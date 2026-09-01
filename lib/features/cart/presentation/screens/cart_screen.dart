@@ -12,6 +12,7 @@ import '../../../../core/widgets/resto_text_field.dart';
 import '../../../orders/data/models/order_model.dart';
 import '../cubit/cart_cubit.dart';
 import '../cubit/cart_state.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -157,7 +158,8 @@ class _CartScreenState extends State<CartScreen> {
                       Expanded(
                         child: _buildTypeOption(
                           context,
-                          title: 'توصيل للبيت 🛵',
+                          title: 'توصيل للبيت',
+                          icon: LucideIcons.bike,
                           isSelected: state.orderType == OrderType.delivery,
                           onTap: () => context.read<CartCubit>().setOrderType(OrderType.delivery),
                           isDark: isDark,
@@ -166,7 +168,8 @@ class _CartScreenState extends State<CartScreen> {
                       Expanded(
                         child: _buildTypeOption(
                           context,
-                          title: 'استلام من الفرع 🏬',
+                          title: 'استلام من الفرع',
+                          icon: LucideIcons.store,
                           isSelected: state.orderType == OrderType.takeaway,
                           onTap: () => context.read<CartCubit>().setOrderType(OrderType.takeaway),
                           isDark: isDark,
@@ -466,6 +469,7 @@ class _CartScreenState extends State<CartScreen> {
   Widget _buildTypeOption(
     BuildContext context, {
     required String title,
+    IconData? icon,
     required bool isSelected,
     required VoidCallback onTap,
     required bool isDark,
@@ -480,17 +484,30 @@ class _CartScreenState extends State<CartScreen> {
           color: isSelected ? AppColors.secondaryTerracotta : Colors.transparent,
           borderRadius: BorderRadius.circular(AppDimensions.radiusFull),
         ),
-        child: Center(
-          child: Text(
-            title,
-            style: TextStyle(
-              color: isSelected
-                  ? Colors.white
-                  : (isDark ? AppColors.onSurfaceDark : AppColors.onSurfaceLight),
-              fontWeight: FontWeight.bold,
-              fontSize: 13,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              title,
+              style: TextStyle(
+                color: isSelected
+                    ? Colors.white
+                    : (isDark ? AppColors.onSurfaceDark : AppColors.onSurfaceLight),
+                fontWeight: FontWeight.bold,
+                fontSize: 13,
+              ),
             ),
-          ),
+            if (icon != null) ...[
+              const SizedBox(width: 6),
+              Icon(
+                icon,
+                size: 16,
+                color: isSelected
+                    ? Colors.white
+                    : (isDark ? AppColors.onSurfaceDark : AppColors.onSurfaceLight),
+              ),
+            ],
+          ],
         ),
       ),
     );

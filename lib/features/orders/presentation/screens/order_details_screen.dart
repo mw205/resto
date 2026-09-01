@@ -12,6 +12,7 @@ import '../../../cart/presentation/cubit/cart_cubit.dart';
 import '../../data/models/order_model.dart';
 import '../cubit/order_cubit.dart';
 import '../cubit/order_state.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 class OrderDetailsScreen extends StatefulWidget {
   final String orderId;
@@ -295,7 +296,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 // Action Buttons
                 if (isActive) ...[
                   RestoButton(
-                    text: 'تتبع حالة الطلب لحظياً 🛵',
+                    text: 'تتبع حالة الطلب لحظياً',
+                    trailingIcon: const Icon(LucideIcons.bike, size: 16, color: Colors.white),
                     onPressed: () =>
                         context.push('/customer/order-tracking/${order.id}'),
                     width: double.infinity,
@@ -305,7 +307,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
 
                 if (isDelivered) ...[
                   RestoButton(
-                    text: 'تقييم الوجبة والتوصيل ⭐',
+                    text: 'تقييم الوجبة والتوصيل',
+                    trailingIcon: const Icon(LucideIcons.star, size: 16, color: Colors.white),
                     onPressed: () =>
                         context.push('/customer/rate-order/${order.id}'),
                     width: double.infinity,
@@ -314,7 +317,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 ],
 
                 RestoButton(
-                  text: 'إعادة هذا الطلب 🔁',
+                  text: 'إعادة هذا الطلب',
+                  trailingIcon: const Icon(LucideIcons.refreshCcw, size: 16, color: AppColors.primary),
                   variant: RestoButtonVariant.secondary,
                   onPressed: () {
                     for (var item in order.items) {
@@ -326,7 +330,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     }
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                        content: Text('تمت إضافة أصناف الطلب إلى السلة 🎉'),
+                        content: Text('تمت إضافة أصناف الطلب إلى السلة'),
                         backgroundColor: AppColors.successGreen,
                       ),
                     );

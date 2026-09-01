@@ -29,7 +29,7 @@ class FeedbackCubit extends Cubit<FeedbackState> {
       await _api.submitFeedback(feedback);
       emit(state.copyWith(
         status: FeedbackStatus.success,
-        successMessage: 'شكراً لمشاركتك! تم تسجيل تقييمك بنجاح ❤️',
+        successMessage: 'شكراً لمشاركتك! تم تسجيل تقييمك بنجاح',
       ));
     } catch (e) {
       emit(state.copyWith(

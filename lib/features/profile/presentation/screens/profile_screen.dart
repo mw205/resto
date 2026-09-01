@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
+
 import '../../../../app/theme/theme_cubit.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_dimensions.dart';
 import '../../../../core/widgets/resto_card.dart';
-import '../../../auth/data/models/user_model.dart';
 import '../../../auth/presentation/cubit/auth_cubit.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -46,7 +47,9 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          user?.name.isNotEmpty == true ? user!.name.substring(0, 1) : 'م',
+                          user?.name.isNotEmpty == true
+                              ? user!.name.substring(0, 1)
+                              : 'م',
                           style: const TextStyle(
                             fontSize: 26,
                             fontWeight: FontWeight.bold,
@@ -80,20 +83,46 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 6),
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 3,
+                            ),
                             decoration: BoxDecoration(
                               color: isDriver
-                                  ? AppColors.secondaryTerracotta.withOpacity(0.15)
+                                  ? AppColors.secondaryTerracotta.withOpacity(
+                                      0.15,
+                                    )
                                   : AppColors.successGreen.withOpacity(0.15),
-                              borderRadius: BorderRadius.circular(AppDimensions.radiusFull),
-                            ),
-                            child: Text(
-                              isDriver ? 'كابتن توصيل ديليفري 🛵' : 'عميل ريستو المميز ⭐',
-                              style: TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.bold,
-                                color: isDriver ? AppColors.secondaryTerracotta : AppColors.successGreen,
+                              borderRadius: BorderRadius.circular(
+                                AppDimensions.radiusFull,
                               ),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  isDriver
+                                      ? LucideIcons.bike
+                                      : LucideIcons.star,
+                                  size: 14,
+                                  color: isDriver
+                                      ? AppColors.secondaryTerracotta
+                                      : AppColors.successGreen,
+                                ),
+                                const SizedBox(width: 4),
+                                Text(
+                                  isDriver
+                                      ? 'كابتن توصيل ديليفري'
+                                      : 'عميل ريستو المميز',
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.bold,
+                                    color: isDriver
+                                        ? AppColors.secondaryTerracotta
+                                        : AppColors.successGreen,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
@@ -113,67 +142,76 @@ class ProfileScreen extends StatelessWidget {
                     BlocBuilder<ThemeCubit, ThemeMode>(
                       builder: (context, mode) {
                         return SwitchListTile(
-                          title: const Text('الوضع الليلي (Dark Mode)',
-                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+                          title: const Text(
+                            'الوضع الليلي (Dark Mode)',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
                           secondary: Icon(
-                            isDark ? Icons.dark_mode_rounded : Icons.light_mode_rounded,
+                            isDark
+                                ? Icons.dark_mode_rounded
+                                : Icons.light_mode_rounded,
                             color: AppColors.secondaryTerracotta,
                           ),
                           value: isDark,
                           activeThumbColor: AppColors.secondaryTerracotta,
-                          onChanged: (val) => context.read<ThemeCubit>().toggleTheme(),
+                          onChanged: (val) =>
+                              context.read<ThemeCubit>().toggleTheme(),
                         );
-                      },
-                    ),
-                    const Divider(height: 1),
-
-                    // Role Switcher (Customer <-> Driver)
-                    ListTile(
-                      leading: const Icon(Icons.swap_horiz_rounded, color: AppColors.secondaryTerracotta),
-                      title: Text(
-                        isDriver ? 'التبديل إلى حساب العميل' : 'التبديل إلى بوابة السائق (Driver)',
-                        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
-                      ),
-                      subtitle: Text(
-                        isDriver ? 'تصفح المنيو وطلب الطعام' : 'عرض الطلبات المعينة وتغيير حالتها',
-                        style: const TextStyle(fontSize: 11),
-                      ),
-                      trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 14),
-                      onTap: () {
-                        final newRole = isDriver ? UserRole.customer : UserRole.driver;
-                        context.read<AuthCubit>().switchRole(newRole);
-                        if (newRole == UserRole.driver) {
-                          context.go('/driver/orders');
-                        } else {
-                          context.go('/customer/home');
-                        }
                       },
                     ),
                     const Divider(height: 1),
 
                     // Complaints & Suggestions
                     ListTile(
-                      leading: const Icon(Icons.support_agent_rounded, color: AppColors.secondaryTerracotta),
-                      title: const Text('مركز الشكاوى والمقترحات',
-                          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
-                      trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 14),
+                      leading: const Icon(
+                        Icons.support_agent_rounded,
+                        color: AppColors.secondaryTerracotta,
+                      ),
+                      title: const Text(
+                        'مركز الشكاوى والمقترحات',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      trailing: const Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        size: 14,
+                      ),
                       onTap: () => context.push('/customer/feedback'),
                     ),
                     const Divider(height: 1),
 
                     // Saved Addresses
                     ListTile(
-                      leading: const Icon(Icons.location_on_outlined, color: AppColors.secondaryTerracotta),
-                      title: const Text('العناوين المحفوظة',
-                          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+                      leading: const Icon(
+                        Icons.location_on_outlined,
+                        color: AppColors.secondaryTerracotta,
+                      ),
+                      title: const Text(
+                        'العناوين المحفوظة',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                       subtitle: Text(
-                        user?.savedAddresses.firstOrNull ?? 'القاهرة - مصر الجديدة',
+                        user?.savedAddresses.firstOrNull ??
+                            'القاهرة - مصر الجديدة',
                         style: const TextStyle(fontSize: 11),
                       ),
-                      trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 14),
+                      trailing: const Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        size: 14,
+                      ),
                       onTap: () {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('تم حفظ عنوانك الافتراضي بنجاح')),
+                          const SnackBar(
+                            content: Text('تم حفظ عنوانك الافتراضي بنجاح'),
+                          ),
                         );
                       },
                     ),
@@ -190,7 +228,10 @@ class ProfileScreen extends StatelessWidget {
                   children: [
                     Text(
                       'عن ريستو',
-                      style: GoogleFonts.cairo(fontSize: 14, fontWeight: FontWeight.bold),
+                      style: GoogleFonts.cairo(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(height: 6),
                     Text(
@@ -208,8 +249,13 @@ class ProfileScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text('الإصدار:', style: TextStyle(fontSize: 12)),
-                        Text('1.0.0 (Culinary Heritage)',
-                            style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                        Text(
+                          '1.0.0 (Culinary Heritage)',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ],
                     ),
                   ],
@@ -221,7 +267,10 @@ class ProfileScreen extends StatelessWidget {
               RestoCard(
                 padding: EdgeInsets.zero,
                 child: ListTile(
-                  leading: const Icon(Icons.logout_rounded, color: AppColors.errorRed),
+                  leading: const Icon(
+                    Icons.logout_rounded,
+                    color: AppColors.errorRed,
+                  ),
                   title: const Text(
                     'تسجيل الخروج',
                     style: TextStyle(
@@ -235,7 +284,9 @@ class ProfileScreen extends StatelessWidget {
                       context: context,
                       builder: (ctx) => AlertDialog(
                         title: const Text('تسجيل الخروج'),
-                        content: const Text('هل أنت متأكد من تسجيل الخروج من ريستو؟'),
+                        content: const Text(
+                          'هل أنت متأكد من تسجيل الخروج من ريستو؟',
+                        ),
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.pop(ctx),
@@ -249,7 +300,10 @@ class ProfileScreen extends StatelessWidget {
                             },
                             child: const Text(
                               'خروج',
-                              style: TextStyle(color: AppColors.errorRed, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                color: AppColors.errorRed,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ],

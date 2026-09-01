@@ -12,7 +12,7 @@ import '../../../auth/presentation/cubit/auth_cubit.dart';
 import '../../../orders/data/models/order_model.dart';
 import '../../../orders/presentation/cubit/order_cubit.dart';
 import '../cubit/cart_cubit.dart';
-
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 class CheckoutScreen extends StatefulWidget {
   const CheckoutScreen({super.key});
 
@@ -327,9 +327,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 ),
                 const SizedBox(height: 24),
 
-                // Place Order Button
                 RestoButton(
-                  text: 'تأكيد الطلب الآن 🎉',
+                  text: 'تأكيد الطلب الآن',
+                  trailingIcon: const Icon(LucideIcons.partyPopper, size: 16, color: Colors.white),
                   onPressed: _placeOrder,
                   isLoading: _isSubmitting,
                   width: double.infinity,

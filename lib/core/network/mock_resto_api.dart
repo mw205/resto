@@ -48,37 +48,37 @@ class MockRestoApi {
       const CategoryModel(
         id: 'cat_grills',
         name: 'مشويات وفحم',
-        icon: '🍖',
+        icon: 'beef',
         imageUrl: AppAssets.grillsImg,
       ),
       const CategoryModel(
         id: 'cat_koshary',
         name: 'كشري وطواجن',
-        icon: '🍲',
+        icon: 'soup',
         imageUrl: AppAssets.kosharyImg,
       ),
       const CategoryModel(
         id: 'cat_main',
         name: 'أطباق رئيسية ومحاشي',
-        icon: '🥘',
+        icon: 'utensils',
         imageUrl: AppAssets.molokhiaImg,
       ),
       const CategoryModel(
         id: 'cat_sandwiches',
         name: 'سندوتشات وحواوشي',
-        icon: '🥪',
+        icon: 'sandwich',
         imageUrl: AppAssets.hawawshiImg,
       ),
       const CategoryModel(
         id: 'cat_desserts',
         name: 'حلويات شرقية',
-        icon: '🍮',
+        icon: 'dessert',
         imageUrl: AppAssets.ummAliImg,
       ),
       const CategoryModel(
         id: 'cat_drinks',
         name: 'عصائر ومشروبات',
-        icon: '🥤',
+        icon: 'cup-soda',
         imageUrl: AppAssets.drinksImg,
       ),
     ]);
@@ -359,14 +359,14 @@ class MockRestoApi {
     _notifications.addAll([
       NotificationModel(
         id: 'notif_01',
-        title: 'طلبك في الطريق إليك! 🛵',
+        title: 'طلبك في الطريق إليك!',
         body: 'كابتن هاني سعيد استلم طلبك رقم EG-9481 وهو في الطريق لعنوانك الآن.',
         createdAt: DateTime.now().subtract(const Duration(minutes: 5)),
         targetOrderId: 'ord_101',
       ),
       NotificationModel(
         id: 'notif_02',
-        title: 'عرض المشويات الأسبوعي 🔥',
+        title: 'عرض المشويات الأسبوعي',
         body: 'استمتع بخصم 20% بكود RESTO20 على كل أصناف المشويات على الفحم.',
         createdAt: DateTime.now().subtract(const Duration(hours: 3)),
         type: 'promo',
@@ -377,7 +377,16 @@ class MockRestoApi {
   // Auth Operations
   Future<UserModel> login({required String email, required String password}) async {
     await Future.delayed(const Duration(milliseconds: 600));
-    if (email.contains('driver')) {
+    if (email.contains('admin')) {
+      _currentUser = const UserModel(
+        id: 'adm_001',
+        name: 'مدير النظام',
+        email: 'admin@resto.eg',
+        phone: '01000000000',
+        role: UserRole.admin,
+        token: 'jwt_token_sample_admin_789',
+      );
+    } else if (email.contains('driver')) {
       _currentUser = const UserModel(
         id: 'drv_001',
         name: 'كابتن هاني سعيد',
@@ -538,7 +547,7 @@ class MockRestoApi {
       0,
       NotificationModel(
         id: _uuid.v4(),
-        title: 'تم استلام طلبك ${newOrder.orderNumber} 🎉',
+        title: 'تم استلام طلبك ${newOrder.orderNumber}',
         body: 'المطبخ بدأ في تحضير أشهى المأكولات المصرية لطلبك.',
         createdAt: DateTime.now(),
         targetOrderId: newOrder.id,
@@ -586,9 +595,9 @@ class MockRestoApi {
 
     String notifBody = 'تم تحديث حالة طلبك إلى: ${newStatus.arabicTitle}';
     if (newStatus == OrderStatus.onTheWay) {
-      notifBody = 'الكابتن استلم طلبك وهو في الطريق لعنوانك الآن 🛵';
+      notifBody = 'الكابتن استلم طلبك وهو في الطريق لعنوانك الآن';
     } else if (newStatus == OrderStatus.delivered) {
-      notifBody = 'تم تسليم طلبك بنجاح. بالهنا والشفا! ❤️';
+      notifBody = 'تم تسليم طلبك بنجاح. بالهنا والشفا!';
     }
 
     _notifications.insert(

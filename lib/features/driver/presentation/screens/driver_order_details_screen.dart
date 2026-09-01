@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
+
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_dimensions.dart';
 import '../../../../core/utils/currency_formatter.dart';
@@ -16,10 +18,7 @@ import '../cubit/driver_state.dart';
 class DriverOrderDetailsScreen extends StatelessWidget {
   final String orderId;
 
-  const DriverOrderDetailsScreen({
-    super.key,
-    required this.orderId,
-  });
+  const DriverOrderDetailsScreen({super.key, required this.orderId});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +48,8 @@ class DriverOrderDetailsScreen extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          final order = state.selectedOrder ??
+          final order =
+              state.selectedOrder ??
               state.assignedOrders.where((o) => o.id == orderId).firstOrNull;
 
           if (order == null) {
@@ -121,10 +121,15 @@ class DriverOrderDetailsScreen extends StatelessWidget {
                             width: 48,
                             height: 48,
                             decoration: BoxDecoration(
-                              color: AppColors.secondaryTerracotta.withOpacity(0.12),
+                              color: AppColors.secondaryTerracotta.withOpacity(
+                                0.12,
+                              ),
                               shape: BoxShape.circle,
                             ),
-                            child: const Icon(Icons.person, color: AppColors.secondaryTerracotta),
+                            child: const Icon(
+                              Icons.person,
+                              color: AppColors.secondaryTerracotta,
+                            ),
                           ),
                           const SizedBox(width: 12),
                           Expanded(
@@ -134,7 +139,9 @@ class DriverOrderDetailsScreen extends StatelessWidget {
                                 Text(
                                   order.customerName,
                                   style: const TextStyle(
-                                      fontWeight: FontWeight.bold, fontSize: 14),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14,
+                                  ),
                                 ),
                                 Text(
                                   order.customerPhone,
@@ -150,13 +157,18 @@ class DriverOrderDetailsScreen extends StatelessWidget {
                           ),
                           RestoButton(
                             text: 'اتصال',
-                            leadingIcon:
-                                const Icon(Icons.phone_rounded, size: 16, color: Colors.white),
+                            leadingIcon: const Icon(
+                              Icons.phone_rounded,
+                              size: 16,
+                              color: Colors.white,
+                            ),
                             height: 38,
                             onPressed: () {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text('جاري الاتصال بالعميل ${order.customerPhone}...'),
+                                  content: Text(
+                                    'جاري الاتصال بالعميل ${order.customerPhone}...',
+                                  ),
                                   backgroundColor: AppColors.successGreen,
                                 ),
                               );
@@ -172,18 +184,26 @@ class DriverOrderDetailsScreen extends StatelessWidget {
                           color: isDark
                               ? AppColors.surfaceContainerLowDark
                               : AppColors.surfaceContainerLow,
-                          borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
+                          borderRadius: BorderRadius.circular(
+                            AppDimensions.radiusMd,
+                          ),
                         ),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Icon(Icons.location_on_rounded,
-                                color: AppColors.secondaryTerracotta, size: 20),
+                            const Icon(
+                              Icons.location_on_rounded,
+                              color: AppColors.secondaryTerracotta,
+                              size: 20,
+                            ),
                             const SizedBox(width: 8),
                             Expanded(
                               child: Text(
                                 order.deliveryAddress,
-                                style: const TextStyle(fontSize: 13, height: 1.4),
+                                style: const TextStyle(
+                                  fontSize: 13,
+                                  height: 1.4,
+                                ),
                               ),
                             ),
                           ],
@@ -234,12 +254,17 @@ class DriverOrderDetailsScreen extends StatelessWidget {
                                 ),
                               ),
                               Expanded(
-                                child: Text(item.product.name,
-                                    style: const TextStyle(fontSize: 13)),
+                                child: Text(
+                                  item.product.name,
+                                  style: const TextStyle(fontSize: 13),
+                                ),
                               ),
                               Text(
                                 CurrencyFormatter.format(item.totalPrice),
-                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 13,
+                                ),
                               ),
                             ],
                           ),
@@ -277,22 +302,34 @@ class DriverOrderDetailsScreen extends StatelessWidget {
                   if (order.status == OrderStatus.received ||
                       order.status == OrderStatus.preparing) ...[
                     RestoButton(
-                      text: 'استلام الطلب وبدء التوصيل (في الطريق) 🛵',
+                      text: 'استلام الطلب وبدء التوصيل',
+                      trailingIcon: const Icon(
+                        LucideIcons.bike,
+                        size: 16,
+                        color: Colors.white,
+                      ),
                       onPressed: () {
-                        context
-                            .read<DriverCubit>()
-                            .updateStatus(order.id, OrderStatus.onTheWay);
+                        context.read<DriverCubit>().updateStatus(
+                          order.id,
+                          OrderStatus.onTheWay,
+                        );
                       },
                       width: double.infinity,
                     ),
                   ] else if (order.status == OrderStatus.onTheWay) ...[
                     RestoButton(
-                      text: 'تأكيد تسليم الطلب وتحصيل الكاش ✅',
+                      text: 'تأكيد تسليم الطلب وتحصيل الكاش',
+                      trailingIcon: const Icon(
+                        LucideIcons.checkCircle2,
+                        size: 16,
+                        color: Colors.white,
+                      ),
                       variant: RestoButtonVariant.primary,
                       onPressed: () {
-                        context
-                            .read<DriverCubit>()
-                            .updateStatus(order.id, OrderStatus.delivered);
+                        context.read<DriverCubit>().updateStatus(
+                          order.id,
+                          OrderStatus.delivered,
+                        );
                       },
                       width: double.infinity,
                     ),
@@ -303,22 +340,33 @@ class DriverOrderDetailsScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 14),
                     decoration: BoxDecoration(
                       color: AppColors.successGreen.withOpacity(0.12),
-                      borderRadius: BorderRadius.circular(AppDimensions.radiusFull),
+                      borderRadius: BorderRadius.circular(
+                        AppDimensions.radiusFull,
+                      ),
                       border: Border.all(color: AppColors.successGreen),
                     ),
-                    child: const Center(
-                      child: Text(
-                        'تم تسليم هذا الطلب بنجاح ✅',
-                        style: TextStyle(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          LucideIcons.checkCircle2,
                           color: AppColors.successGreen,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
+                          size: 18,
                         ),
-                      ),
+                        const SizedBox(width: 8),
+                        const Text(
+                          'تم تسليم هذا الطلب بنجاح',
+                          style: TextStyle(
+                            color: AppColors.successGreen,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
+                  const SizedBox(height: 24),
                 ],
-                const SizedBox(height: 24),
               ],
             ),
           );

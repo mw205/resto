@@ -9,15 +9,16 @@ abstract class Failure extends Equatable {
 }
 
 class ServerFailure extends Failure {
-  const ServerFailure([String message = 'حدث خطأ أثناء الاتصال بالسيرفر']) : super(message);
+  const ServerFailure([super.message = 'حدث خطأ أثناء الاتصال بالسيرفر']);
 }
 
 class CacheFailure extends Failure {
-  const CacheFailure([String message = 'حدث خطأ في استرجاع البيانات المؤقتة']) : super(message);
+  const CacheFailure([super.message = 'حدث خطأ في استرجاع البيانات المؤقتة']);
 }
 
 class AuthFailure extends Failure {
-  const AuthFailure([String message = 'بيانات الاعتماد غير صالحة أو منتهية']) : super(message);
+  const AuthFailure([String message = 'بيانات الاعتماد غير صالحة أو منتهية'])
+    : super(message);
 }
 
 class ValidationFailure extends Failure {

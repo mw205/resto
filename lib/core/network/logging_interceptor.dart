@@ -7,7 +7,7 @@ class LoggingInterceptor extends Interceptor {
     if (kDebugMode) {
       debugPrint('➡️ [DIO REQ] ${options.method} => ${options.uri}');
       if (options.data != null) {
-        debugPrint('📦 Payload: ${options.data}');
+        debugPrint('Payload: ${options.data}');
       }
     }
     return handler.next(options);

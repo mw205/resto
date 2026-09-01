@@ -16,6 +16,7 @@ import '../../../notifications/presentation/cubit/notifications_state.dart';
 import '../../data/models/product_model.dart';
 import '../cubit/menu_cubit.dart';
 import '../cubit/menu_state.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -113,13 +114,19 @@ class HomeScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'مساء الخير يا ${authUser?.name.split(' ').first ?? 'فندم'} 👋',
-                        style: GoogleFonts.cairo(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: isDark ? Colors.white : AppColors.primary,
-                        ),
+                      Row(
+                        children: [
+                          Text(
+                            'مساء الخير يا ${authUser?.name.split(' ').first ?? 'فندم'}',
+                            style: GoogleFonts.cairo(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              color: isDark ? Colors.white : AppColors.primary,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          const Icon(LucideIcons.hand, size: 24, color: Colors.amber),
+                        ],
                       ),
                       Text(
                         'جاهز لتذوق أشهى الأطباق والمشويات المصرية؟',
@@ -312,9 +319,10 @@ class HomeScreen extends StatelessWidget {
                                     ),
                                   ),
                                   child: Center(
-                                    child: Text(
-                                      cat.icon,
-                                      style: const TextStyle(fontSize: 26),
+                                    child: Icon(
+                                      _getCategoryIcon(cat.icon),
+                                      size: 26,
+                                      color: AppColors.secondaryTerracotta,
                                     ),
                                   ),
                                 ),
@@ -343,13 +351,19 @@ class HomeScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'الأكثر طلباً والأشهر 🔥',
-                        style: GoogleFonts.cairo(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          color: isDark ? Colors.white : AppColors.primary,
-                        ),
+                      Row(
+                        children: [
+                          Text(
+                            'الأكثر طلباً والأشهر',
+                            style: GoogleFonts.cairo(
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                              color: isDark ? Colors.white : AppColors.primary,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          const Icon(LucideIcons.flame, color: Colors.orange, size: 20),
+                        ],
                       ),
                     ],
                   ),
@@ -439,7 +453,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        const Icon(Icons.star_rounded, color: Colors.amber, size: 16),
+                        const Icon(LucideIcons.star, color: Colors.amber, size: 16),
                         const SizedBox(width: 2),
                         Text(
                           '${product.rating}',
@@ -476,7 +490,7 @@ class HomeScreen extends StatelessWidget {
                         context.read<CartCubit>().addToCart(product);
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text('تمت إضافة ${product.name} للسلة 🎉'),
+                            content: Text('تمت إضافة ${product.name} للسلة'),
                             duration: const Duration(seconds: 1),
                             backgroundColor: AppColors.successGreen,
                           ),
@@ -492,7 +506,7 @@ class HomeScreen extends StatelessWidget {
                         child: const Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(Icons.add, color: Colors.white, size: 16),
+                            Icon(LucideIcons.plus, color: Colors.white, size: 16),
                             SizedBox(width: 4),
                             Text(
                               'إضافة',
@@ -514,5 +528,17 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  IconData _getCategoryIcon(String iconName) {
+    switch (iconName) {
+      case 'beef': return LucideIcons.beef;
+      case 'soup': return LucideIcons.soup;
+      case 'utensils': return LucideIcons.utensils;
+      case 'sandwich': return LucideIcons.sandwich;
+      case 'dessert': return LucideIcons.cakeSlice;
+      case 'cup-soda': return LucideIcons.cupSoda;
+      default: return LucideIcons.utensils;
+    }
   }
 }

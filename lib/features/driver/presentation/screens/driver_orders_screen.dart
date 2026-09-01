@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
+
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_dimensions.dart';
 import '../../../../core/utils/currency_formatter.dart';
@@ -9,7 +11,6 @@ import '../../../../core/utils/date_formatter.dart';
 import '../../../../core/widgets/resto_button.dart';
 import '../../../../core/widgets/resto_card.dart';
 import '../../../../core/widgets/status_chip.dart';
-import '../../../auth/data/models/user_model.dart';
 import '../../../auth/presentation/cubit/auth_cubit.dart';
 import '../../../orders/data/models/order_model.dart';
 import '../cubit/driver_cubit.dart';
@@ -28,15 +29,27 @@ class DriverOrdersScreen extends StatelessWidget {
       appBar: AppBar(
         title: Column(
           children: [
-            Text(
-              'بوابة كابتن الديليفري 🛵',
-              style: GoogleFonts.cairo(fontWeight: FontWeight.bold, fontSize: 16),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'بوابة كابتن الديليفري',
+                  style: GoogleFonts.cairo(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+                const SizedBox(width: 6),
+                const Icon(LucideIcons.bike, size: 18),
+              ],
             ),
             Text(
               user?.name ?? 'كابتن هاني سعيد',
               style: TextStyle(
                 fontSize: 11,
-                color: isDark ? AppColors.onSurfaceVariantDark : AppColors.onSurfaceVariantLight,
+                color: isDark
+                    ? AppColors.onSurfaceVariantDark
+                    : AppColors.onSurfaceVariantLight,
               ),
             ),
           ],
@@ -45,14 +58,6 @@ class DriverOrdersScreen extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.refresh_rounded),
             onPressed: () => context.read<DriverCubit>().loadAssignedOrders(),
-          ),
-          IconButton(
-            icon: const Icon(Icons.switch_account_rounded),
-            tooltip: 'العودة لحساب العميل',
-            onPressed: () {
-              context.read<AuthCubit>().switchRole(UserRole.customer);
-              context.go('/customer/home');
-            },
           ),
         ],
       ),
@@ -68,10 +73,13 @@ class DriverOrdersScreen extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          if (state.status == DriverStatus.loading && state.assignedOrders.isEmpty) {
+          if (state.status == DriverStatus.loading &&
+              state.assignedOrders.isEmpty) {
             return const Center(
               child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(AppColors.secondaryTerracotta),
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  AppColors.secondaryTerracotta,
+                ),
               ),
             );
           }
@@ -83,8 +91,11 @@ class DriverOrdersScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.check_circle_outline_rounded,
-                        size: 64, color: AppColors.successGreen),
+                    const Icon(
+                      Icons.check_circle_outline_rounded,
+                      size: 64,
+                      color: AppColors.successGreen,
+                    ),
                     const SizedBox(height: 14),
                     Text(
                       'لا توجد طلبات معينة لك حالياً',
@@ -154,12 +165,18 @@ class DriverOrdersScreen extends StatelessWidget {
                       // Customer Info
                       Row(
                         children: [
-                          const Icon(Icons.person_pin_rounded,
-                              color: AppColors.secondaryTerracotta, size: 20),
+                          const Icon(
+                            Icons.person_pin_rounded,
+                            color: AppColors.secondaryTerracotta,
+                            size: 20,
+                          ),
                           const SizedBox(width: 8),
                           Text(
                             order.customerName,
-                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 13,
+                            ),
                           ),
                           const Spacer(),
                           Text(
@@ -179,8 +196,11 @@ class DriverOrdersScreen extends StatelessWidget {
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Icon(Icons.location_on_outlined,
-                              color: AppColors.secondaryTerracotta, size: 20),
+                          const Icon(
+                            Icons.location_on_outlined,
+                            color: AppColors.secondaryTerracotta,
+                            size: 20,
+                          ),
                           const SizedBox(width: 8),
                           Expanded(
                             child: Text(
@@ -236,40 +256,67 @@ class DriverOrdersScreen extends StatelessWidget {
                             if (order.status == OrderStatus.received ||
                                 order.status == OrderStatus.preparing)
                               RestoButton(
-                                text: 'بدء التوصيل (في الطريق) 🛵',
+                                text: 'بدء التوصيل (في الطريق)',
+                                trailingIcon: const Icon(
+                                  LucideIcons.bike,
+                                  size: 16,
+                                  color: Colors.white,
+                                ),
                                 height: 40,
                                 onPressed: () {
-                                  context
-                                      .read<DriverCubit>()
-                                      .updateStatus(order.id, OrderStatus.onTheWay);
+                                  context.read<DriverCubit>().updateStatus(
+                                    order.id,
+                                    OrderStatus.onTheWay,
+                                  );
                                 },
                               )
                             else if (order.status == OrderStatus.onTheWay)
                               RestoButton(
-                                text: 'تم تسليم الطلب للعميل ✅',
+                                text: 'تم تسليم الطلب للعميل',
+                                trailingIcon: const Icon(
+                                  LucideIcons.checkCircle2,
+                                  size: 16,
+                                  color: Colors.white,
+                                ),
                                 height: 40,
                                 variant: RestoButtonVariant.primary,
                                 onPressed: () {
-                                  context
-                                      .read<DriverCubit>()
-                                      .updateStatus(order.id, OrderStatus.delivered);
+                                  context.read<DriverCubit>().updateStatus(
+                                    order.id,
+                                    OrderStatus.delivered,
+                                  );
                                 },
                               ),
                           ] else ...[
                             Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 6,
+                              ),
                               decoration: BoxDecoration(
                                 color: AppColors.successGreen.withOpacity(0.12),
-                                borderRadius: BorderRadius.circular(AppDimensions.radiusFull),
-                              ),
-                              child: const Text(
-                                'تم التسليم والتحصيل ✅',
-                                style: TextStyle(
-                                  color: AppColors.successGreen,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12,
+                                borderRadius: BorderRadius.circular(
+                                  AppDimensions.radiusFull,
                                 ),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Text(
+                                    'تم التسليم والتحصيل',
+                                    style: TextStyle(
+                                      color: AppColors.successGreen,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 4),
+                                  const Icon(
+                                    LucideIcons.checkCircle2,
+                                    size: 14,
+                                    color: AppColors.successGreen,
+                                  ),
+                                ],
                               ),
                             ),
                           ],

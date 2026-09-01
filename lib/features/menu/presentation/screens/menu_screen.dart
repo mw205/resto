@@ -265,7 +265,7 @@ class _MenuScreenState extends State<MenuScreen> {
                         context.read<CartCubit>().addToCart(product);
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text('تمت إضافة ${product.name} للسلة 🎉'),
+                            content: Text('تمت إضافة ${product.name} للسلة'),
                             duration: const Duration(seconds: 1),
                             backgroundColor: AppColors.successGreen,
                           ),

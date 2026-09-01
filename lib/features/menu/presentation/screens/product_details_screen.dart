@@ -336,7 +336,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   );
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text('تمت إضافة $_quantity من ${product.name} للسلة 🎉'),
+                  content: Text('تمت إضافة $_quantity من ${product.name} للسلة'),
                   duration: const Duration(seconds: 1),
                   backgroundColor: AppColors.successGreen,
                 ),

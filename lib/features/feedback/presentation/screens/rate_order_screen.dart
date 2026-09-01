@@ -23,13 +23,13 @@ class RateOrderScreen extends StatefulWidget {
 class _RateOrderScreenState extends State<RateOrderScreen> {
   double _rating = 5.0;
   final List<String> _availableTags = [
-    'سرعة التوصيل ⚡',
-    'طعم رائع ولذيذ 😋',
-    'تغليف ممتاز وفاخر 📦',
-    'الأكل ساخن وطازة 🔥',
-    'كابتن التوصيل محترم ومحترف 🛵',
+    'سرعة التوصيل',
+    'طعم رائع ولذيذ',
+    'تغليف ممتاز وفاخر',
+    'الأكل ساخن وطازة',
+    'كابتن التوصيل محترم ومحترف',
   ];
-  final Set<String> _selectedTags = {'طعم رائع ولذيذ 😋', 'الأكل ساخن وطازة 🔥'};
+  final Set<String> _selectedTags = {'طعم رائع ولذيذ', 'الأكل ساخن وطازة'};
   final _commentController = TextEditingController();
 
   @override

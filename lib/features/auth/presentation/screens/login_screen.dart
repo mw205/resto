@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import '../../../../core/constants/app_colors.dart';
-import '../../../../core/constants/app_dimensions.dart';
 import '../../../../core/widgets/resto_button.dart';
 import '../../../../core/widgets/resto_text_field.dart';
-import '../../data/models/user_model.dart';
 import '../cubit/auth_cubit.dart';
 import '../cubit/auth_state.dart';
 
@@ -33,9 +32,9 @@ class _LoginScreenState extends State<LoginScreen> {
   void _submit() {
     if (_formKey.currentState?.validate() ?? false) {
       context.read<AuthCubit>().login(
-            email: _emailController.text.trim(),
-            password: _passwordController.text.trim(),
-          );
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
     }
   }
 
@@ -51,7 +50,8 @@ class _LoginScreenState extends State<LoginScreen> {
           } else {
             context.go('/customer/home');
           }
-        } else if (state.status == AuthStatus.error && state.errorMessage != null) {
+        } else if (state.status == AuthStatus.error &&
+            state.errorMessage != null) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(state.errorMessage!),
@@ -62,7 +62,9 @@ class _LoginScreenState extends State<LoginScreen> {
       },
       builder: (context, state) {
         return Scaffold(
-          backgroundColor: isDark ? AppColors.surfaceDark : AppColors.surfaceLight,
+          backgroundColor: isDark
+              ? AppColors.surfaceDark
+              : AppColors.surfaceLight,
           body: SafeArea(
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
@@ -78,7 +80,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         width: 72,
                         height: 72,
                         decoration: BoxDecoration(
-                          color: AppColors.secondaryTerracotta.withOpacity(0.12),
+                          color: AppColors.secondaryTerracotta.withOpacity(
+                            0.12,
+                          ),
                           shape: BoxShape.circle,
                         ),
                         child: const Icon(
@@ -107,7 +111,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         'أهلاً بيك! استمتع بأشهى أكلات المطبخ المصري',
                         style: GoogleFonts.cairo(
                           fontSize: 13,
-                          color: isDark ? AppColors.onSurfaceVariantDark : AppColors.onSurfaceVariantLight,
+                          color: isDark
+                              ? AppColors.onSurfaceVariantDark
+                              : AppColors.onSurfaceVariantLight,
                         ),
                       ),
                     ),
@@ -138,10 +144,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       prefixIcon: const Icon(Icons.lock_outline, size: 20),
                       suffixIcon: IconButton(
                         icon: Icon(
-                          _obscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                          _obscurePassword
+                              ? Icons.visibility_off_outlined
+                              : Icons.visibility_outlined,
                           size: 20,
                         ),
-                        onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
+                        onPressed: () => setState(
+                          () => _obscurePassword = !_obscurePassword,
+                        ),
                       ),
                       validator: (val) {
                         if (val == null || val.length < 6) {
@@ -168,7 +178,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         Text(
                           'ليس لديك حساب؟',
                           style: TextStyle(
-                            color: isDark ? AppColors.onSurfaceVariantDark : AppColors.onSurfaceVariantLight,
+                            color: isDark
+                                ? AppColors.onSurfaceVariantDark
+                                : AppColors.onSurfaceVariantLight,
                             fontSize: 13,
                           ),
                         ),
@@ -181,48 +193,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               fontWeight: FontWeight.bold,
                               fontSize: 13,
                             ),
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    const Divider(height: 40),
-
-                    // Quick Demo Switchers
-                    Text(
-                      'أدوار الحسابات (للتجربة السريعة):',
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                        color: isDark ? AppColors.onSurfaceVariantDark : AppColors.onSurfaceVariantLight,
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: RestoButton(
-                            text: 'دخول كعميل',
-                            variant: RestoButtonVariant.secondary,
-                            height: 44,
-                            onPressed: () {
-                              _emailController.text = 'mohamed@resto.eg';
-                              _passwordController.text = '123456';
-                              context.read<AuthCubit>().switchRole(UserRole.customer);
-                            },
-                          ),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: RestoButton(
-                            text: 'دخول ككابتن ديليفري',
-                            variant: RestoButtonVariant.outline,
-                            height: 44,
-                            onPressed: () {
-                              _emailController.text = 'driver@resto.eg';
-                              _passwordController.text = '123456';
-                              context.read<AuthCubit>().switchRole(UserRole.driver);
-                            },
                           ),
                         ),
                       ],

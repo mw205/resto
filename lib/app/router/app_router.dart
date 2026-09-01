@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../core/di/service_locator.dart';
+
 import '../../features/auth/data/models/user_model.dart';
 import '../../features/auth/presentation/cubit/auth_cubit.dart';
 import '../../features/auth/presentation/screens/login_screen.dart';
@@ -23,7 +23,9 @@ import '../../features/orders/presentation/screens/order_tracking_screen.dart';
 import '../../features/orders/presentation/screens/orders_history_screen.dart';
 import '../../features/profile/presentation/screens/profile_screen.dart';
 
-final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
+final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(
+  debugLabel: 'root',
+);
 
 class AppRouter {
   AppRouter._();
@@ -39,7 +41,9 @@ class AppRouter {
         final isDriver = authState.user?.role == UserRole.driver;
 
         final isSplash = state.matchedLocation == '/splash';
-        final isLoggingIn = state.matchedLocation == '/login' || state.matchedLocation == '/register';
+        final isLoggingIn =
+            state.matchedLocation == '/login' ||
+            state.matchedLocation == '/register';
 
         if (isSplash) return null;
 
@@ -202,7 +206,9 @@ class AppRouter {
 class GoRouterRefreshStream extends ChangeNotifier {
   GoRouterRefreshStream(Stream<dynamic> stream) {
     notifyListeners();
-    _subscription = stream.asBroadcastStream().listen((dynamic _) => notifyListeners());
+    _subscription = stream.asBroadcastStream().listen(
+      (dynamic _) => notifyListeners(),
+    );
   }
 
   late final dynamic _subscription;

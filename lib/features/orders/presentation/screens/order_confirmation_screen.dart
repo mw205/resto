@@ -7,6 +7,7 @@ import '../../../../core/utils/currency_formatter.dart';
 import '../../../../core/widgets/resto_button.dart';
 import '../../../../core/widgets/resto_card.dart';
 import '../cubit/order_cubit.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 class OrderConfirmationScreen extends StatefulWidget {
   final String orderId;
@@ -65,14 +66,21 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                 const SizedBox(height: 24),
 
                 // Title
-                Text(
-                  'تم استلام طلبك بنجاح! 🎉',
-                  style: GoogleFonts.cairo(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: isDark ? Colors.white : AppColors.primary,
-                  ),
-                  textAlign: TextAlign.center,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'تم استلام طلبك بنجاح!',
+                      style: GoogleFonts.cairo(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: isDark ? Colors.white : AppColors.primary,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(width: 8),
+                    const Icon(LucideIcons.partyPopper, color: Colors.amber, size: 28),
+                  ],
                 ),
                 const SizedBox(height: 8),
 
@@ -138,7 +146,8 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
 
                 // Track Order Button
                 RestoButton(
-                  text: 'تتبع حالة الطلب لحظة بلحظة 🛵',
+                  text: 'تتبع حالة الطلب لحظة بلحظة',
+                  trailingIcon: const Icon(LucideIcons.bike, size: 16, color: Colors.white),
                   onPressed: () {
                     context.push('/customer/order-tracking/${widget.orderId}');
                   },

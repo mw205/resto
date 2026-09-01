@@ -12,6 +12,7 @@ import '../../../cart/presentation/cubit/cart_cubit.dart';
 import '../../data/models/order_model.dart';
 import '../cubit/order_cubit.dart';
 import '../cubit/order_state.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 class OrdersHistoryScreen extends StatelessWidget {
   const OrdersHistoryScreen({super.key});
@@ -35,9 +36,27 @@ class OrdersHistoryScreen extends StatelessWidget {
                 isDark ? AppColors.onSurfaceVariantDark : AppColors.onSurfaceVariantLight,
             indicatorColor: AppColors.secondaryTerracotta,
             labelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
-            tabs: const [
-              Tab(text: 'الطلبات الحالية 🛵'),
-              Tab(text: 'الطلبات السابقة 📋'),
+            tabs: [
+              Tab(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [
+                    Text('الطلبات الحالية'),
+                    SizedBox(width: 4),
+                    Icon(LucideIcons.bike, size: 16),
+                  ],
+                ),
+              ),
+              Tab(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [
+                    Text('الطلبات السابقة'),
+                    SizedBox(width: 4),
+                    Icon(LucideIcons.clipboardList, size: 16),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
@@ -185,7 +204,8 @@ class OrdersHistoryScreen extends StatelessWidget {
                         ),
                       ] else ...[
                         RestoButton(
-                          text: 'إعادة الطلب 🔁',
+                          text: 'إعادة الطلب',
+                          trailingIcon: const Icon(LucideIcons.refreshCcw, size: 16, color: AppColors.primary),
                           variant: RestoButtonVariant.secondary,
                           height: 38,
                           onPressed: () {
@@ -198,7 +218,7 @@ class OrdersHistoryScreen extends StatelessWidget {
                             }
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
-                                content: Text('تمت إضافة أصناف الطلب إلى السلة 🎉'),
+                                content: Text('تمت إضافة أصناف الطلب إلى السلة'),
                                 backgroundColor: AppColors.successGreen,
                               ),
                             );

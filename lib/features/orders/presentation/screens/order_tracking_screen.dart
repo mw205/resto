@@ -9,7 +9,7 @@ import '../../../../core/widgets/status_chip.dart';
 import '../../data/models/order_model.dart';
 import '../cubit/order_tracking_cubit.dart';
 import '../cubit/order_tracking_state.dart';
-
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 class OrderTrackingScreen extends StatefulWidget {
   final String orderId;
 
@@ -104,8 +104,8 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                             const SizedBox(height: 4),
                             Text(
                               order.orderType == OrderType.delivery
-                                  ? 'توصيل لباب البيت 🛵'
-                                  : 'استلام من المطعم 🏬',
+                                  ? 'توصيل لباب البيت'
+                                  : 'استلام من الفرع',
                               style: TextStyle(
                                 fontSize: 12,
                                 color: isDark
@@ -252,7 +252,8 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
                   // Rating Action if Delivered
                   if (order.status == OrderStatus.delivered) ...[
                     RestoButton(
-                      text: 'قيّم تجربتك مع هذا الطلب ⭐',
+                      text: 'قيّم تجربتك مع هذا الطلب',
+                      trailingIcon: const Icon(LucideIcons.star, size: 16, color: Colors.white),
                       onPressed: () => context.push('/customer/rate-order/${order.id}'),
                       width: double.infinity,
                     ),
