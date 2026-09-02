@@ -17,11 +17,17 @@ scripts:
     run: melos exec -- "flutter clean"
     description: Clean all packages.
   build:landing:
-    run: cd packages/resto_landing_page && flutter build web --release --wasm
+    run: cd packages/resto_landing_page && flutter build web --release
     description: Build production release bundle for the Landing Page.
   build:admin:
-    run: cd packages/resto_admin_web && flutter build web --release --wasm
+    run: cd packages/resto_admin_web && flutter build web --release
     description: Build production release bundle for the Admin Dashboard.
   build:web:
     run: melos run build:landing && melos run build:admin
     description: Build production release bundles for both Web targets.
+  deploy:landing:
+    run: cd packages/resto_landing_page/build/web && vercel --prod
+    description: Deploy Landing Page to Vercel production.
+  deploy:admin:
+    run: cd packages/resto_admin_web/build/web && vercel --prod
+    description: Deploy Admin Dashboard to Vercel production.
