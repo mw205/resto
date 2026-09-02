@@ -4,6 +4,15 @@ Enterprise-grade **Melos Monorepo** for **Resto (ريستو)**, a high-end Egypt
 
 ---
 
+## 🌐 Live Production Deployments (Vercel)
+
+| Project | Live URL | Platform | Technology |
+| :--- | :--- | :--- | :--- |
+| **Landing Page** | [https://resto-landing-zeta.vercel.app](https://resto-landing-zeta.vercel.app) | Web / Mobile Responsive | Flutter Web (Wasm & HTML) |
+| **Admin Operations Dashboard** | [https://resto-admin-rouge.vercel.app](https://resto-admin-rouge.vercel.app) | Web Admin Portal (TOTP 2FA) | Flutter Web (Wasm & CanvasKit) |
+
+---
+
 ## 📱 Mobile App Showcase (`resto_app`)
 
 The **Resto Mobile Application** delivers a seamless digital dining experience for customers and real-time order dispatch for delivery captains.
