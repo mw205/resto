@@ -1,0 +1,27 @@
+name: resto_monorepo
+packages:
+  - packages/**
+
+command:
+  bootstrap:
+    runPubGetInParallel: false
+
+scripts:
+  analyze:
+    run: melos exec -- "flutter analyze"
+    description: Run flutter analyze across all packages.
+  test:
+    run: melos exec --dir-exists=test -- "flutter test"
+    description: Run tests across packages.
+  clean:
+    run: melos exec -- "flutter clean"
+    description: Clean all packages.
+  build:landing:
+    run: cd packages/resto_landing_page && flutter build web --release --wasm
+    description: Build production release bundle for the Landing Page.
+  build:admin:
+    run: cd packages/resto_admin_web && flutter build web --release --wasm
+    description: Build production release bundle for the Admin Dashboard.
+  build:web:
+    run: melos run build:landing && melos run build:admin
+    description: Build production release bundles for both Web targets.
