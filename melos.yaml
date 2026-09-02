@@ -31,3 +31,6 @@ scripts:
   deploy:admin:
     run: cd packages/resto_admin_web/build/web && vercel --prod
     description: Deploy Admin Dashboard to Vercel production.
+  deploy:web:
+    run: melos run deploy:landing && melos run deploy:admin
+    description: Deploy both Landing Page and Admin Dashboard to Vercel production.
