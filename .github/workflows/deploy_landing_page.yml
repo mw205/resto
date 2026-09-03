@@ -19,12 +19,11 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-          flutter-version: '3.13.2'
 
       - name: Install dependencies and build
-        working-directory: packages/resto_landing_page
         run: |
           flutter pub get
+          cd packages/resto_landing_page
           flutter build web --release
 
       - name: Install Vercel CLI
@@ -35,11 +34,11 @@ jobs:
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
         env:
           VERCEL_ORG_ID: team_0VAr8wzbHT96Zzse0JG0DRAS
-          VERCEL_PROJECT_ID: prj_h4aPYORiK27BxFmmkPTHxtYuwvX4
+          VERCEL_PROJECT_ID: prj_OeFvpZMruyHxJ9qRUUw4ibD2SwRe
 
       - name: Deploy Project Artifacts to Vercel
         working-directory: packages/resto_landing_page/build/web
         run: vercel deploy --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
         env:
           VERCEL_ORG_ID: team_0VAr8wzbHT96Zzse0JG0DRAS
-          VERCEL_PROJECT_ID: prj_h4aPYORiK27BxFmmkPTHxtYuwvX4
+          VERCEL_PROJECT_ID: prj_OeFvpZMruyHxJ9qRUUw4ibD2SwRe
