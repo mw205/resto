@@ -1,0 +1,45 @@
+name: Deploy Landing Page to Vercel
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'packages/resto_landing_page/**'
+      - 'packages/resto_core/**'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          flutter-version: '3.13.2'
+
+      - name: Install dependencies and build
+        working-directory: packages/resto_landing_page
+        run: |
+          flutter pub get
+          flutter build web --release
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Pull Vercel Environment Information
+        working-directory: packages/resto_landing_page/build/web
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: team_0VAr8wzbHT96Zzse0JG0DRAS
+          VERCEL_PROJECT_ID: prj_h4aPYORiK27BxFmmkPTHxtYuwvX4
+
+      - name: Deploy Project Artifacts to Vercel
+        working-directory: packages/resto_landing_page/build/web
+        run: vercel deploy --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: team_0VAr8wzbHT96Zzse0JG0DRAS
+          VERCEL_PROJECT_ID: prj_h4aPYORiK27BxFmmkPTHxtYuwvX4
