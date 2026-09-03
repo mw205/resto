@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <title>كتالوج منظومة ريستو (Resto) — الحل المتكامل للمطاعم</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --primary: #D95D39;
+      --primary-dark: #B54522;
+      --primary-light: #FDF2EE;
+      --charcoal: #1E1E1E;
+      --charcoal-soft: #2B2B2B;
+      --forest: #2D4B3E;
+      --forest-light: #EBF2EE;
+      --cream: #FBF9F8;
+      --cream-dark: #F3ECE8;
+      --gray-text: #555555;
+      --gray-light: #ECEAE7;
+      --border-color: #E2DBD4;
+      --white: #FFFFFF;
+      --shadow-sm: 0 4px 14px rgba(30, 30, 30, 0.05);
+      --shadow-md: 0 10px 24px rgba(30, 30, 30, 0.08);
+      --shadow-lg: 0 16px 36px rgba(30, 30, 30, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    @page {
+      size: 1200px 848px;
+      margin: 0;
+    }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: #333333;
+      color: var(--charcoal);
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .catalog-page {
+      width: 1200px;
+      height: 848px;
+      margin: 0 auto 20px auto;
+      background-color: var(--cream);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 34px 44px;
+      page-break-after: always;
+      break-after: page;
+    }
+
+    @media print {
+      body {
+        background-color: transparent;
+      }
+
+      .catalog-page {
+        margin: 0;
+        border: none;
+      }
+    }
+
+    /* HEADER & FOOTER */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 1.5px solid var(--border-color);
+      margin-bottom: 16px;
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid var(--border-color);
+    }
+
+    .header-title h4 {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--charcoal);
+      line-height: 1.1;
+    }
+
+    .header-title span {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .header-tag {
+      font-size: 11.5px;
+      font-weight: 700;
+      background: var(--cream-dark);
+      padding: 4px 12px;
+      border-radius: 6px;
+      color: var(--charcoal-soft);
+    }
+
+    .page-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 10px;
+      border-top: 1.5px solid var(--border-color);
+      font-size: 11px;
+      color: #777777;
+    }
+
+    .page-num {
+      font-family: 'Plus Jakarta Sans', 'Cairo', sans-serif;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    /* COMMON TYPOGRAPHY & CARDS */
+    .title-group h2 {
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--charcoal);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .title-group h2::before {
+      content: '';
+      display: inline-block;
+      width: 5px;
+      height: 22px;
+      background: var(--primary);
+      border-radius: 3px;
+    }
+
+    .title-group p {
+      font-size: 13px;
+      color: var(--gray-text);
+      margin-top: 2px;
+      margin-bottom: 14px;
+    }
+
+    .two-col-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      flex: 1;
+      align-items: center;
+    }
+
+    .content-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 18px 22px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* DEVICE FRAMES */
+    .phone-mockup-frame {
+      background: #F2ECE9;
+      border-radius: 16px;
+      padding: 6px;
+      border: 1.5px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+    }
+
+    .phone-mockup-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 12px;
+    }
+
+    .web-mockup-frame {
+      background: #1E1E1E;
+      border-radius: 14px;
+      padding: 8px 8px 6px 8px;
+      box-shadow: var(--shadow-lg);
+      border: 1.5px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .browser-top {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding-bottom: 6px;
+      padding-left: 6px;
+    }
+
+    .browser-circle {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .bc-red {
+      background: #FF5F56;
+    }
+
+    .bc-yellow {
+      background: #FFBD2E;
+    }
+
+    .bc-green {
+      background: #27C93F;
+    }
+
+    .web-mockup-frame img {
+      width: 100%;
+      border-radius: 6px;
+      object-fit: cover;
+    }
+
+    /* FEATURE BULLETS */
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .feature-point {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .point-badge {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 13px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      flex-shrink: 0;
+    }
+
+    .point-text h4 {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--charcoal);
+      margin-bottom: 2px;
+    }
+
+    .point-text p {
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--gray-text);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ==================== PAGE 1: COVER ==================== -->
+  <section class="catalog-page"
+    style="background: linear-gradient(135deg, #1C1C1C 0%, #292929 100%); color: var(--white); justify-content: space-between; padding: 48px 56px;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <img src="assets/logo.jpg" alt="Resto Logo"
+          style="width: 64px; height: 64px; border-radius: 16px; border: 1.5px solid rgba(255,255,255,0.2);">
+        <div>
+          <h2 style="font-size: 26px; font-weight: 900; letter-spacing: -0.5px;">منظومة ريستو (Resto)</h2>
+          <p style="font-size: 13px; color: #F7936E; font-weight: 700;">نظام الطلب المباشر وإدارة المطاعم الفاخرة</p>
+        </div>
+      </div>
+      <div
+        style="background: rgba(217, 93, 57, 0.2); border: 1.5px solid #D95D39; padding: 6px 18px; border-radius: 999px; font-size: 13px; font-weight: 800; color: #F7936E;">
+        كتالوج المنتج الرسمي • إصدار 2026
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; margin: 20px 0;">
+      <div>
+        <span
+          style="background: rgba(255,255,255,0.1); padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 800; color: #F7936E; text-transform: uppercase;">
+          Culinary Heritage Architecture
+        </span>
+        <h1 style="font-size: 38px; font-weight: 900; line-height: 1.3; margin: 14px 0 16px 0;">
+          الحل الرقمي الشامل لتشغيل ومبيعات المطاعم بدون عمولات وسيطة
+        </h1>
+        <p style="font-size: 15px; line-height: 1.7; color: #CCCCCC; margin-bottom: 24px;">
+          دليلك المتكامل لاستكشاف منظومة ريستو: تجربة العميل عبر الهاتف المحمول، بوابة كابتن الديليفري الذكية، ولوحة
+          تحكم العمليات المركزية للمطبخ والمبيعات.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;">
+          <div
+            style="background: rgba(255,255,255,0.06); padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); text-align: center;">
+            <div style="font-size: 22px; font-weight: 900; color: #F7936E; font-family: 'Plus Jakarta Sans';">3</div>
+            <div style="font-size: 11.5px; color: #BBB;">تطبيقات متزامنة</div>
+          </div>
+          <div
+            style="background: rgba(255,255,255,0.06); padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); text-align: center;">
+            <div style="font-size: 22px; font-weight: 900; color: #F7936E; font-family: 'Plus Jakarta Sans';">0%</div>
+            <div style="font-size: 11.5px; color: #BBB;">عمولة منصات خارجية</div>
+          </div>
+          <div
+            style="background: rgba(255,255,255,0.06); padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); text-align: center;">
+            <div style="font-size: 22px; font-weight: 900; color: #F7936E; font-family: 'Plus Jakarta Sans';">100%</div>
+            <div style="font-size: 11.5px; color: #BBB;">تحكم بالعمليات</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: center; align-items: center;">
+        <img src="assets/dining_lifestyle.jpg" alt="تجربة المطعم"
+          style="width: 100%; max-height: 420px; object-fit: cover; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.6); border: 2px solid rgba(255,255,255,0.15);">
+      </div>
+    </div>
+
+    <div
+      style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 14px; font-size: 11.5px; color: #888;">
+      <span>منظومة ريستو للبرمجيات المتطورة — حل مخصص لقطاع الضيافة والمطاعم</span>
+      <span style="color: #DDD;">الغلاف • صفحة 1 من 10</span>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE 2: PRODUCT OVERVIEW & ECOSYSTEM ==================== -->
+  <section class="catalog-page">
+    <div class="page-header">
+      <div class="header-brand">
+        <img src="assets/logo.jpg" alt="Logo" class="header-logo">
+        <div class="header-title">
+          <h4>منظومة ريستو (Resto)</h4>
+          <span>نظرة عامة على المنظومة وقيمتها لقطاع الأعمال</span>
+        </div>
+      </div>
+      <div class="header-tag">البنية البرمجية</div>
+    </div>
+
+    <div class="title-group">
+      <h2>ثلاث تجارب استخدام ذكية .. تعمل ككيان واحد متناغم</h2>
+      <p>صُممت منظومة ريستو لتمنح صاحب المطعم سيطرة تامة على قنوات البيع وعمليات التشغيل اليومية:</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; flex: 1; align-items: center;">
+      <div class="feature-list">
+        <div class="content-card" style="padding: 14px 18px;">
+          <h4 style="color: var(--primary); font-size: 15px; margin-bottom: 4px;">1. امتلاك القناة الرقمية وتوفير
+            العمولات</h4>
+          <p style="font-size: 12px; line-height: 1.5; color: var(--gray-text);">
+            بدلاً من دفع ما بين 15% إلى 25% عمولة لكل طلب لتطبيقات التوصيل الوسيطة، يمنحك ريستو قناة طلب رقمية مباشرة
+            100% خاصة باسم وهوية مطعمك.
+          </p>
+        </div>
+
+        <div class="content-card" style="padding: 14px 18px;">
+          <h4 style="color: var(--forest); font-size: 15px; margin-bottom: 4px;">2. انسيابية العمليات والربط اللحظي</h4>
+          <p style="font-size: 12px; line-height: 1.5; color: var(--gray-text);">
+            بمجرد إتمام العميل للطلب، يظهر فورياً على شاشة المطبخ في لوحة التحكم، ويتم إسناد كابتن التوصيل بضغطة زر دون
+            اتصالات هاتفية مشتتة.
+          </p>
+        </div>
+
+        <div class="content-card" style="padding: 14px 18px;">
+          <h4 style="color: #B36B00; font-size: 15px; margin-bottom: 4px;">3. قاعدة بيانات العملاء وبرامج الولاء</h4>
+          <p style="font-size: 12px; line-height: 1.5; color: var(--gray-text);">
+            امتلك بيانات عملائك وتفضيلاتهم وسجل طلباتهم، واستهدفهم بكوبونات وعروض أسبوعية مخصصة تشجعهم على تكرار الطلب.
+          </p>
+        </div>
+      </div>
+
+      <!-- Ecosystem Diagram Card -->
+      <div class="content-card"
+        style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; padding: 22px;">
+        <h3 style="font-size: 16px; font-weight: 800; margin-bottom: 12px; text-align: center;">مخطط تدفق المنظومة
+          المتكاملة (Ecosystem Architecture)</h3>
+
+        <div
+          style="background: #F7F5F2; border-radius: 14px; padding: 16px; border: 1.5px dashed var(--border-color); text-align: center;">
+          <div
+            style="background: var(--forest-light); color: var(--forest); padding: 8px 14px; border-radius: 8px; font-weight: 800; font-size: 13px; display: inline-block; margin-bottom: 10px;">
+            📱 تطبيق العميل (Customer Mobile App)
+          </div>
+          <div style="font-size: 11px; color: #777;">تصفح المنيو • اختيار توصيل / استلام • كود الخصم • تأكيد الطلب</div>
+
+          <div style="font-size: 18px; color: var(--primary); margin: 6px 0;">⬇️ ⬆️</div>
+
+          <div
+            style="background: #242424; color: #FFF; padding: 10px 18px; border-radius: 10px; font-weight: 800; font-size: 13.5px; display: inline-block;">
+            ⚡ خادم ريستو المركزي ولوحة العمليات (Admin Dashboard)
+          </div>
+          <div style="font-size: 11px; color: #777; margin-top: 4px;">توزيع الطلبات • ضبط المخزون • المبيعات الحية •
+            إسناد الكباتن</div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px;">
+            <div
+              style="background: #FEF3E2; color: #B36B00; padding: 8px; border-radius: 8px; font-weight: 800; font-size: 12px;">
+              🛵 تطبيق الكابتن<br><span style="font-weight: 500; font-size: 10.5px;">استلام وتوصيل وتحصيل</span>
+            </div>
+            <div
+              style="background: var(--primary-light); color: var(--primary-dark); padding: 8px; border-radius: 8px; font-weight: 800; font-size: 12px;">
+              🍳 شاشة المطبخ<br><span style="font-weight: 500; font-size: 10.5px;">تجهيز الأصناف بدقة</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="font-size: 11.5px; color: #666; text-align: center; margin-top: 10px;">
+          كل تفاعل يتم مزامنته لحظياً عبر النظام لضمان تجربة سلسة بدون تأخير.
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>منظومة ريستو (Resto) — الكتالوج التعريفي الشامل</span>
+      <span class="page-num">صفحة 2 من 10</span>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE 3: CUSTOMER EXPERIENCE (MENU & DISHES) ==================== -->
+  <section class="catalog-page">
+    <div class="page-header">
+      <div class="header-brand">
+        <img src="assets/logo.jpg" alt="Logo" class="header-logo">
+        <div class="header-title">
+          <h4>منظومة ريستو (Resto)</h4>
+          <span>تطبيق الهاتف للعملاء (iOS &amp; Android)</span>
+        </div>
+      </div>
+      <div class="header-tag">تجربة العميل • الجزء الأول</div>
+    </div>
+
+    <div class="title-group">
+      <h2>قائمة طعام رقمية فاخرة تُشبع الحواس وتُحفز الشراء</h2>
+      <p>تجربة استعراض بصرية تأخذ العميل في رحلة شهية عبر أطباق مطعمك الغنية:</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 24px; flex: 1; align-items: center;">
+      <!-- Screenshots Duo -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; height: 520px;">
+        <div class="phone-mockup-frame">
+          <img src="assets/customer_home.png" alt="الرئيسية">
+        </div>
+        <div class="phone-mockup-frame">
+          <img src="assets/customer_menu.png" alt="المنيو">
+        </div>
+      </div>
+
+      <!-- Features Description -->
+      <div class="feature-list">
+        <div class="content-card">
+          <h4 style="font-size: 15px; font-weight: 800; color: var(--primary); margin-bottom: 4px;">تصفح ذكي وتصنيف دقيق
+            للأكلات</h4>
+          <p style="font-size: 12.5px; line-height: 1.6; color: var(--gray-text);">
+            تصنيفات واضحة تناسب طبيعة المطعم (مشويات وفحم، كشري وطواجن فخار، أطباق رئيسية ومحاشي، سندوتشات وحواوشي) مع
+            أيقونات معبرة تتيح الوصول للصنف المطلوب بثوانٍ معدودة.
+          </p>
+        </div>
+
+        <div class="content-card">
+          <h4 style="font-size: 15px; font-weight: 800; color: var(--charcoal); margin-bottom: 4px;">شفافية السعرات
+            الحرارية ووقت التحضير</h4>
+          <p style="font-size: 12.5px; line-height: 1.6; color: var(--gray-text);">
+            عرض احترافي لتفاصيل كل طبق متضمناً السعرات الحرارية المحسوبة بدقة (مثل 580 سعرة)، ووقت التجهيز المتوقع (مثل
+            15 دقيقة)، ومكونات الصنف لتعزيز ثقة العميل.
+          </p>
+        </div>
+
+        <div class="content-card">
+          <h4 style="font-size: 15px; font-weight: 800; color: var(--forest); margin-bottom: 4px;">شريط بحث فوري ولافتات
+            العروض الترويجية</h4>
+          <p style="font-size: 12.5px; line-height: 1.6; color: var(--gray-text);">
+            محرك بحث سلس للأطباق والمكونات، مع بانر علوي ديناميكي يعرض كود الخصم الأسبوعي الفعال (RESTO20) لتشجيع العميل
+            على رفع قيمة سلة الشراء.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>منظومة ريستو (Resto) — الكتالوج التعريفي الشامل</span>
+      <span class="page-num">صفحة 3 من 10</span>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE 4: ORDERING, TRACKING & REORDER ==================== -->
+  <section class="catalog-page">
+    <div class="page-header">
+      <div class="header-brand">
+        <img src="assets/logo.jpg" alt="Logo" class="header-logo">
+        <div class="header-title">
+          <h4>منظومة ريستو (Resto)</h4>
+          <span>السلة، خيارات الاستلام وتتبع مراحل الطلب</span>
+        </div>
+      </div>
+      <div class="header-tag">تجربة العميل • الجزء الثاني</div>
+    </div>
+
+    <div class="title-group">
+      <h2>طلب مباشر سلس وتتبع شفاف للوجبة حتى باب البيت</h2>
+      <p>مرونة كاملة بين التوصيل المنزلي والاستلام من الفرع مع متابعة دقيقة لمراحل الطهي:</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 24px; flex: 1; align-items: center;">
+      <!-- Three Mobile Screens in a Row -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; height: 510px;">
+        <div class="phone-mockup-frame">
+          <img src="assets/customer_cart.png" alt="السلة وتطبيق الكوبون">
+        </div>
+        <div class="phone-mockup-frame">
+          <img src="assets/customer_checkout.png" alt="تأكيد الطلب والدفع كاش">
+        </div>
+        <div class="phone-mockup-frame">
+          <img src="assets/customer_tracking_start.png" alt="تتبع مراحل الطلب">
+        </div>
+      </div>
+
+      <!-- Feature Details -->
+      <div class="feature-list">
+        <div class="content-card">
+          <h4 style="font-size: 14.5px; font-weight: 800; color: var(--primary); margin-bottom: 3px;">سلة مرنة وتطبيق
+            فوري للكوبونات</h4>
+          <p style="font-size: 12px; line-height: 1.5; color: var(--gray-text);">
+            التحكم في كميات الأصناف بسهولة، إضافة كود الخصم (RESTO20) مع خصم فوري ومباشر، والتبديل السلس بين توصيل
+            للمنزل أو استلام من الفرع.
+          </p>
+        </div>
+
+        <div class="content-card">
+          <h4 style="font-size: 14.5px; font-weight: 800; color: var(--charcoal); margin-bottom: 3px;">تأكيد العنوان
+            والدفع عند الاستلام (كاش)</h4>
+          <p style="font-size: 12px; line-height: 1.5; color: var(--gray-text);">
+            تحديد العنوان المفصل ورقم الهاتف للتواصل، مع مساحة لكتابة تعليمات مخصصة للكابتن أو الشيف (مثل: رن الجرس
+            واترك الطلب)، وخيار الدفع كاش المفضل في السوق المصري.
+          </p>
+        </div>
+
+        <div class="content-card">
+          <h4 style="font-size: 14.5px; font-weight: 800; color: var(--forest); margin-bottom: 3px;">تتبع الخط الزمني
+            المعتمد (بدون تعقيدات GPS)</h4>
+          <p style="font-size: 12px; line-height: 1.5; color: var(--gray-text);">
+            مخطط زمني واضح من 4 مراحل: (تم استلام الطلب ➔ قيد التحضير في المطبخ ➔ في الطريق مع الكابتن ➔ تم التسليم
+            بنجاح)، مع بطاقة تعريفية بكابتن التوصيل وزر اتصال مباشر.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>منظومة ريستو (Resto) — الكتالوج التعريفي الشامل</span>
+      <span class="page-num">صفحة 4 من 10</span>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE 5: DRIVER MOBILE APP ==================== -->
+  <section class="catalog-page">
+    <div class="page-header">
+      <div class="header-brand">
+        <img src="assets/logo.jpg" alt="Logo" class="header-logo">
+        <div class="header-title">
+          <h4>منظومة ريستو (Resto)</h4>
+          <span>تطبيق كابتن التوصيل (Driver Mobile Application)</span>
+        </div>
+      </div>
+      <div class="header-tag">بوابة أسطول التوصيل</div>
+    </div>
+
+    <div class="title-group">
+      <h2>أداة تشغيلية سهلة تمكّن كابتن التوصيل من الإنجاز السريع</h2>
+      <p>واجهة عملية صُممت خصيصاً لبيئة الحركة السريعة للكباتن دون أي خطوات معقدة:</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 28px; flex: 1; align-items: center;">
+      <!-- Driver Screen Frame -->
+      <div class="phone-mockup-frame" style="height: 520px; width: 85%; margin: 0 auto;">
+        <img src="assets/driver_portal.png" alt="بوابة كابتن الديليفري">
+      </div>
+
+      <!-- Explanations -->
+      <div class="feature-list">
+        <div class="content-card">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+            <span
+              style="background: #FEF3E2; color: #B36B00; font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 4px;">استلام
+              فوري</span>
+            <h4 style="font-size: 15px; font-weight: 800; color: var(--charcoal);">قائمة الطلبات المسندة لكل كابتن</h4>
+          </div>
+          <p style="font-size: 12.5px; line-height: 1.6; color: var(--gray-text);">
+            يفتح الكابتن التطبيق ليجد الطلبات التي أسندتها له إدارة المطبخ مرتبة بحسب الأولوية، مع بيان رقم الطلب وزمن
+            الاستلام.
+          </p>
+        </div>
+
+        <div class="content-card">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+            <span
+              style="background: var(--primary-light); color: var(--primary-dark); font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 4px;">بيانات
+              واضحة</span>
+            <h4 style="font-size: 15px; font-weight: 800; color: var(--charcoal);">العنوان التفصيلي ومبلغ التحصيل كاش
+            </h4>
+          </div>
+          <p style="font-size: 12.5px; line-height: 1.6; color: var(--gray-text);">
+            تظهر بيانات العنوان بدقة (المدينة، الحي، اسم الشارع، رقم العمارة والدور) مع رقم هاتف العميل للتواصل الفوري،
+            ومبلغ التحصيل المطلوب بالجنيه المصري (مثال: 150 ج.م).
+          </p>
+        </div>
+
+        <div class="content-card">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+            <span
+              style="background: var(--forest-light); color: var(--forest); font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 4px;">نقرة
+              واحدة</span>
+            <h4 style="font-size: 15px; font-weight: 800; color: var(--charcoal);">تأكيد التسليم وتحديث حالة الطلب
+              لحظياً</h4>
+          </div>
+          <p style="font-size: 12.5px; line-height: 1.6; color: var(--gray-text);">
+            زر تشغيل مباشر وواضح: "تم تسليم الطلب للعميل". بمجرد الضغط عليه، يتحول الطلب في لوحة تحكم الإدارة إلى مكتمل
+            وتصل رسالة فورية للعميل بالاستلام.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>منظومة ريستو (Resto) — الكتالوج التعريفي الشامل</span>
+      <span class="page-num">صفحة 5 من 10</span>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE 6: ADMIN OPERATIONS OVERVIEW ==================== -->
+  <section class="catalog-page">
+    <div class="page-header">
+      <div class="header-brand">
+        <img src="assets/logo.jpg" alt="Logo" class="header-logo">
+        <div class="header-title">
+          <h4>منظومة ريستو (Resto)</h4>
+          <span>لوحة تحكم العمليات المركزية (Operations Web Dashboard)</span>
+        </div>
+      </div>
+      <div class="header-tag">غرفة القيادة والعمليات</div>
+    </div>
+
+    <div class="title-group">
+      <h2>متابعة فورية للمبيعات، طابور المطبخ، وأسطول التوصيل</h2>
+      <p>شاشة قيادة موحدة تمنح مدير المطعم رؤية بانورامية حية لكل ما يدور داخل الفرع لحظة بلحظة:</p>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 16px; flex: 1;">
+      <!-- Web Dashboard Wide Mockup -->
+      <div class="web-mockup-frame" style="height: 380px;">
+        <div class="browser-top">
+          <span class="browser-circle bc-red"></span>
+          <span class="browser-circle bc-yellow"></span>
+          <span class="browser-circle bc-green"></span>
+          <span
+            style="color: #999; font-size: 11px; font-family: 'Plus Jakarta Sans'; margin-right: 8px;">https://admin.resto.eg/overview</span>
+        </div>
+        <img src="assets/admin_overview.png" alt="لوحة مؤشرات العمليات الحية">
+      </div>
+
+      <!-- Analytics Breakdown Grid -->
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;">
+        <div class="content-card" style="padding: 10px 14px; text-align: center;">
+          <div style="font-size: 11.5px; color: #777;">مبيعات اليوم اللحظية</div>
+          <div style="font-size: 18px; font-weight: 900; color: var(--primary); margin: 2px 0;">640 ج.م</div>
+          <div style="font-size: 10.5px; color: var(--forest); font-weight: 700;">+14% مقارنة بالأمس</div>
+        </div>
+
+        <div class="content-card" style="padding: 10px 14px; text-align: center;">
+          <div style="font-size: 11.5px; color: #777;">إجمالي طلبات اليوم</div>
+          <div style="font-size: 18px; font-weight: 900; color: var(--charcoal); margin: 2px 0;">3 طلبات</div>
+          <div style="font-size: 10.5px; color: #777;">معدل إنجاز 98%</div>
+        </div>
+
+        <div class="content-card" style="padding: 10px 14px; text-align: center;">
+          <div style="font-size: 11.5px; color: #777;">طابور المطبخ النشط</div>
+          <div style="font-size: 18px; font-weight: 900; color: #B36B00; margin: 2px 0;">0 طلب معلق</div>
+          <div style="font-size: 10.5px; color: #777;">أسرع تجهيز: 16 دقيقة</div>
+        </div>
+
+        <div class="content-card" style="padding: 10px 14px; text-align: center;">
+          <div style="font-size: 11.5px; color: #777;">كباتن في الطريق</div>
+          <div style="font-size: 18px; font-weight: 900; color: var(--forest); margin: 2px 0;">1 كابتن نشط</div>
+          <div style="font-size: 10.5px; color: #777;">متوسط التوصيل: 32 دقيقة</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>منظومة ريستو (Resto) — الكتالوج التعريفي الشامل</span>
+      <span class="page-num">صفحة 6 من 10</span>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE 7: KITCHEN & ORDER MANAGEMENT ==================== -->
+  <section class="catalog-page">
+    <div class="page-header">
+      <div class="header-brand">
+        <img src="assets/logo.jpg" alt="Logo" class="header-logo">
+        <div class="header-title">
+          <h4>منظومة ريستو (Resto)</h4>
+          <span>إدارة الطلبات وطابور المطبخ (Orders Management)</span>
+        </div>
+      </div>
+      <div class="header-tag">إدارة الصالة والمطبخ</div>
+    </div>
+
+    <div class="title-group">
+      <h2>معالجة فورية للطلبات وتحديث مباشر لمراحل الطهي</h2>
+      <p>جدول تفاعلي موحد يتيح لمدير الفرع متابعة تفاصيل الطلبات وإجراءات التسليم للكباتن:</p>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 16px; flex: 1;">
+      <!-- Orders Table Screen -->
+      <div class="web-mockup-frame" style="height: 380px;">
+        <div class="browser-top">
+          <span class="browser-circle bc-red"></span>
+          <span class="browser-circle bc-yellow"></span>
+          <span class="browser-circle bc-green"></span>
+          <span
+            style="color: #999; font-size: 11px; font-family: 'Plus Jakarta Sans'; margin-right: 8px;">https://admin.resto.eg/orders</span>
+        </div>
+        <img src="assets/admin_orders_management.png" alt="جدول إدارة الطلبات">
+      </div>
+
+      <!-- Feature Capabilities -->
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+        <div class="content-card" style="padding: 12px 16px;">
+          <h4 style="font-size: 13.5px; font-weight: 800; color: var(--primary); margin-bottom: 2px;">تصفية سريعة
+            للطلبات</h4>
+          <p style="font-size: 11.5px; color: var(--gray-text); line-height: 1.4;">
+            التبديل الفوري بين (كل الطلبات)، (الطلبات النشطة الآن)، و(الطلبات المكتملة) لتقليل الضغط على مسؤولي الكاشير
+            والمطبخ.
+          </p>
+        </div>
+
+        <div class="content-card" style="padding: 12px 16px;">
+          <h4 style="font-size: 13.5px; font-weight: 800; color: var(--charcoal); margin-bottom: 2px;">بيانات الصنف
+            والعميل تفصيلاً</h4>
+          <p style="font-size: 11.5px; color: var(--gray-text); line-height: 1.4;">
+            عرض الأصناف المطلوبة بدقة (مثل: كشري ملوكي، مشويات مشكلة، طاجن أم علي) مع هاتف العميل ومجموع الفاتورة
+            الإجمالي.
+          </p>
+        </div>
+
+        <div class="content-card" style="padding: 12px 16px;">
+          <h4 style="font-size: 13.5px; font-weight: 800; color: var(--forest); margin-bottom: 2px;">زر الإجراء السريع
+            (Quick Action)</h4>
+          <p style="font-size: 11.5px; color: var(--gray-text); line-height: 1.4;">
+            إمكانية تأكيد التسليم أو تحديث مرحلة الطلب مباشرة من الجدول دون الحاجة لفتح صفحات تفصيلية جانبية.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>منظومة ريستو (Resto) — الكتالوج التعريفي الشامل</span>
+      <span class="page-num">صفحة 7 من 10</span>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE 8: MENU AVAILABILITY & FLEET MANAGEMENT ==================== -->
+  <section class="catalog-page">
+    <div class="page-header">
+      <div class="header-brand">
+        <img src="assets/logo.jpg" alt="Logo" class="header-logo">
+        <div class="header-title">
+          <h4>منظومة ريستو (Resto)</h4>
+          <span>التحكم في قائمة الطعام والمخزون وأسطول التوصيل</span>
+        </div>
+      </div>
+      <div class="header-tag">المخزون والأسطول</div>
+    </div>
+
+    <div class="title-group">
+      <h2>مرونة مطلقة: إيقاف الوجبات النافذة فورياً وإدارة طاقم الكباتن</h2>
+      <p>أدوات إدارية تحمي سمعة مطعمك وتمنع طلب أي وجبة نفدت مكوناتها من المطبخ:</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; flex: 1; align-items: stretch;">
+      <!-- Menu Stock Toggle -->
+      <div class="content-card"
+        style="display: flex; flex-direction: column; justify-content: space-between; padding: 16px;">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <h3 style="font-size: 15px; font-weight: 800; color: var(--primary);">إدارة توفر الأصناف (Menu &amp; Stock)
+            </h3>
+            <span
+              style="font-size: 11px; background: var(--primary-light); color: var(--primary-dark); padding: 2px 8px; border-radius: 4px; font-weight: 800;">تحكم
+              مباشر</span>
+          </div>
+          <p style="font-size: 11.5px; color: var(--gray-text); margin-bottom: 10px;">
+            زر تبديل لحظي (متوفر الآن / غير متوفر) لكل صنف في القائمة؛ بمجرد إيقافه يختفي فورياً من تطبيق العميل لتفادي
+            الإحراج.
+          </p>
+        </div>
+
+        <div class="web-mockup-frame" style="height: 310px;">
+          <div class="browser-top">
+            <span class="browser-circle bc-red"></span>
+            <span class="browser-circle bc-yellow"></span>
+            <span class="browser-circle bc-green"></span>
+            <span
+              style="color: #999; font-size: 10px; font-family: 'Plus Jakarta Sans'; margin-right: 6px;">admin.resto.eg/menu</span>
+          </div>
+          <img src="assets/admin_menu_stock.png" alt="إدارة المنيو والمخزون">
+        </div>
+      </div>
+
+      <!-- Fleet Staff Roster -->
+      <div class="content-card"
+        style="display: flex; flex-direction: column; justify-content: space-between; padding: 16px;">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <h3 style="font-size: 15px; font-weight: 800; color: var(--forest);">كباتن التوصيل والأسطول (Fleet Roster)
+            </h3>
+            <span
+              style="font-size: 11px; background: var(--forest-light); color: var(--forest); padding: 2px 8px; border-radius: 4px; font-weight: 800;">متابعة
+              الأسطول</span>
+          </div>
+          <p style="font-size: 11.5px; color: var(--gray-text); margin-bottom: 10px;">
+            متابعة حالة كل سائق (في طريق التوصيل، متاح للطلب القادم، استراحة)، مع رصد تقييمات العملاء وعدد الطلبات
+            المنجزة يومياً.
+          </p>
+        </div>
+
+        <div class="web-mockup-frame" style="height: 310px;">
+          <div class="browser-top">
+            <span class="browser-circle bc-red"></span>
+            <span class="browser-circle bc-yellow"></span>
+            <span class="browser-circle bc-green"></span>
+            <span
+              style="color: #999; font-size: 10px; font-family: 'Plus Jakarta Sans'; margin-right: 6px;">admin.resto.eg/delivery-staff</span>
+          </div>
+          <img src="assets/admin_delivery_fleet.png" alt="إدارة الكباتن والأسطول">
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>منظومة ريستو (Resto) — الكتالوج التعريفي الشامل</span>
+      <span class="page-num">صفحة 8 من 10</span>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE 9: COMPLETE OPERATIONAL LIFECYCLE ==================== -->
+  <section class="catalog-page">
+    <div class="page-header">
+      <div class="header-brand">
+        <img src="assets/logo.jpg" alt="Logo" class="header-logo">
+        <div class="header-title">
+          <h4>منظومة ريستو (Resto)</h4>
+          <span>دورة تشغيل الطلب المتكاملة (End-to-End Workflow)</span>
+        </div>
+      </div>
+      <div class="header-tag">سير العمليات الكامل</div>
+    </div>
+
+    <div class="title-group">
+      <h2>دورة متكاملة تضمن تجربة استثنائية من الشاشة وحتى المائدة</h2>
+      <p>انسيابية تامة في تدفق البيانات بين العميل وإدارة المطبخ والكابتن دون أي فجوات:</p>
+    </div>
+
+    <!-- 4-Stage Operational Grid -->
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; flex: 1; align-items: stretch;">
+      <!-- Step 1 -->
+      <div class="content-card"
+        style="display: flex; flex-direction: column; justify-content: space-between; border-top: 4px solid var(--forest);">
+        <div>
+          <div style="font-size: 12px; font-weight: 800; color: var(--forest); margin-bottom: 6px;">المرحلة الأولى</div>
+          <h4 style="font-size: 15px; font-weight: 800; margin-bottom: 6px;">العميل يطلب ويخصص</h4>
+          <p style="font-size: 12px; color: var(--gray-text); line-height: 1.5;">
+            تصفح الوجبات، إضافة تعليمات الشيف، تطبيق كود الخصم (RESTO20)، واختيار طريقة التوصيل أو الاستلام.
+          </p>
+        </div>
+        <div style="background: #F9F7F5; padding: 10px; border-radius: 10px; text-align: center; margin-top: 10px;">
+          <span style="font-size: 11px; font-weight: 700; color: #555;">📱 تطبيق العميل الذكي</span>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="content-card"
+        style="display: flex; flex-direction: column; justify-content: space-between; border-top: 4px solid var(--primary);">
+        <div>
+          <div style="font-size: 12px; font-weight: 800; color: var(--primary); margin-bottom: 6px;">المرحلة الثانية
+          </div>
+          <h4 style="font-size: 15px; font-weight: 800; margin-bottom: 6px;">المطبخ يستلم ويحضر</h4>
+          <p style="font-size: 12px; color: var(--gray-text); line-height: 1.5;">
+            يظهر الطلب فورياً في طابور المطبخ، يبدأ الشيف التجهيز، ويتم إسناد كابتن التوصيل المتاح بضغطة زر واحدة.
+          </p>
+        </div>
+        <div style="background: #F9F7F5; padding: 10px; border-radius: 10px; text-align: center; margin-top: 10px;">
+          <span style="font-size: 11px; font-weight: 700; color: #555;">💻 لوحة تحكم العمليات</span>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="content-card"
+        style="display: flex; flex-direction: column; justify-content: space-between; border-top: 4px solid #B36B00;">
+        <div>
+          <div style="font-size: 12px; font-weight: 800; color: #B36B00; margin-bottom: 6px;">المرحلة الثالثة</div>
+          <h4 style="font-size: 15px; font-weight: 800; margin-bottom: 6px;">الكابتن ينطلق للعنوان</h4>
+          <p style="font-size: 12px; color: var(--gray-text); line-height: 1.5;">
+            يستلم السائق الطلب ساخناً، يطّلع على العنوان وهاتف العميل، ويغير الحالة إلى "في الطريق" لتحديث العميل.
+          </p>
+        </div>
+        <div style="background: #F9F7F5; padding: 10px; border-radius: 10px; text-align: center; margin-top: 10px;">
+          <span style="font-size: 11px; font-weight: 700; color: #555;">🛵 بوابة كابتن الديليفري</span>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="content-card"
+        style="display: flex; flex-direction: column; justify-content: space-between; border-top: 4px solid var(--charcoal);">
+        <div>
+          <div style="font-size: 12px; font-weight: 800; color: var(--charcoal); margin-bottom: 6px;">المرحلة الرابعة
+          </div>
+          <h4 style="font-size: 15px; font-weight: 800; margin-bottom: 6px;">التسليم والتقييم والولاء</h4>
+          <p style="font-size: 12px; color: var(--gray-text); line-height: 1.5;">
+            تسليم الوجبة، تحصيل الكاش، تقييم التجربة في التطبيق، وإمكانية إعادة الطلب بضغطة واحدة في المرات القادمة.
+          </p>
+        </div>
+        <div style="background: #F9F7F5; padding: 10px; border-radius: 10px; text-align: center; margin-top: 10px;">
+          <span style="font-size: 11px; font-weight: 700; color: #555;">⭐ رضا العميل وإعادة الطلب</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Customer Engagement Bar -->
+    <div
+      style="background: var(--white); border-radius: 14px; padding: 14px 20px; border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; margin-top: 14px;">
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <span style="font-size: 20px;">🛡️</span>
+        <div>
+          <h4 style="font-size: 13.5px; font-weight: 800;">مركز متكامل للشكاوى والمقترحات داخل تطبيق العميل</h4>
+          <p style="font-size: 11.5px; color: var(--gray-text);">قناة اتصال مباشرة تستقبل آراء العملاء وتعالجها فورياً
+            لحماية سمعة مطعمك.</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <span
+          style="font-size: 11px; background: var(--cream-dark); padding: 4px 10px; border-radius: 6px; font-weight: 700;">تقييم
+          الوجبات</span>
+        <span
+          style="font-size: 11px; background: var(--cream-dark); padding: 4px 10px; border-radius: 6px; font-weight: 700;">إعادة
+          الطلب السريع</span>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>منظومة ريستو (Resto) — الكتالوج التعريفي الشامل</span>
+      <span class="page-num">صفحة 9 من 10</span>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE 10: CALL TO ACTION & DEMO ==================== -->
+  <section class="catalog-page"
+    style="background: linear-gradient(135deg, #181818 0%, #262626 100%); color: var(--white); justify-content: space-between;">
+    <div class="page-header" style="border-bottom-color: rgba(255,255,255,0.15);">
+      <div class="header-brand">
+        <img src="assets/logo.jpg" alt="Logo" class="header-logo" style="border-color: rgba(255,255,255,0.2);">
+        <div class="header-title">
+          <h4 style="color: var(--white);">منظومة ريستو (Resto)</h4>
+          <span style="color: #F7936E;">الخطوة التالية والدعوة للتجربة الحية</span>
+        </div>
+      </div>
+      <div class="header-tag" style="background: rgba(255,255,255,0.1); color: #F7936E;">جاهز للتجربة الآن</div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 36px; align-items: center; flex: 1;">
+      <div>
+        <h2 style="font-size: 32px; font-weight: 900; line-height: 1.35; margin-bottom: 14px;">
+          جاهز لتشهد منظومة ريستو قيد التشغيل في مطعمك؟
+        </h2>
+        <p style="font-size: 14px; line-height: 1.7; color: #CCC; margin-bottom: 24px;">
+          لا نطلب منك الاعتماد على الكلمات؛ يمكنك تجربة النظام بنفسك عملياً الآن عبر الرابط التجريبي التفاعلي. جرب الطلب
+          كعميل، استلم الطلب في المطبخ، وقم بتوصيله ككابتن.
+        </p>
+
+        <!-- Credentials Card -->
+        <div
+          style="background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 18px 22px;">
+          <h4 style="font-size: 14px; color: #F7936E; font-weight: 800; margin-bottom: 10px;">بيانات الحسابات المتاحة
+            للاختبار المباشر:</h4>
+
+          <div style="display: flex; flex-direction: column; gap: 8px; font-size: 12.5px;">
+            <div
+              style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px;">
+              <span style="color: #FFF; font-weight: 700;">حساب العميل (تطبيق الهاتف):</span>
+              <span style="color: #F7936E; font-family: 'Plus Jakarta Sans';">mohamed@resto.eg</span>
+            </div>
+            <div
+              style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px;">
+              <span style="color: #FFF; font-weight: 700;">حساب كابتن التوصيل:</span>
+              <span style="color: #F7936E; font-family: 'Plus Jakarta Sans';">driver@resto.eg</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding-top: 2px;">
+              <span style="color: #FFF; font-weight: 700;">حساب مدير العمليات (لوحة الويب):</span>
+              <span style="color: #F7936E; font-family: 'Plus Jakarta Sans';">admin@resto.eg (مع كود TOTP
+                التلقائي)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact / Demo Box -->
+      <div
+        style="background: rgba(255,255,255,0.04); border: 1.5px solid rgba(217, 93, 57, 0.3); border-radius: 20px; padding: 26px; text-align: center;">
+        <div
+          style="width: 56px; height: 56px; border-radius: 50%; background: var(--primary); color: #FFF; display: flex; align-items: center; justify-content: center; font-size: 26px; margin: 0 auto 16px auto; box-shadow: 0 8px 24px rgba(217, 93, 57, 0.4);">
+          🚀
+        </div>
+        <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 8px;">ابدأ الجولة التجريبية التفاعلية</h3>
+        <p style="font-size: 12px; color: #AAA; line-height: 1.6; margin-bottom: 20px;">
+          استعرض دليل الديمو المرفق للتعرف على السيناريو النموذجي لتجربة كافة خصائص النظام خطوة بخطوة.
+        </p>
+
+        <div
+          style="background: rgba(0,0,0,0.3); border-radius: 12px; padding: 12px; margin-bottom: 18px; text-align: right; font-size: 11.5px;">
+          <div style="color: #888; margin-bottom: 2px;">رابط الديمو المباشر:</div>
+          <div style="color: #F7936E; font-family: 'Plus Jakarta Sans'; font-weight: 700;">[رابط الديمو التجريبي الخاص
+            بالعميل]</div>
+          <div style="color: #888; margin-top: 8px; margin-bottom: 2px;">للتواصل والاستفسارات الفنية:</div>
+          <div style="color: #DDD;">فريق حلول ريستو الرقمية لإدارة المطاعم</div>
+        </div>
+
+        <a href="https://resto-landing-zeta.vercel.app/" target="_blank"
+          style="background: var(--primary); color: var(--white); display: block; padding: 12px 24px; border-radius: 12px; font-weight: 800; font-size: 14px; text-decoration: none; box-shadow: 0 4px 16px rgba(217, 93, 57, 0.4);">
+          فتح المنظومة وتجربة الديمو &larr;
+        </a>
+      </div>
+    </div>
+
+    <div class="page-footer" style="border-top-color: rgba(255,255,255,0.15); color: #888;">
+      <span>منظومة ريستو (Resto) — الكتالوج التعريفي الشامل • إصدار 2026</span>
+      <span class="page-num">صفحة 10 من 10</span>
+    </div>
+  </section>
+
+</body>
+
+</html>

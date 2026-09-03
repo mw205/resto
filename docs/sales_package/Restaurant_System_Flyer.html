@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1200, initial-scale=1.0">
+  <title>ريستو (Resto) — الحل الرقمي المتكامل لإدارة ومبيعات المطاعم</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #D95D39;
+      --primary-dark: #B54522;
+      --primary-light: #FDF2EE;
+      --charcoal: #1E1E1E;
+      --charcoal-soft: #2B2B2B;
+      --forest: #2D4B3E;
+      --forest-light: #EBF2EE;
+      --cream: #FBF9F8;
+      --cream-dark: #F3ECE8;
+      --gray-text: #5A5A5A;
+      --gray-light: #EAE6E1;
+      --border-color: #E2DBD4;
+      --white: #FFFFFF;
+      --shadow-sm: 0 4px 14px rgba(30, 30, 30, 0.05);
+      --shadow-md: 0 10px 28px rgba(30, 30, 30, 0.08);
+      --shadow-lg: 0 20px 45px rgba(30, 30, 30, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    @page {
+      size: 1200px 1720px;
+      margin: 0;
+    }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: var(--cream);
+      color: var(--charcoal);
+      width: 1200px;
+      height: 1720px;
+      margin: 0 auto;
+      padding: 34px 44px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      overflow: hidden;
+    }
+
+    /* HEADER */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand-logo-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      object-fit: cover;
+      box-shadow: var(--shadow-sm);
+      border: 1.5px solid var(--border-color);
+    }
+
+    .brand-text h1 {
+      font-size: 30px;
+      font-weight: 900;
+      color: var(--charcoal);
+      line-height: 1.15;
+    }
+
+    .brand-text p {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-top: 2px;
+    }
+
+    .badge-pill {
+      background-color: var(--primary-light);
+      color: var(--primary-dark);
+      border: 1.5px solid rgba(217, 93, 57, 0.25);
+      padding: 6px 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    /* HERO SECTION */
+    .hero-section {
+      background: linear-gradient(135deg, #242424 0%, #151515 100%);
+      color: var(--white);
+      border-radius: 22px;
+      padding: 24px 34px;
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 28px;
+      align-items: center;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      left: -80px;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle, rgba(217, 93, 57, 0.35) 0%, rgba(217, 93, 57, 0) 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-content h2 {
+      font-size: 29px;
+      font-weight: 900;
+      line-height: 1.35;
+      margin-bottom: 10px;
+    }
+
+    .hero-content h2 span {
+      color: #F7936E;
+    }
+
+    .hero-content p {
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: #D6D6D6;
+      margin-bottom: 16px;
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .metric-box {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 8px 12px;
+      text-align: center;
+    }
+
+    .metric-value {
+      font-size: 20px;
+      font-weight: 900;
+      color: #F7936E;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .metric-label {
+      font-size: 11.5px;
+      color: #B0B0B0;
+      margin-top: 2px;
+      font-weight: 600;
+    }
+
+    .hero-visual img {
+      width: 100%;
+      max-height: 210px;
+      object-fit: cover;
+      border-radius: 14px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+    }
+
+    /* SECTION TITLES */
+    .section-title {
+      font-size: 19px;
+      font-weight: 900;
+      color: var(--charcoal);
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::before {
+      content: '';
+      display: inline-block;
+      width: 5px;
+      height: 20px;
+      background-color: var(--primary);
+      border-radius: 4px;
+    }
+
+    .section-subtitle {
+      font-size: 12px;
+      color: var(--gray-text);
+      margin-bottom: 12px;
+    }
+
+    /* SECTION 1: SYSTEM EXPERIENCES (FULL APP SCREENS SHOWCASE) */
+    .showcase-container {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 18px;
+    }
+
+    /* Mobile apps side-by-side */
+    .mobile-duo-card {
+      background: var(--white);
+      border-radius: 18px;
+      padding: 16px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mobile-duo-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .duo-title h3 {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--charcoal);
+    }
+
+    .duo-title p {
+      font-size: 11.5px;
+      color: var(--gray-text);
+    }
+
+    .mobile-phones-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .phone-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .phone-tag {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+
+    .phone-wrapper {
+      width: 100%;
+      height: 380px;
+      background: #F8F6F4;
+      border-radius: 14px;
+      border: 1px solid var(--border-color);
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .phone-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+
+    /* Web Dashboard Card */
+    .web-card {
+      background: var(--white);
+      border-radius: 18px;
+      padding: 16px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .web-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .web-title h3 {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--charcoal);
+    }
+
+    .web-title p {
+      font-size: 11.5px;
+      color: var(--gray-text);
+    }
+
+    .web-wrapper {
+      width: 100%;
+      height: 250px;
+      background: #1E1E1E;
+      border-radius: 12px;
+      padding: 6px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 12px;
+    }
+
+    .browser-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px 6px 8px;
+    }
+
+    .browser-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background: #FF5F56; }
+    .dot-yellow { background: #FFBD2E; }
+    .dot-green { background: #27C93F; }
+
+    .browser-url {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      padding: 2px 10px;
+      font-size: 10px;
+      color: #BBB;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      margin-right: 8px;
+      flex: 1;
+    }
+
+    .web-wrapper img {
+      width: 100%;
+      height: calc(100% - 24px);
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 6px;
+    }
+
+    .web-features-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      background: var(--cream);
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+    }
+
+    .wf-item {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--charcoal);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .wf-bullet {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--primary);
+    }
+
+    /* SECTION 2: KEY CAPABILITIES */
+    .features-section {
+      background: var(--white);
+      border-radius: 18px;
+      padding: 16px 22px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .feature-item {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      background: var(--cream);
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+    }
+
+    .feature-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      flex-shrink: 0;
+    }
+
+    .feature-text h4 {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--charcoal);
+      margin-bottom: 2px;
+    }
+
+    .feature-text p {
+      font-size: 10.5px;
+      line-height: 1.35;
+      color: var(--gray-text);
+    }
+
+    /* SECTION 3: WORKFLOW */
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .workflow-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 12px 16px;
+      border: 1px solid var(--border-color);
+    }
+
+    .wf-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--charcoal);
+      margin-bottom: 10px;
+    }
+
+    .wf-tag {
+      font-size: 10px;
+      font-weight: 800;
+      background: var(--cream-dark);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--charcoal);
+    }
+
+    .steps-flow {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .step-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .step-circle {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--cream);
+      border: 2px solid var(--primary);
+      color: var(--primary-dark);
+      font-size: 11px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 3px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .step-node span {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--charcoal);
+      max-width: 70px;
+      line-height: 1.25;
+    }
+
+    .step-connector {
+      flex: 1;
+      height: 2px;
+      background: var(--border-color);
+      margin: 0 4px 14px 4px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: linear-gradient(135deg, #1E1E1E 0%, #2A2A2A 100%);
+      color: var(--white);
+      border-radius: 18px;
+      padding: 16px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-md);
+    }
+
+    .footer-right h3 {
+      font-size: 17px;
+      font-weight: 800;
+      margin-bottom: 2px;
+      color: var(--white);
+    }
+
+    .footer-right p {
+      font-size: 11.5px;
+      color: #B5B5B5;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .demo-info {
+      text-align: left;
+    }
+
+    .demo-info .label {
+      font-size: 10px;
+      color: #999;
+      font-weight: 600;
+    }
+
+    .demo-info .value {
+      font-size: 12.5px;
+      font-weight: 800;
+      color: #F7936E;
+    }
+
+    .cta-btn {
+      background: var(--primary);
+      color: var(--white);
+      padding: 8px 20px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(217, 93, 57, 0.35);
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand-group">
+      <img src="assets/app_icon.jpg" alt="شعار ريستو" class="brand-logo-img">
+      <div class="brand-text">
+        <h1>منظومة ريستو (Resto)</h1>
+        <p>الحل الرقمي المتكامل للطلب المباشر وإدارة عمليات المطاعم</p>
+      </div>
+    </div>
+    <div class="badge-pill">نظام احترافي مخصص لقطاع الضيافة</div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h2>امتلك قناتك الرقمية الخاصة <span>وضاعف مبيعاتك المباشرة</span></h2>
+      <p>منظومة برمجية متكاملة تمنح مطعمك تطبيق هاتف فاخر للعملاء، وتطبيقاً ذكياً لكباتن التوصيل، ولوحة تحكم مركزية لإدارة المطبخ والمبيعات، دون دفع عمولات باهظة لمنصات التوصيل الخارجية.</p>
+      
+      <div class="hero-metrics">
+        <div class="metric-box">
+          <div class="metric-value">3</div>
+          <div class="metric-label">تطبيقات متكاملة بنظام واحد</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-value">0%</div>
+          <div class="metric-label">عمولة وسطاء على المبيعات</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-value">100%</div>
+          <div class="metric-label">تحكم بالطلبات والمخزون</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <img src="assets/dining_lifestyle.jpg" alt="تجربة العميل في المطعم">
+    </div>
+  </section>
+
+  <!-- SECTION 1: THREE EXPERIENCES (WITH FULL APP PHOTOS FULLY DISPLAYED) -->
+  <section>
+    <div class="section-title">نظام واحد متزامن .. بثلاث تجارب استخدام مخصصة</div>
+    <div class="section-subtitle">شاشات حقيقية كاملة وغير مقتطعة من صلب النظام المنفذ:</div>
+
+    <div class="showcase-container">
+      <!-- 1 & 2: Mobile Apps (Customer + Driver) -->
+      <div class="mobile-duo-card">
+        <div class="mobile-duo-header">
+          <div class="duo-title">
+            <h3>تطبيقات الهاتف الذكي (iOS &amp; Android)</h3>
+            <p>تجربة استثنائية للعميل وبوابة تشغيلية سهلة للكابتن</p>
+          </div>
+          <span style="font-size: 11px; font-weight: 800; background: var(--cream-dark); padding: 3px 8px; border-radius: 6px;">شاشات كاملة</span>
+        </div>
+
+        <div class="mobile-phones-row">
+          <!-- Customer App Full -->
+          <div class="phone-column">
+            <span class="phone-tag" style="background: var(--forest-light); color: var(--forest);">تطبيق العميل</span>
+            <div class="phone-wrapper">
+              <img src="assets/customer_home.png" alt="شاشة تطبيق العميل كاملة">
+            </div>
+          </div>
+
+          <!-- Driver App Full -->
+          <div class="phone-column">
+            <span class="phone-tag" style="background: #FEF3E2; color: #B36B00;">تطبيق الكابتن</span>
+            <div class="phone-wrapper">
+              <img src="assets/driver_portal.png" alt="شاشة تطبيق الكابتن كاملة">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3: Web Dashboard (Full Width Card) -->
+      <div class="web-card">
+        <div>
+          <div class="web-header">
+            <div class="web-title">
+              <h3>لوحة تحكم العمليات المركزية (Web)</h3>
+              <p>متابعة المبيعات الحية، طابور المطبخ، وأسطول الكباتن</p>
+            </div>
+            <span style="font-size: 11px; font-weight: 800; background: var(--primary-light); color: var(--primary-dark); padding: 3px 8px; border-radius: 6px;">شاشة المتصفح</span>
+          </div>
+
+          <div class="web-wrapper">
+            <div class="browser-bar">
+              <span class="browser-dot dot-red"></span>
+              <span class="browser-dot dot-yellow"></span>
+              <span class="browser-dot dot-green"></span>
+              <span class="browser-url">admin.resto.eg/overview</span>
+            </div>
+            <img src="assets/admin_overview.png" alt="شاشة لوحة تحكم العمليات كاملة">
+          </div>
+        </div>
+
+        <div class="web-features-list">
+          <div class="wf-item"><span class="wf-bullet"></span>مؤشرات المبيعات ونسب الإنجاز اللحظية</div>
+          <div class="wf-item"><span class="wf-bullet"></span>منحنى حجم الطلبات الساعي ورصد الذروة</div>
+          <div class="wf-item"><span class="wf-bullet"></span>إيقاف وتفعيل وجبات المنيو بضغطة زر</div>
+          <div class="wf-item"><span class="wf-bullet"></span>إسناد فوري للطلبات ومتابعة الكباتن</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: KEY FEATURES -->
+  <section class="features-section">
+    <div class="section-title">أهم المزايا والقدرات التشغيلية للمنظومة</div>
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="feature-num">1</div>
+        <div class="feature-text">
+          <h4>قائمة طعام تفاعلية</h4>
+          <p>أصناف مصنفة بالسعرات الحرارية ووقت التجهيز والصور الفاخرة.</p>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-num">2</div>
+        <div class="feature-text">
+          <h4>توصيل واستلام من الفرع</h4>
+          <p>مرونة تامة للعميل في اختيار التوصيل للعنوان أو الاستلام السريع.</p>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-num">3</div>
+        <div class="feature-text">
+          <h4>تتبع مراحل الطلب اللحظي</h4>
+          <p>مخطط زمني شفاف من 4 مراحل يوضح تقدم الوجبة في المطبخ والطريق.</p>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-num">4</div>
+        <div class="feature-text">
+          <h4>كوبونات وخصومات ذكية</h4>
+          <p>إدارة العروض الترويجية وخصومات فورية مثل (RESTO20).</p>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-num">5</div>
+        <div class="feature-text">
+          <h4>تحكم فوري بتوفر الأصناف</h4>
+          <p>زر تفعيل فوري لإيقاف أي صنف نافذ من المطبخ دون تعديل البرمجة.</p>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-num">6</div>
+        <div class="feature-text">
+          <h4>إسناد ومتابعة الكباتن</h4>
+          <p>توزيع الطلبات على سائقي المطعم ومتابعة حالات التسليم والتقييمات.</p>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-num">7</div>
+        <div class="feature-text">
+          <h4>مركز الشكاوى والمقترحات</h4>
+          <p>قناة تواصل مباشرة داخل التطبيق لحل ملاحظات العملاء وبناء ولائهم.</p>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-num">8</div>
+        <div class="feature-text">
+          <h4>تقارير المبيعات الحية</h4>
+          <p>رسوم بيانية لساعات الذروة، ونسب مبيعات الأقسام لقرارات أدق.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: HOW IT WORKS -->
+  <section>
+    <div class="section-title">دورة تشغيل مبسطة وسريعة للطلبات</div>
+    <div class="section-subtitle">انسيابية كاملة تضمن وصول الوجبة ساخنة وبأعلى جودة:</div>
+
+    <div class="workflow-grid">
+      <!-- مسار التوصيل -->
+      <div class="workflow-card">
+        <div class="wf-title">
+          <span class="wf-tag">طلب توصيل منزلي</span>
+          <span>مسار متكامل من 4 خطوات</span>
+        </div>
+        <div class="steps-flow">
+          <div class="step-node">
+            <div class="step-circle">1</div>
+            <span>العميل يؤكد الطلب</span>
+          </div>
+          <div class="step-connector"></div>
+          <div class="step-node">
+            <div class="step-circle">2</div>
+            <span>المطبخ يجهز</span>
+          </div>
+          <div class="step-connector"></div>
+          <div class="step-node">
+            <div class="step-circle">3</div>
+            <span>الكابتن في الطريق</span>
+          </div>
+          <div class="step-connector"></div>
+          <div class="step-node">
+            <div class="step-circle">4</div>
+            <span>التسليم والتحصيل</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- مسار الاستلام من الفرع -->
+      <div class="workflow-card">
+        <div class="wf-title">
+          <span class="wf-tag">استلام من الفرع (Takeaway)</span>
+          <span>توفير للوقت وسرعة الخدمة</span>
+        </div>
+        <div class="steps-flow">
+          <div class="step-node">
+            <div class="step-circle">1</div>
+            <span>العميل يختار الاستلام</span>
+          </div>
+          <div class="step-connector"></div>
+          <div class="step-node">
+            <div class="step-circle">2</div>
+            <span>استلام الطلب بالفرع</span>
+          </div>
+          <div class="step-connector"></div>
+          <div class="step-node">
+            <div class="step-circle">3</div>
+            <span>المطبخ يحضر الطلب</span>
+          </div>
+          <div class="step-connector"></div>
+          <div class="step-node">
+            <div class="step-circle">4</div>
+            <span>جاهز للاستلام الفوري</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-right">
+      <h3>استكشف المنظومة بنفسك عبر الديمو المباشر</h3>
+      <p>يمكنك تجربة دورة الطلب كاملة كعميل، وكابتن توصيل، ومدير عمليات من خلال المتصفح الآن.</p>
+    </div>
+    <div class="footer-left">
+      <div class="demo-info">
+        <div class="label">الديمو التفاعلي متاح الآن</div>
+        <div class="value">حسابات تجريبية مفعلة بالكامل</div>
+      </div>
+      <a href="https://resto-landing-zeta.vercel.app/" target="_blank" class="cta-btn">ابدأ تجربة الديمو &larr;</a>
+    </div>
+  </footer>
+
+</body>
+</html>

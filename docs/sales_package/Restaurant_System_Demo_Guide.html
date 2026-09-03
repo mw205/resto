@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>دليل الجولة التجريبية لمنظومة ريستو (Resto Demo Guide)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #D95D39;
+      --primary-dark: #B54522;
+      --primary-light: #FDF2EE;
+      --charcoal: #1E1E1E;
+      --charcoal-soft: #2B2B2B;
+      --forest: #2D4B3E;
+      --forest-light: #EBF2EE;
+      --cream: #FBF9F8;
+      --cream-dark: #F3ECE8;
+      --gray-text: #555555;
+      --border-color: #E2DBD4;
+      --white: #FFFFFF;
+      --shadow-sm: 0 4px 14px rgba(30, 30, 30, 0.05);
+      --shadow-md: 0 10px 24px rgba(30, 30, 30, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    @page {
+      size: 1200px 1720px;
+      margin: 0;
+    }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: var(--cream);
+      color: var(--charcoal);
+      width: 1200px;
+      height: 1720px;
+      margin: 0 auto;
+      padding: 34px 44px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      overflow: hidden;
+    }
+
+    /* HEADER */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand-logo-img {
+      width: 58px;
+      height: 58px;
+      border-radius: 16px;
+      object-fit: cover;
+      box-shadow: var(--shadow-sm);
+      border: 1.5px solid var(--border-color);
+    }
+
+    .brand-text h1 {
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--charcoal);
+      line-height: 1.15;
+    }
+
+    .brand-text p {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .badge-pill {
+      background-color: var(--primary-light);
+      color: var(--primary-dark);
+      border: 1.5px solid rgba(217, 93, 57, 0.25);
+      padding: 6px 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    /* INTRO BANNER */
+    .intro-banner {
+      background: linear-gradient(135deg, #242424 0%, #151515 100%);
+      color: var(--white);
+      border-radius: 20px;
+      padding: 22px 30px;
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 24px;
+      align-items: center;
+      box-shadow: var(--shadow-md);
+    }
+
+    .intro-banner h2 {
+      font-size: 24px;
+      font-weight: 900;
+      line-height: 1.35;
+      margin-bottom: 6px;
+    }
+
+    .intro-banner h2 span { color: #F7936E; }
+
+    .intro-banner p {
+      font-size: 13px;
+      line-height: 1.65;
+      color: #DDD;
+    }
+
+    .credentials-box {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      padding: 12px 16px;
+    }
+
+    .cred-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4px 0;
+      font-size: 11.5px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .cred-row:last-child { border-bottom: none; }
+    .cred-role { color: #BBB; }
+    .cred-val { color: #F7936E; font-weight: 700; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+    /* JOURNEY TIMELINE (15 STEPS) */
+    .section-title {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--charcoal);
+      margin: 18px 0 10px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 18px;
+      background-color: var(--primary);
+      border-radius: 3px;
+    }
+
+    .steps-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      flex: 1;
+    }
+
+    .journey-phase {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 16px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .phase-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1.5px solid var(--border-color);
+      margin-bottom: 10px;
+    }
+
+    .phase-badge {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .phase-1 { background: var(--forest-light); color: var(--forest); }
+    .phase-2 { background: var(--primary-light); color: var(--primary-dark); }
+    .phase-3 { background: #FEF3E2; color: #B36B00; }
+
+    .phase-header h3 {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--charcoal);
+    }
+
+    .step-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .step-card {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      background: var(--cream);
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+    }
+
+    .step-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      background: #242424;
+      color: #FFF;
+      font-size: 11px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      flex-shrink: 0;
+    }
+
+    .step-content h4 {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--charcoal);
+      line-height: 1.25;
+      margin-bottom: 2px;
+    }
+
+    .step-content p {
+      font-size: 10.5px;
+      line-height: 1.35;
+      color: var(--gray-text);
+    }
+
+    .phase-callout {
+      margin-top: 10px;
+      background: #FAF8F6;
+      border-radius: 8px;
+      padding: 6px 10px;
+      border-right: 3px solid var(--primary);
+      font-size: 10px;
+      color: #444;
+      font-weight: 600;
+    }
+
+    /* BOTTOM TIPS & FOOTER */
+    .tips-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .tip-card {
+      background: var(--white);
+      border-radius: 14px;
+      padding: 12px 16px;
+      border: 1px solid var(--border-color);
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .tip-icon { font-size: 20px; }
+
+    .tip-text h4 {
+      font-size: 12.5px;
+      font-weight: 800;
+      color: var(--charcoal);
+      margin-bottom: 2px;
+    }
+
+    .tip-text p {
+      font-size: 11px;
+      color: var(--gray-text);
+      line-height: 1.4;
+    }
+
+    footer {
+      margin-top: 16px;
+      background: linear-gradient(135deg, #1E1E1E 0%, #2A2A2A 100%);
+      color: var(--white);
+      border-radius: 16px;
+      padding: 14px 26px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-md);
+    }
+
+    .footer-right h3 {
+      font-size: 15.5px;
+      font-weight: 800;
+      margin-bottom: 2px;
+      color: var(--white);
+    }
+
+    .footer-right p {
+      font-size: 11px;
+      color: #B5B5B5;
+    }
+
+    .cta-btn {
+      background: var(--primary);
+      color: var(--white);
+      padding: 8px 20px;
+      border-radius: 10px;
+      font-size: 12.5px;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand-group">
+      <img src="assets/app_icon.jpg" alt="شعار ريستو" class="brand-logo-img">
+      <div class="brand-text">
+        <h1>دليل الجولة التجريبية التفاعلية (Demo Guide)</h1>
+        <p>مسار مقترح لاختبار منظومة ريستو (Resto) خطوة بخطوة</p>
+      </div>
+    </div>
+    <div class="badge-pill">تجربة حية متكاملة 100%</div>
+  </header>
+
+  <!-- INTRO BANNER -->
+  <section class="intro-banner">
+    <div>
+      <h2>كيف تختبر المنظومة <span>كصاحب مطعم ومستثمر؟</span></h2>
+      <p>
+        صُمم هذا الدليل ليأخذك في رحلة عملية متكاملة مدتها 5 دقائق عبر المراحل الخمسة عشرة الأساسية لدورة الطلب، بدءاً من تصفح العميل وحتى تسليم الكابتن وتسجيل الأرباح في لوحة العمليات.
+      </p>
+    </div>
+
+    <div class="credentials-box">
+      <div style="font-size: 11px; font-weight: 800; color: #FFF; margin-bottom: 6px;">بيانات الحسابات التجريبية:</div>
+      <div class="cred-row">
+        <span class="cred-role">العميل (Mobile):</span>
+        <span class="cred-val">mohamed@resto.eg</span>
+      </div>
+      <div class="cred-row">
+        <span class="cred-role">الكابتن (Mobile):</span>
+        <span class="cred-val">driver@resto.eg</span>
+      </div>
+      <div class="cred-row">
+        <span class="cred-role">مدير العمليات (Web):</span>
+        <span class="cred-val">admin@resto.eg (+ TOTP)</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15-STEP JOURNEY -->
+  <div class="section-title">مسار الجولة التجريبية الموصى به (Recommended 15-Step Journey)</div>
+
+  <section class="steps-container">
+    <!-- PHASE 1: CUSTOMER ORDERING (Steps 1-6) -->
+    <div class="journey-phase">
+      <div>
+        <div class="phase-header">
+          <span class="phase-badge phase-1">المرحلة الأولى</span>
+          <h3>تجربة العميل (Customer App)</h3>
+        </div>
+
+        <div class="step-list">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <h4>فتح تطبيق العميل وتسجيل الدخول</h4>
+              <p>الدخول بحساب <code>mohamed@resto.eg</code> ومشاهدة الترحيب المخصص والبانر الترويجي.</p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <h4>تصفح المنيو والتصنيفات</h4>
+              <p>استعراض أقسام المشويات والطواجن مع السعرات ووقت التجهيز والصور الفاخرة.</p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <h4>إضافة وجبة للسلة</h4>
+              <p>الضغط على (+ إضافة) وتعديل الكمية مع ملاحظة تحديث عداد السلة فورياً.</p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <h4>تطبيق كود الخصم (RESTO20)</h4>
+              <p>إدخال كود الخصم في السلة ومشاهدة تطبيق الخصم الفوري 20% على الفاتورة.</p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">5</div>
+            <div class="step-content">
+              <h4>تأكيد طلب التوصيل المنزلي</h4>
+              <p>إدخال تفاصيل العنوان، كتابة ملاحظة للشيف، واختيار الدفع كاش عند الاستلام.</p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">6</div>
+            <div class="step-content">
+              <h4>شاشة تتبع الطلب اللحظي</h4>
+              <p>ملاحظة تفعيل المرحلة الأولى (تم استلام الطلب وتأكيده) على الخط الزمني.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-callout">
+        💡 <strong>لاحظ:</strong> تجربة مستخدم سريعة، بدون أي خطوات مشتتة أو إعلانات وسيطة.
+      </div>
+    </div>
+
+    <!-- PHASE 2: ADMIN DISPATCH (Steps 7-9) -->
+    <div class="journey-phase">
+      <div>
+        <div class="phase-header">
+          <span class="phase-badge phase-2">المرحلة الثانية</span>
+          <h3>إدارة العمليات (Admin Web)</h3>
+        </div>
+
+        <div class="step-list">
+          <div class="step-card">
+            <div class="step-num">7</div>
+            <div class="step-content">
+              <h4>فتح لوحة التحكم عبر المتصفح</h4>
+              <p>الدخول بـ <code>admin@resto.eg</code> واستخدام رمز TOTP للتحقق الآمن المكون من 6 أرقام.</p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">8</div>
+            <div class="step-content">
+              <h4>مراجعة الطلب في طابور المطبخ</h4>
+              <p>مشاهدة ظهور الطلب الجديد فورياً في جدول إدارة الطلبات مع بيانات الأصناف وهاتف العميل.</p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">9</div>
+            <div class="step-content">
+              <h4>إسناد الطلب لكابتن التوصيل</h4>
+              <p>تحديد كابتن متاح (مثل: كابتن هاني سعيد) وإرسال أمر التوصيل بضغطة زر واحدة.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 14px; background: #F7F5F2; padding: 12px; border-radius: 12px; border: 1px solid var(--border-color);">
+          <h4 style="font-size: 11.5px; font-weight: 800; color: var(--primary); margin-bottom: 4px;">خصائص إضافية استكشفها باللوحة:</h4>
+          <ul style="font-size: 10.5px; color: #666; padding-right: 14px; line-height: 1.5;">
+            <li>مؤشرات المبيعات الحية ومنحنى ساعات الذروة.</li>
+            <li>زر التبديل السريع لتوفر أصناف المنيو (Stock Toggle).</li>
+            <li>متابعة حالات كباتن الأسطول وسجل التقييمات.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase-callout">
+        💡 <strong>لاحظ:</strong> مزامنة لحظية فورية تنقل بيانات الطلب بين الويب والموبايل في أجزاء من الثانية.
+      </div>
+    </div>
+
+    <!-- PHASE 3: DRIVER & FULFILLMENT (Steps 10-15) -->
+    <div class="journey-phase">
+      <div>
+        <div class="phase-header">
+          <span class="phase-badge phase-3">المرحلة الثالثة</span>
+          <h3>التوصيل والولاء (Driver &amp; Reorder)</h3>
+        </div>
+
+        <div class="step-list">
+          <div class="step-card">
+            <div class="step-num">10</div>
+            <div class="step-content">
+              <h4>فتح تطبيق كابتن التوصيل</h4>
+              <p>تسجيل الدخول بـ <code>driver@resto.eg</code> ومشاهدة الطلب الجديد المسند للكابتن فوراً.</p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">11</div>
+            <div class="step-content">
+              <h4>بدء التوصيل "في الطريق"</h4>
+              <p>الضغط على زر الانطلاق، مما يحدث حالة الطلب لدى العميل إلى المرحلة الثالثة.</p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">12</div>
+            <div class="step-content">
+              <h4>تسليم الطلب وتحصيل الكاش</h4>
+              <p>مطابقة مبلغ الفاتورة والضغط على زر "تم تسليم الطلب للعميل".</p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">13</div>
+            <div class="step-content">
+              <h4>العودة لتطبيق العميل</h4>
+              <p>مشاهدة إشعار اكتمال الطلب وتحول الخط الزمني إلى "تم التسليم بنجاح".</p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">14</div>
+            <div class="step-content">
+              <h4>تقييم الوجبة والخدمة</h4>
+              <p>إعطاء التقييم بالنجوم أو إرسال مقترح عبر مركز الشكاوى والمقترحات.</p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">15</div>
+            <div class="step-content">
+              <h4>تجربة إعادة الطلب بضغطة زر</h4>
+              <p>فتح سجل الطلبات السابقة واستخدام زر (إعادة الطلب) لتعبئة السلة فورياً.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-callout">
+        💡 <strong>لاحظ:</strong> تتبع شفاف وواضح للمراحل الأربعة دون الحاجة لتكاليف واستهلاك بطارية الـ GPS.
+      </div>
+    </div>
+  </section>
+
+  <!-- TIPS & ADVICE -->
+  <div class="tips-row">
+    <div class="tip-card">
+      <div class="tip-icon">✨</div>
+      <div class="tip-text">
+        <h4>جرب التبديل بين شاشتين بجانب بعضهما</h4>
+        <p>افتح تطبيق العميل على هاتفك ولوحة تحكم العمليات على حاسوبك وشاهد التحديث اللحظي للطلب في نفس الثانية.</p>
+      </div>
+    </div>
+
+    <div class="tip-card">
+      <div class="tip-icon">🛑</div>
+      <div class="tip-text">
+        <h4>اختبر ميزة إيقاف الصنف النافذ</h4>
+        <p>قم بتعطيل صنف من لوحة الإدارة وشاهد اختفاءه فورياً من تطبيق العميل لمنع أي طلبات غير متوفرة بمطبخك.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-right">
+      <h3>هل تحتاج لمساعدة أثناء الجولة التجريبية؟</h3>
+      <p>فريق ريستو جاهز للإجابة عن أي استفسار أو تنظيم جلسة شرح تفاعلية مخصصة لإدارة مطعمك.</p>
+    </div>
+    <a href="https://drive.google.com/drive/folders/1FY4WpzYWaPibN1hgsEeguVwnmO0GabH5?usp=sharing" target="_blank" class="cta-btn">تحميل تطبيق العميل والكابتن &larr;</a>
+  </footer>
+
+</body>
+</html>
