@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:resto_core/resto_core.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -91,56 +91,36 @@ class LandingPageScreen extends StatelessWidget {
                 ),
               Row(
                 children: [
-                  OutlinedButton.icon(
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: AppColors.primaryCharcoal,
+                  ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.secondaryTerracotta,
+                      foregroundColor: Colors.white,
                       padding: EdgeInsets.symmetric(
-                        horizontal: isMobile ? 12 : 16,
+                        horizontal: isMobile ? 14 : 20,
                         vertical: 10,
                       ),
-                      side: const BorderSide(color: AppColors.outlineLight),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(
                           AppDimensions.radiusFull,
                         ),
                       ),
+                      elevation: 2,
                     ),
-                    icon: const Icon(Icons.admin_panel_settings, size: 15),
+                    icon: const Icon(RestoIcons.smartphone, size: 15),
                     label: Text(
-                      'لوحة الإدارة',
+                      'حمل التطبيق',
                       style: GoogleFonts.cairo(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    onPressed: () => launchUrl(Uri.parse('https://resto-admin-f8712mdj5-mw205s-projects.vercel.app/'), mode: LaunchMode.externalApplication),
-                  ),
-                  const SizedBox(width: 8),
-                  ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.secondaryTerracotta,
-                  foregroundColor: Colors.white,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: isMobile ? 14 : 20,
-                    vertical: 10,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                      AppDimensions.radiusFull,
+                    onPressed: () => launchUrl(
+                      Uri.parse(
+                        'https://drive.google.com/drive/folders/1FY4WpzYWaPibN1hgsEeguVwnmO0GabH5?usp=sharing',
+                      ),
+                      mode: LaunchMode.externalApplication,
                     ),
                   ),
-                  elevation: 2,
-                ),
-                icon: const Icon(RestoIcons.smartphone, size: 15),
-                label: Text(
-                  'حمل التطبيق',
-                  style: GoogleFonts.cairo(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                onPressed: () => launchUrl(Uri.parse('https://drive.google.com/drive/folders/1FY4WpzYWaPibN1hgsEeguVwnmO0GabH5?usp=sharing'), mode: LaunchMode.externalApplication),
-              ),
                 ],
               ),
             ],
@@ -249,7 +229,12 @@ class LandingPageScreen extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  onPressed: () => launchUrl(Uri.parse('https://drive.google.com/drive/folders/1FY4WpzYWaPibN1hgsEeguVwnmO0GabH5?usp=sharing'), mode: LaunchMode.externalApplication),
+                  onPressed: () => launchUrl(
+                    Uri.parse(
+                      'https://drive.google.com/drive/folders/1FY4WpzYWaPibN1hgsEeguVwnmO0GabH5?usp=sharing',
+                    ),
+                    mode: LaunchMode.externalApplication,
+                  ),
                 ),
               ],
             ),
@@ -976,7 +961,12 @@ class LandingPageScreen extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        onPressed: () => launchUrl(Uri.parse('https://drive.google.com/drive/folders/1FY4WpzYWaPibN1hgsEeguVwnmO0GabH5?usp=sharing'), mode: LaunchMode.externalApplication),
+                        onPressed: () => launchUrl(
+                          Uri.parse(
+                            'https://drive.google.com/drive/folders/1FY4WpzYWaPibN1hgsEeguVwnmO0GabH5?usp=sharing',
+                          ),
+                          mode: LaunchMode.externalApplication,
+                        ),
                       ),
                       ElevatedButton.icon(
                         style: ElevatedButton.styleFrom(
@@ -998,7 +988,12 @@ class LandingPageScreen extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        onPressed: () => launchUrl(Uri.parse('https://drive.google.com/drive/folders/1FY4WpzYWaPibN1hgsEeguVwnmO0GabH5?usp=sharing'), mode: LaunchMode.externalApplication),
+                        onPressed: () => launchUrl(
+                          Uri.parse(
+                            'https://drive.google.com/drive/folders/1FY4WpzYWaPibN1hgsEeguVwnmO0GabH5?usp=sharing',
+                          ),
+                          mode: LaunchMode.externalApplication,
+                        ),
                       ),
                     ],
                   ),
@@ -1070,5 +1065,4 @@ class LandingPageScreen extends StatelessWidget {
       },
     );
   }
-
 }
