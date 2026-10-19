@@ -43,6 +43,7 @@ dependencies:
   uuid: ^4.6.0
   lucide_icons_flutter: ^3.1.17
   local_auth: ^3.0.2
+  lottie: ^3.6.1
 
 dev_dependencies:
   flutter_test:
@@ -65,4 +66,5 @@ flutter:
     - assets/translations/
     - assets/images/
     - assets/images/food/
+    - assets/lottie/
 resolution: workspace

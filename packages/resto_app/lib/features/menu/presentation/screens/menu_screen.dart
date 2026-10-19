@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -38,7 +39,7 @@ class _MenuScreenState extends State<MenuScreen> {
       backgroundColor: isDark ? AppColors.surfaceDark : AppColors.surfaceLight,
       appBar: AppBar(
         title: Text(
-          'قائمة الطعام',
+          'menu.title'.tr(),
           style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
         ),
       ),
@@ -52,7 +53,7 @@ class _MenuScreenState extends State<MenuScreen> {
                 controller: _searchController,
                 onChanged: (val) => context.read<MenuCubit>().searchDishes(val),
                 decoration: InputDecoration(
-                  hintText: 'ابحث عن أكلتك المفضلة...',
+                  hintText: 'menu.search_placeholder'.tr(),
                   prefixIcon: const Icon(Icons.search_rounded, color: AppColors.secondaryTerracotta),
                   suffixIcon: _searchController.text.isNotEmpty
                       ? IconButton(
@@ -76,7 +77,7 @@ class _MenuScreenState extends State<MenuScreen> {
                   child: Row(
                     children: [
                       StatusChip(
-                        label: 'الكل',
+                        label: 'menu.all'.tr(),
                         isSelected: state.selectedCategoryId == 'all',
                         onTap: () => context.read<MenuCubit>().selectCategory('all'),
                       ),
@@ -226,7 +227,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     ),
                     const SizedBox(width: 2),
                     Text(
-                      '${product.calories} سعرة',
+                      '${product.calories} ${'common.cal'.tr()}',
                       style: TextStyle(
                         fontSize: 11,
                         color: isDark ? AppColors.onSurfaceVariantDark : AppColors.onSurfaceVariantLight,
@@ -240,7 +241,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     ),
                     const SizedBox(width: 2),
                     Text(
-                      '${product.preparationTimeMinutes} دقيقة',
+                      '${product.preparationTimeMinutes} ${'common.minutes'.tr()}',
                       style: TextStyle(
                         fontSize: 11,
                         color: isDark ? AppColors.onSurfaceVariantDark : AppColors.onSurfaceVariantLight,
@@ -265,7 +266,7 @@ class _MenuScreenState extends State<MenuScreen> {
                         context.read<CartCubit>().addToCart(product);
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text('تمت إضافة ${product.name} للسلة'),
+                            content: Text('${product.name} ${'product_details.added_to_cart'.tr()}'),
                             duration: const Duration(seconds: 1),
                             backgroundColor: AppColors.successGreen,
                           ),
@@ -278,14 +279,14 @@ class _MenuScreenState extends State<MenuScreen> {
                           color: AppColors.secondaryTerracotta,
                           borderRadius: BorderRadius.circular(AppDimensions.radiusFull),
                         ),
-                        child: const Row(
+                        child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(Icons.add, color: Colors.white, size: 16),
-                            SizedBox(width: 4),
+                            const Icon(Icons.add, color: Colors.white, size: 16),
+                            const SizedBox(width: 4),
                             Text(
-                              'إضافة',
-                              style: TextStyle(
+                              'menu.add_to_cart'.tr(),
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 11,
                                 fontWeight: FontWeight.bold,

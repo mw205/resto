@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -33,7 +34,7 @@ class DriverOrdersScreen extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'بوابة كابتن الديليفري',
+                  'driver.dashboard_title'.tr(),
                   style: GoogleFonts.cairo(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -44,7 +45,7 @@ class DriverOrdersScreen extends StatelessWidget {
               ],
             ),
             Text(
-              user?.name ?? 'كابتن هاني سعيد',
+              user?.name ?? 'Captain Hany Saeed',
               style: TextStyle(
                 fontSize: 11,
                 color: isDark
@@ -137,7 +138,7 @@ class DriverOrdersScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'طلب ${order.orderNumber}',
+                            '${'common.order_id'.tr()} #${order.orderNumber}',
                             style: GoogleFonts.cairo(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -145,7 +146,7 @@ class DriverOrdersScreen extends StatelessWidget {
                             ),
                           ),
                           StatusChip(
-                            label: order.status.arabicTitle,
+                            label: order.status.name.toUpperCase(),
                             statusType: order.status.chipType,
                           ),
                         ],
@@ -219,7 +220,7 @@ class DriverOrdersScreen extends StatelessWidget {
 
                       // Items summary
                       Text(
-                        'الأصناف: ${order.items.map((i) => "${i.quantity}x ${i.product.name}").join(" ، ")}',
+                        order.items.map((i) => "${i.quantity}x ${i.product.name}").join(" • "),
                         style: const TextStyle(fontSize: 12),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -234,7 +235,7 @@ class DriverOrdersScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'التحصيل كاش',
+                                'driver.cash_to_collect'.tr(),
                                 style: TextStyle(
                                   fontSize: 11,
                                   color: isDark
@@ -255,37 +256,41 @@ class DriverOrdersScreen extends StatelessWidget {
                           if (!isDelivered) ...[
                             if (order.status == OrderStatus.received ||
                                 order.status == OrderStatus.preparing)
-                              RestoButton(
-                                text: 'بدء التوصيل (في الطريق)',
-                                trailingIcon: const Icon(
-                                  LucideIcons.bike,
-                                  size: 16,
-                                  color: Colors.white,
+                              Flexible(
+                                child: RestoButton(
+                                  text: 'driver.action_pick_up'.tr(),
+                                  trailingIcon: const Icon(
+                                    LucideIcons.bike,
+                                    size: 16,
+                                    color: Colors.white,
+                                  ),
+                                  height: 40,
+                                  onPressed: () {
+                                    context.read<DriverCubit>().updateStatus(
+                                      order.id,
+                                      OrderStatus.onTheWay,
+                                    );
+                                  },
                                 ),
-                                height: 40,
-                                onPressed: () {
-                                  context.read<DriverCubit>().updateStatus(
-                                    order.id,
-                                    OrderStatus.onTheWay,
-                                  );
-                                },
                               )
                             else if (order.status == OrderStatus.onTheWay)
-                              RestoButton(
-                                text: 'تم تسليم الطلب للعميل',
-                                trailingIcon: const Icon(
-                                  LucideIcons.checkCircle2,
-                                  size: 16,
-                                  color: Colors.white,
+                              Flexible(
+                                child: RestoButton(
+                                  text: 'driver.action_deliver'.tr(),
+                                  trailingIcon: const Icon(
+                                    LucideIcons.checkCircle2,
+                                    size: 16,
+                                    color: Colors.white,
+                                  ),
+                                  height: 40,
+                                  variant: RestoButtonVariant.primary,
+                                  onPressed: () {
+                                    context.read<DriverCubit>().updateStatus(
+                                      order.id,
+                                      OrderStatus.delivered,
+                                    );
+                                  },
                                 ),
-                                height: 40,
-                                variant: RestoButtonVariant.primary,
-                                onPressed: () {
-                                  context.read<DriverCubit>().updateStatus(
-                                    order.id,
-                                    OrderStatus.delivered,
-                                  );
-                                },
                               ),
                           ] else ...[
                             Container(

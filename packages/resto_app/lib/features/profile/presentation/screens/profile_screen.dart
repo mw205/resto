@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -160,6 +161,40 @@ class ProfileScreen extends StatelessWidget {
                           onChanged: (val) =>
                               context.read<ThemeCubit>().toggleTheme(),
                         );
+                      },
+                    ),
+                    const Divider(height: 1),
+
+                    // Language Selector
+                    ListTile(
+                      leading: const Icon(
+                        Icons.language_rounded,
+                        color: AppColors.secondaryTerracotta,
+                      ),
+                      title: Text(
+                        'language.title'.tr(),
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      subtitle: Text(
+                        context.locale.languageCode == 'ar'
+                            ? 'العربية (Arabic)'
+                            : 'English',
+                        style: const TextStyle(fontSize: 12),
+                      ),
+                      trailing: const Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        size: 14,
+                      ),
+                      onTap: () {
+                        final isArabic = context.locale.languageCode == 'ar';
+                        if (isArabic) {
+                          context.setLocale(const Locale('en', 'US'));
+                        } else {
+                          context.setLocale(const Locale('ar', 'EG'));
+                        }
                       },
                     ),
                     const Divider(height: 1),

@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -38,7 +39,7 @@ class _CartScreenState extends State<CartScreen> {
       backgroundColor: isDark ? AppColors.surfaceDark : AppColors.surfaceLight,
       appBar: AppBar(
         title: Text(
-          'سلة الطلبات',
+          'cart.title'.tr(),
           style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
         ),
         actions: [
@@ -51,21 +52,21 @@ class _CartScreenState extends State<CartScreen> {
                   showDialog(
                     context: context,
                     builder: (ctx) => AlertDialog(
-                      title: const Text('تفريغ السلة'),
-                      content: const Text('هل أنت متأكد من حذف جميع الأصناف من السلة؟'),
+                      title: Text('common.delete'.tr()),
+                      content: Text('cart.empty_desc'.tr()),
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.pop(ctx),
-                          child: const Text('إلغاء'),
+                          child: Text('common.cancel'.tr()),
                         ),
                         TextButton(
                           onPressed: () {
                             context.read<CartCubit>().clearCart();
                             Navigator.pop(ctx);
                           },
-                          child: const Text(
-                            'تفريغ',
-                            style: TextStyle(color: AppColors.errorRed, fontWeight: FontWeight.bold),
+                          child: Text(
+                            'common.confirm'.tr(),
+                            style: const TextStyle(color: AppColors.errorRed, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ],
@@ -111,7 +112,7 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                     const SizedBox(height: 20),
                     Text(
-                      'سلتك فاضية لسه!',
+                      'cart.empty_title'.tr(),
                       style: GoogleFonts.cairo(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -120,7 +121,7 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'تصفح قائمة الطعام واطلب أشهى المأكولات والمشويات المصرية',
+                      'cart.empty_desc'.tr(),
                       style: TextStyle(
                         fontSize: 13,
                         color: isDark ? AppColors.onSurfaceVariantDark : AppColors.onSurfaceVariantLight,
@@ -129,7 +130,7 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                     const SizedBox(height: 28),
                     RestoButton(
-                      text: 'تصفح قائمة الطعام الآن',
+                      text: 'cart.browse_menu'.tr(),
                       onPressed: () => context.push('/customer/menu'),
                     ),
                   ],
@@ -158,7 +159,7 @@ class _CartScreenState extends State<CartScreen> {
                       Expanded(
                         child: _buildTypeOption(
                           context,
-                          title: 'توصيل للبيت',
+                          title: 'cart.delivery'.tr(),
                           icon: LucideIcons.bike,
                           isSelected: state.orderType == OrderType.delivery,
                           onTap: () => context.read<CartCubit>().setOrderType(OrderType.delivery),
@@ -168,7 +169,7 @@ class _CartScreenState extends State<CartScreen> {
                       Expanded(
                         child: _buildTypeOption(
                           context,
-                          title: 'استلام من الفرع',
+                          title: 'cart.takeaway'.tr(),
                           icon: LucideIcons.store,
                           isSelected: state.orderType == OrderType.takeaway,
                           onTap: () => context.read<CartCubit>().setOrderType(OrderType.takeaway),
@@ -182,7 +183,7 @@ class _CartScreenState extends State<CartScreen> {
 
                 // Cart Items List
                 Text(
-                  'الأصناف المختارة (${state.totalItemsCount})',
+                  '${'nav.cart'.tr()} (${state.totalItemsCount})',
                   style: GoogleFonts.cairo(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -315,7 +316,7 @@ class _CartScreenState extends State<CartScreen> {
                           const Icon(Icons.discount_outlined, color: AppColors.secondaryTerracotta, size: 20),
                           const SizedBox(width: 8),
                           Text(
-                            'كوبون الخصم (جرب: RESTO20)',
+                            'cart.coupon_code'.tr(),
                             style: TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.bold,
@@ -331,12 +332,12 @@ class _CartScreenState extends State<CartScreen> {
                             Expanded(
                               child: RestoTextField(
                                 controller: _couponController,
-                                hint: 'ادخل كود الكوبون...',
+                                hint: 'cart.enter_coupon'.tr(),
                               ),
                             ),
                             const SizedBox(width: 10),
                             RestoButton(
-                              text: 'تطبيق',
+                              text: 'common.apply'.tr(),
                               height: 48,
                               onPressed: () {
                                 context.read<CartCubit>().applyCoupon(_couponController.text);
@@ -359,7 +360,7 @@ class _CartScreenState extends State<CartScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'تم تطبيق كوبون: ${state.appliedCoupon!.code}',
+                                    '${'cart.coupon_applied'.tr()} (${state.appliedCoupon!.code})',
                                     style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: AppColors.successGreen,
@@ -367,7 +368,7 @@ class _CartScreenState extends State<CartScreen> {
                                     ),
                                   ),
                                   Text(
-                                    'وفرت ${CurrencyFormatter.format(state.discountAmount)}',
+                                    '- ${CurrencyFormatter.format(state.discountAmount)}',
                                     style: TextStyle(
                                       fontSize: 12,
                                       color: isDark ? AppColors.onSurfaceVariantDark : AppColors.onSurfaceVariantLight,
@@ -398,7 +399,7 @@ class _CartScreenState extends State<CartScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'ملخص الفاتورة',
+                        'cart.price_breakdown'.tr(),
                         style: GoogleFonts.cairo(
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
@@ -406,19 +407,19 @@ class _CartScreenState extends State<CartScreen> {
                         ),
                       ),
                       const SizedBox(height: 12),
-                      _buildPriceRow('المجموع الفرعي', CurrencyFormatter.format(state.subtotal), isDark),
+                      _buildPriceRow('common.subtotal'.tr(), CurrencyFormatter.format(state.subtotal), isDark),
                       const SizedBox(height: 8),
                       _buildPriceRow(
-                        'خدمة التوصيل',
+                        'common.delivery_fee'.tr(),
                         state.orderType == OrderType.delivery
                             ? CurrencyFormatter.format(state.deliveryFee)
-                            : 'مجاناً (استلام من الفرع)',
+                            : 'Free (Pickup)',
                         isDark,
                       ),
                       if (state.discountAmount > 0) ...[
                         const SizedBox(height: 8),
                         _buildPriceRow(
-                          'الخصم',
+                          'common.discount'.tr(),
                           '- ${CurrencyFormatter.format(state.discountAmount)}',
                           isDark,
                           isDiscount: true,
@@ -429,7 +430,7 @@ class _CartScreenState extends State<CartScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'الإجمالي النهائي',
+                            'common.total'.tr(),
                             style: GoogleFonts.cairo(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -453,7 +454,7 @@ class _CartScreenState extends State<CartScreen> {
 
                 // Checkout Button
                 RestoButton(
-                  text: 'متابعة الدفع وتأكيد الطلب',
+                  text: 'cart.proceed_checkout'.tr(),
                   onPressed: () => context.push('/customer/checkout'),
                   width: double.infinity,
                 ),

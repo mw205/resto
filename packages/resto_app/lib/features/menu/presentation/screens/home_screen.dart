@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -65,7 +66,7 @@ class HomeScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'التوصيل إلى',
+                              'cart.delivery_address'.tr(),
                               style: TextStyle(
                                 fontSize: 11,
                                 color: isDark ? AppColors.onSurfaceVariantDark : AppColors.onSurfaceVariantLight,
@@ -74,7 +75,7 @@ class HomeScreen extends StatelessWidget {
                             Text(
                               authUser?.savedAddresses.isNotEmpty == true
                                   ? authUser!.savedAddresses.first
-                                  : 'القاهرة - مصر الجديدة',
+                                  : 'Cairo, New Cairo - First Settlement',
                               style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.bold,
@@ -117,7 +118,7 @@ class HomeScreen extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            'مساء الخير يا ${authUser?.name.split(' ').first ?? 'فندم'}',
+                            '${'home.greeting'.tr()} ${authUser?.name.split(' ').first ?? 'Guest'}',
                             style: GoogleFonts.cairo(
                               fontSize: 22,
                               fontWeight: FontWeight.bold,
@@ -129,7 +130,7 @@ class HomeScreen extends StatelessWidget {
                         ],
                       ),
                       Text(
-                        'جاهز لتذوق أشهى الأطباق والمشويات المصرية؟',
+                        'home.greeting_sub'.tr(),
                         style: TextStyle(
                           fontSize: 13,
                           color: isDark ? AppColors.onSurfaceVariantDark : AppColors.onSurfaceVariantLight,
@@ -160,7 +161,7 @@ class HomeScreen extends StatelessWidget {
                           const Icon(Icons.search_rounded, color: AppColors.secondaryTerracotta, size: 22),
                           const SizedBox(width: 10),
                           Text(
-                            'ابحث عن كشري، ملوخية، كباب، حواوشي...',
+                            'common.search'.tr(),
                             style: TextStyle(
                               color: isDark ? AppColors.onSurfaceVariantDark : AppColors.onSurfaceVariantLight,
                               fontSize: 13,
@@ -210,7 +211,7 @@ class HomeScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(AppDimensions.radiusFull),
                             ),
                             child: const Text(
-                              'كود الخصم: RESTO20',
+                              'PROMO: RESTO20',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 11,
@@ -220,7 +221,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            'خصم 20% على كل المشويات',
+                            'home.hero_title'.tr(),
                             style: GoogleFonts.cairo(
                               color: Colors.white,
                               fontSize: 18,
@@ -228,9 +229,9 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 4),
-                          const Text(
-                            'كباب وكفتة وشيش طاووق على الفحم الحجري',
-                            style: TextStyle(color: Colors.white70, fontSize: 12),
+                          Text(
+                            'home.hero_sub'.tr(),
+                            style: const TextStyle(color: Colors.white70, fontSize: 12),
                           ),
                         ],
                       ),
@@ -246,7 +247,7 @@ class HomeScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'أقسام الأكلات',
+                        'home.categories_title'.tr(),
                         style: GoogleFonts.cairo(
                           fontSize: 17,
                           fontWeight: FontWeight.bold,
@@ -255,9 +256,9 @@ class HomeScreen extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: () => context.push('/customer/menu'),
-                        child: const Text(
-                          'عرض المنيو',
-                          style: TextStyle(
+                        child: Text(
+                          'common.view_all'.tr(),
+                          style: const TextStyle(
                             color: AppColors.secondaryTerracotta,
                             fontWeight: FontWeight.bold,
                             fontSize: 13,
@@ -354,7 +355,7 @@ class HomeScreen extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            'الأكثر طلباً والأشهر',
+                            'home.bestsellers_title'.tr(),
                             style: GoogleFonts.cairo(
                               fontSize: 17,
                               fontWeight: FontWeight.bold,

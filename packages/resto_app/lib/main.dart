@@ -30,6 +30,8 @@ void main() async {
       supportedLocales: const [
         Locale('ar', 'EG'),
         Locale('ar'),
+        Locale('en', 'US'),
+        Locale('en'),
       ],
       path: 'assets/translations',
       fallbackLocale: const Locale('ar', 'EG'),

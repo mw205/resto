@@ -463,6 +463,8 @@ class MockRestoApi {
   }
 
   // Menu Operations
+  List<ProductModel> get productsList => List.unmodifiable(_products);
+
   Future<List<CategoryModel>> getCategories() async {
     await Future.delayed(const Duration(milliseconds: 400));
     return List.unmodifiable(_categories);

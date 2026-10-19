@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../features/auth/data/models/user_model.dart';
 import '../../features/auth/presentation/cubit/auth_cubit.dart';
 import '../../features/auth/presentation/screens/login_screen.dart';
+import '../../features/auth/presentation/screens/onboarding_screen.dart';
 import '../../features/auth/presentation/screens/register_screen.dart';
 import '../../features/auth/presentation/screens/splash_screen.dart';
 import '../../features/cart/presentation/screens/cart_screen.dart';
@@ -41,11 +42,12 @@ class AppRouter {
         final isDriver = authState.user?.role == UserRole.driver;
 
         final isSplash = state.matchedLocation == '/splash';
+        final isOnboarding = state.matchedLocation == '/onboarding';
         final isLoggingIn =
             state.matchedLocation == '/login' ||
             state.matchedLocation == '/register';
 
-        if (isSplash) return null;
+        if (isSplash || isOnboarding) return null;
 
         // If not authenticated and trying to access protected routes
         if (!isAuth && !isLoggingIn) {
@@ -68,6 +70,10 @@ class AppRouter {
         GoRoute(
           path: '/splash',
           builder: (context, state) => const SplashScreen(),
+        ),
+        GoRoute(
+          path: '/onboarding',
+          builder: (context, state) => const OnboardingScreen(),
         ),
         GoRoute(
           path: '/login',

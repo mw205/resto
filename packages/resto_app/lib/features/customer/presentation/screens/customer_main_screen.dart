@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -47,15 +48,15 @@ class CustomerMainScreen extends StatelessWidget {
               indicatorColor: AppColors.secondaryTerracotta.withValues(alpha: 0.15),
               elevation: 0,
               destinations: [
-                const NavigationDestination(
-                  icon: Icon(Icons.home_outlined),
-                  selectedIcon: Icon(Icons.home_rounded, color: AppColors.secondaryTerracotta),
-                  label: 'الرئيسية',
+                NavigationDestination(
+                  icon: const Icon(Icons.home_outlined),
+                  selectedIcon: const Icon(Icons.home_rounded, color: AppColors.secondaryTerracotta),
+                  label: 'nav.home'.tr(),
                 ),
-                const NavigationDestination(
-                  icon: Icon(Icons.restaurant_menu_outlined),
-                  selectedIcon: Icon(Icons.restaurant_menu_rounded, color: AppColors.secondaryTerracotta),
-                  label: 'المنيو',
+                NavigationDestination(
+                  icon: const Icon(Icons.restaurant_menu_outlined),
+                  selectedIcon: const Icon(Icons.restaurant_menu_rounded, color: AppColors.secondaryTerracotta),
+                  label: 'nav.menu'.tr(),
                 ),
                 NavigationDestination(
                   icon: Badge(
@@ -76,17 +77,17 @@ class CustomerMainScreen extends StatelessWidget {
                     backgroundColor: AppColors.secondaryTerracotta,
                     child: const Icon(Icons.shopping_bag_rounded, color: AppColors.secondaryTerracotta),
                   ),
-                  label: 'السلة',
+                  label: 'nav.cart'.tr(),
                 ),
-                const NavigationDestination(
-                  icon: Icon(Icons.receipt_long_outlined),
-                  selectedIcon: Icon(Icons.receipt_long_rounded, color: AppColors.secondaryTerracotta),
-                  label: 'طلباتي',
+                NavigationDestination(
+                  icon: const Icon(Icons.receipt_long_outlined),
+                  selectedIcon: const Icon(Icons.receipt_long_rounded, color: AppColors.secondaryTerracotta),
+                  label: 'nav.orders'.tr(),
                 ),
-                const NavigationDestination(
-                  icon: Icon(Icons.person_outline),
-                  selectedIcon: Icon(Icons.person_rounded, color: AppColors.secondaryTerracotta),
-                  label: 'حسابي',
+                NavigationDestination(
+                  icon: const Icon(Icons.person_outline),
+                  selectedIcon: const Icon(Icons.person_rounded, color: AppColors.secondaryTerracotta),
+                  label: 'nav.profile'.tr(),
                 ),
               ],
             ),
