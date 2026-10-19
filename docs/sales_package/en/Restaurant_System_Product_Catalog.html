@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Resto Ecosystem Product Catalog — Unified Solution for Hospitality</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --primary: #D95D39;
+      --primary-dark: #B54522;
+      --primary-light: #FDF2EE;
+      --charcoal: #1E1E1E;
+      --charcoal-soft: #2B2B2B;
+      --forest: #2D4B3E;
+      --forest-light: #EBF2EE;
+      --cream: #FBF9F8;
+      --cream-dark: #F3ECE8;
+      --gray-text: #555555;
+      --gray-light: #ECEAE7;
+      --border-color: #E2DBD4;
+      --white: #FFFFFF;
+      --shadow-sm: 0 4px 14px rgba(30, 30, 30, 0.05);
+      --shadow-md: 0 10px 24px rgba(30, 30, 30, 0.08);
+      --shadow-lg: 0 16px 36px rgba(30, 30, 30, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    @page {
+      size: 1200px 848px;
+      margin: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #333333;
+      color: var(--charcoal);
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .catalog-page {
+      width: 1200px;
+      height: 848px;
+      margin: 0 auto 20px auto;
+      background-color: var(--cream);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 34px 44px;
+      page-break-after: always;
+      break-after: page;
+    }
+
+    @media print {
+      body {
+        background-color: transparent;
+      }
+
+      .catalog-page {
+        margin: 0;
+        border: none;
+      }
+    }
+
+    /* HEADER & FOOTER */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 1.5px solid var(--border-color);
+      margin-bottom: 16px;
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid var(--border-color);
+    }
+
+    .header-title h4 {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--charcoal);
+      line-height: 1.1;
+    }
+
+    .header-title span {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .header-tag {
+      font-size: 11.5px;
+      font-weight: 700;
+      background: var(--cream-dark);
+      padding: 4px 12px;
+      border-radius: 6px;
+      color: var(--charcoal);
+    }
+
+    .page-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 12px;
+      border-top: 1.5px solid var(--border-color);
+      font-size: 11px;
+      color: #888888;
+      margin-top: 16px;
+    }
+
+    .page-footer .page-num {
+      font-weight: 700;
+      color: var(--charcoal);
+    }
+
+    /* TYPOGRAPHY */
+    .title-group {
+      margin-bottom: 16px;
+    }
+
+    .title-group h2 {
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--charcoal);
+      line-height: 1.25;
+      margin-bottom: 4px;
+    }
+
+    .title-group p {
+      font-size: 12.5px;
+      color: var(--gray-text);
+      line-height: 1.5;
+    }
+
+    /* CARDS & FRAMES */
+    .content-card {
+      background: var(--white);
+      border-radius: 14px;
+      border: 1px solid var(--border-color);
+      padding: 18px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .phone-mockup-frame {
+      border: 3px solid var(--charcoal-soft);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      background-color: #000;
+    }
+
+    .phone-mockup-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .web-mockup-frame {
+      border: 1.5px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      background: #FFFFFF;
+    }
+
+    .web-mockup-frame img {
+      width: 100%;
+      height: calc(100% - 24px);
+      object-fit: cover;
+      display: block;
+    }
+
+    .browser-top {
+      background: #E8E6E3;
+      padding: 5px 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid #D5D2CE;
+    }
+
+    .browser-circle {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+    }
+
+    .bc-red { background: #FF5F56; }
+    .bc-yellow { background: #FFBD2E; }
+    .bc-green { background: #27C93F; }
+  </style>
+</head>
+
+<body>
+
+  <!-- ==================== PAGE 1: COVER ==================== -->
+  <section class="catalog-page"
+    style="background: linear-gradient(135deg, #1C1C1C 0%, #292929 100%); color: var(--white); justify-content: space-between; padding: 48px 56px;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <img src="assets/logo.jpg" alt="Resto Logo"
+          style="width: 64px; height: 64px; border-radius: 16px; border: 1.5px solid rgba(255,255,255,0.2);">
+        <div>
+          <h2 style="font-size: 26px; font-weight: 900; letter-spacing: -0.5px;">Resto Ecosystem</h2>
+          <p style="font-size: 13px; color: #F7936E; font-weight: 700;">Direct Ordering &amp; Operations for Premium Dining Brands</p>
+        </div>
+      </div>
+      <div
+        style="background: rgba(217, 93, 57, 0.2); border: 1.5px solid #D95D39; padding: 6px 18px; border-radius: 999px; font-size: 13px; font-weight: 800; color: #F7936E;">
+        Official Product Catalog • 2026 Edition
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 40px; align-items: center; margin: 20px 0;">
+      <div>
+        <span
+          style="background: rgba(255,255,255,0.1); padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 800; color: #F7936E; text-transform: uppercase;">
+          Culinary Heritage Architecture
+        </span>
+        <h1 style="font-size: 38px; font-weight: 900; line-height: 1.3; margin: 14px 0 16px 0;">
+          The Complete Digital Ordering &amp; Operations Solution with Zero Intermediary Commissions
+        </h1>
+        <p style="font-size: 15px; line-height: 1.7; color: #CCCCCC; margin-bottom: 24px;">
+          Your comprehensive walkthrough to exploring the Resto ecosystem: customer mobile app experience, an intelligent delivery driver portal, and a centralized web dashboard for kitchen and revenue control.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;">
+          <div
+            style="background: rgba(255,255,255,0.06); padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); text-align: center;">
+            <div style="font-size: 22px; font-weight: 900; color: #F7936E; font-family: 'Plus Jakarta Sans';">3</div>
+            <div style="font-size: 11.5px; color: #BBB;">Synchronized Apps</div>
+          </div>
+          <div
+            style="background: rgba(255,255,255,0.06); padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); text-align: center;">
+            <div style="font-size: 22px; font-weight: 900; color: #F7936E; font-family: 'Plus Jakarta Sans';">0%</div>
+            <div style="font-size: 11.5px; color: #BBB;">Aggregator Commission</div>
+          </div>
+          <div
+            style="background: rgba(255,255,255,0.06); padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); text-align: center;">
+            <div style="font-size: 22px; font-weight: 900; color: #F7936E; font-family: 'Plus Jakarta Sans';">100%</div>
+            <div style="font-size: 11.5px; color: #BBB;">Operations Control</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: center; align-items: center;">
+        <img src="assets/dining_lifestyle.jpg" alt="Restaurant Dining Experience"
+          style="width: 100%; max-height: 420px; object-fit: cover; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.6); border: 2px solid rgba(255,255,255,0.15);">
+      </div>
+    </div>
+
+    <div
+      style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 14px; font-size: 11.5px; color: #888;">
+      <span>Resto Hospitality Software Suite — Engineered for Modern Food &amp; Beverage Operators</span>
+      <span style="color: #DDD;">Cover • Page 1 of 10</span>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE 2: PRODUCT OVERVIEW & ECOSYSTEM ==================== -->
+  <section class="catalog-page">
+    <div class="page-header">
+      <div class="header-brand">
+        <img src="assets/logo.jpg" alt="Logo" class="header-logo">
+        <div class="header-title">
+          <h4>Resto Ecosystem</h4>
+          <span>Platform Overview &amp; Commercial Value for Hospitality</span>
+        </div>
+      </div>
+      <div class="header-tag">Architecture</div>
+    </div>
+
+    <div class="title-group">
+      <h2>Three Intelligent User Experiences .. Functioning as One Cohesive Entity</h2>
+      <p>Engineered to give restaurant operators total mastery over digital sales channels and daily fulfillment:</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; flex: 1; align-items: center;">
+      <div class="feature-list">
+        <div class="content-card" style="padding: 14px 18px;">
+          <h4 style="color: var(--primary); font-size: 15px; margin-bottom: 4px;">1. Digital Channel Ownership &amp; Zero Commission</h4>
+          <p style="font-size: 12px; line-height: 1.5; color: var(--gray-text);">
+            Instead of giving away 15% to 25% commission on every order to third-party delivery apps, Resto grants you a 100% direct digital ordering channel under your brand identity.
+          </p>
+        </div>
+
+        <div class="content-card" style="padding: 14px 18px;">
+          <h4 style="color: var(--forest); font-size: 15px; margin-bottom: 4px;">2. Operational Fluidity &amp; Real-Time Sync</h4>
+          <p style="font-size: 12px; line-height: 1.5; color: var(--gray-text);">
+            The instant a guest places an order, it appears in the kitchen queue on the admin console, enabling 1-click driver dispatch without disruptive phone coordination.
+          </p>
+        </div>
+
+        <div class="content-card" style="padding: 14px 18px;">
+          <h4 style="color: #B36B00; font-size: 15px; margin-bottom: 4px;">3. Customer Data Ownership &amp; Loyalty</h4>
+          <p style="font-size: 12px; line-height: 1.5; color: var(--gray-text);">
+            Retain full ownership of customer profiles, contact numbers, and order histories to deliver targeted weekly promotional coupons that encourage high-margin reorders.
+          </p>
+        </div>
+      </div>
+
+      <!-- Ecosystem Diagram Card -->
+      <div class="content-card"
+        style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; padding: 22px;">
+        <h3 style="font-size: 16px; font-weight: 800; margin-bottom: 12px; text-align: center;">Ecosystem Architecture Flow</h3>
+
+        <div
+          style="background: #F7F5F2; border-radius: 14px; padding: 16px; border: 1.5px dashed var(--border-color); text-align: center;">
+          <div
+            style="background: var(--forest-light); color: var(--forest); padding: 8px 14px; border-radius: 8px; font-weight: 800; font-size: 13px; display: inline-block; margin-bottom: 10px;">
+            📱 Customer Mobile App (iOS &amp; Android)
+          </div>
+          <div style="font-size: 11px; color: #777;">Menu Browsing • Delivery / Takeaway Selection • Promo Discounts • Order Confirmation</div>
+
+          <div style="font-size: 18px; color: var(--primary); margin: 6px 0;">⬇️ ⬆️</div>
+
+          <div
+            style="background: #242424; color: #FFF; padding: 10px 18px; border-radius: 10px; font-weight: 800; font-size: 13.5px; display: inline-block;">
+            ⚡ Central Resto Engine &amp; Admin Dashboard
+          </div>
+          <div style="font-size: 11px; color: #777; margin-top: 4px;">Order Dispatch • Menu Stock Toggle • Live Sales Metrics • Driver Roster</div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px;">
+            <div
+              style="background: #FEF3E2; color: #B36B00; padding: 8px; border-radius: 8px; font-weight: 800; font-size: 12px;">
+              🛵 Driver Portal<br><span style="font-weight: 500; font-size: 10.5px;">Dispatch, Transit &amp; Cash Collection</span>
+            </div>
+            <div
+              style="background: var(--primary-light); color: var(--primary-dark); padding: 8px; border-radius: 8px; font-weight: 800; font-size: 12px;">
+              🍳 Kitchen Display<br><span style="font-weight: 500; font-size: 10.5px;">Precision Prep &amp; Line Items</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="font-size: 11.5px; color: #666; text-align: center; margin-top: 10px;">
+          Every interaction is synchronized reactively across devices in sub-seconds without delay.
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>Resto Ecosystem — Comprehensive Product Catalog</span>
+      <span class="page-num">Page 2 of 10</span>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE 3: CUSTOMER EXPERIENCE (MENU & DISHES) ==================== -->
+  <section class="catalog-page">
+    <div class="page-header">
+      <div class="header-brand">
+        <img src="assets/logo.jpg" alt="Logo" class="header-logo">
+        <div class="header-title">
+          <h4>Resto Ecosystem</h4>
+          <span>Customer Smartphone App (iOS &amp; Android)</span>
+        </div>
+      </div>
+      <div class="header-tag">Customer Experience • Part 1</div>
+    </div>
+
+    <div class="title-group">
+      <h2>A Visual, Appetite-Driven Digital Menu That Drives High-Value Orders</h2>
+      <p>An immersive browsing experience taking guests on an appetizing journey across your menu:</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 24px; flex: 1; align-items: center;">
+      <!-- Screenshots Duo -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; height: 520px;">
+        <div class="phone-mockup-frame">
+          <img src="assets/customer_home_en.png" alt="Customer App Home">
+        </div>
+        <div class="phone-mockup-frame">
+          <img src="assets/customer_menu_en.png" alt="Customer App Menu">
+        </div>
+      </div>
+
+      <!-- Features Description -->
+      <div class="feature-list">
+        <div class="content-card">
+          <h4 style="font-size: 15px; font-weight: 800; color: var(--primary); margin-bottom: 4px;">Smart Categorization &amp; Dish Classification</h4>
+          <p style="font-size: 12.5px; line-height: 1.6; color: var(--gray-text);">
+            Clear categories tailored to authentic dining (Charcoal Grills, Clay Pots &amp; Tajines, Traditional Specialties, Sandwiches &amp; Hawawshi) with expressive iconography for effortless browsing in seconds.
+          </p>
+        </div>
+
+        <div class="content-card">
+          <h4 style="font-size: 15px; font-weight: 800; color: var(--charcoal); margin-bottom: 4px;">Calorie Transparency &amp; Estimated Prep Times</h4>
+          <p style="font-size: 12.5px; line-height: 1.6; color: var(--gray-text);">
+            Professional presentation for each dish, including calculated calories (e.g. 580 kcal), expected preparation duration (e.g. 15 mins), and item ingredients to build guest trust.
+          </p>
+        </div>
+
+        <div class="content-card">
+          <h4 style="font-size: 15px; font-weight: 800; color: var(--forest); margin-bottom: 4px;">Instant Search &amp; Promotional Hero Banners</h4>
+          <p style="font-size: 12.5px; line-height: 1.6; color: var(--gray-text);">
+            Rapid search across dishes and ingredients, paired with a dynamic promotional top banner advertising weekly coupon codes (RESTO20) to maximize shopping cart size.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>Resto Ecosystem — Comprehensive Product Catalog</span>
+      <span class="page-num">Page 3 of 10</span>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE 4: ORDERING, TRACKING & REORDER ==================== -->
+  <section class="catalog-page">
+    <div class="page-header">
+      <div class="header-brand">
+        <img src="assets/logo.jpg" alt="Logo" class="header-logo">
+        <div class="header-title">
+          <h4>Resto Ecosystem</h4>
+          <span>Cart, Delivery Preferences &amp; Live Order Tracking</span>
+        </div>
+      </div>
+      <div class="header-tag">Customer Experience • Part 2</div>
+    </div>
+
+    <div class="title-group">
+      <h2>Frictionless Direct Ordering &amp; Transparent Milestone Tracking to the Doorstep</h2>
+      <p>Seamless flexibility between home delivery and takeaway pickup with clear preparation progress:</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 24px; flex: 1; align-items: center;">
+      <!-- Three Mobile Screens in a Row -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; height: 510px;">
+        <div class="phone-mockup-frame">
+          <img src="assets/customer_cart_en.png" alt="Cart &amp; Coupon">
+        </div>
+        <div class="phone-mockup-frame">
+          <img src="assets/customer_checkout.png" alt="Checkout &amp; COD">
+        </div>
+        <div class="phone-mockup-frame">
+          <img src="assets/customer_tracking_start.png" alt="Milestone Tracking">
+        </div>
+      </div>
+
+      <!-- Feature Details -->
+      <div class="feature-list">
+        <div class="content-card">
+          <h4 style="font-size: 14.5px; font-weight: 800; color: var(--primary); margin-bottom: 3px;">Flexible Cart &amp; Real-Time Coupon Validation</h4>
+          <p style="font-size: 12px; line-height: 1.5; color: var(--gray-text);">
+            Easily manage portion quantities, apply promotional discounts (RESTO20) with instant savings applied to the subtotal, and toggle between door-to-door delivery or branch pickup.
+          </p>
+        </div>
+
+        <div class="content-card">
+          <h4 style="font-size: 14.5px; font-weight: 800; color: var(--charcoal); margin-bottom: 3px;">Address Details &amp; Cash on Delivery (COD)</h4>
+          <p style="font-size: 12px; line-height: 1.5; color: var(--gray-text);">
+            Capture detailed street address, building, floor, and contact phone number with custom notes for the chef or courier (e.g., ring doorbell and leave package) alongside trusted cash payment.
+          </p>
+        </div>
+
+        <div class="content-card">
+          <h4 style="font-size: 14.5px; font-weight: 800; color: var(--forest); margin-bottom: 3px;">Reliable 4-Stage Milestone Tracking</h4>
+          <p style="font-size: 12px; line-height: 1.5; color: var(--gray-text);">
+            A clear 4-stage milestone tracker: (Order Received ➔ Cooking in Kitchen ➔ Out with Driver ➔ Delivered Successfully), with courier profile details and direct-call button without battery-draining GPS overhead.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>Resto Ecosystem — Comprehensive Product Catalog</span>
+      <span class="page-num">Page 4 of 10</span>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE 5: DRIVER MOBILE APP ==================== -->
+  <section class="catalog-page">
+    <div class="page-header">
+      <div class="header-brand">
+        <img src="assets/logo.jpg" alt="Logo" class="header-logo">
+        <div class="header-title">
+          <h4>Resto Ecosystem</h4>
+          <span>Driver Mobile Application (Delivery Portal)</span>
+        </div>
+      </div>
+      <div class="header-tag">Delivery Fleet Portal</div>
+    </div>
+
+    <div class="title-group">
+      <h2>A Lightweight Operational Tool Enabling Couriers to Deliver Swiftly</h2>
+      <p>A functional interface specifically tailored for high-tempo transit with zero operational bottlenecks:</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 28px; flex: 1; align-items: center;">
+      <!-- Driver Screen Frame -->
+      <div class="phone-mockup-frame" style="height: 520px; width: 85%; margin: 0 auto;">
+        <img src="assets/driver_portal_en.png" alt="Driver Delivery Portal">
+      </div>
+
+      <!-- Explanations -->
+      <div class="feature-list">
+        <div class="content-card">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+            <span
+              style="background: #FEF3E2; color: #B36B00; font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 4px;">Instant Dispatch</span>
+            <h4 style="font-size: 15px; font-weight: 800; color: var(--charcoal);">Prioritized Order Queue per Driver</h4>
+          </div>
+          <p style="font-size: 12.5px; line-height: 1.6; color: var(--gray-text);">
+            The courier opens the portal to find orders assigned by kitchen management sorted by preparation readiness, order ID, and delivery urgency.
+          </p>
+        </div>
+
+        <div class="content-card">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+            <span
+              style="background: var(--primary-light); color: var(--primary-dark); font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 4px;">Clear Details</span>
+            <h4 style="font-size: 15px; font-weight: 800; color: var(--charcoal);">Pinpoint Address &amp; Exact Cash Due</h4>
+          </div>
+          <p style="font-size: 12.5px; line-height: 1.6; color: var(--gray-text);">
+            Full address breakdown (city, district, street name, building number, floor) with 1-tap customer phone dialing and exact cash collection due in EGP (e.g. 150 EGP).
+          </p>
+        </div>
+
+        <div class="content-card">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+            <span
+              style="background: var(--forest-light); color: var(--forest); font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 4px;">1-Tap Action</span>
+            <h4 style="font-size: 15px; font-weight: 800; color: var(--charcoal);">Instant Delivery Confirmation &amp; Status Sync</h4>
+          </div>
+          <p style="font-size: 12.5px; line-height: 1.6; color: var(--gray-text);">
+            A single, clear action button: "Delivered to Customer". Pressing it marks the delivery completed in the admin console and sends an instant completion notification to the guest.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>Resto Ecosystem — Comprehensive Product Catalog</span>
+      <span class="page-num">Page 5 of 10</span>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE 6: ADMIN OPERATIONS OVERVIEW ==================== -->
+  <section class="catalog-page">
+    <div class="page-header">
+      <div class="header-brand">
+        <img src="assets/logo.jpg" alt="Logo" class="header-logo">
+        <div class="header-title">
+          <h4>Resto Ecosystem</h4>
+          <span>Operations Web Dashboard (Central Command)</span>
+        </div>
+      </div>
+      <div class="header-tag">Command &amp; Control</div>
+    </div>
+
+    <div class="title-group">
+      <h2>Real-Time Sales Monitoring, Kitchen Queues &amp; Delivery Fleet Oversight</h2>
+      <p>A unified command interface giving restaurant managers a live panoramic view of all branch activity:</p>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 16px; flex: 1;">
+      <!-- Web Dashboard Wide Mockup -->
+      <div class="web-mockup-frame" style="height: 380px;">
+        <div class="browser-top">
+          <span class="browser-circle bc-red"></span>
+          <span class="browser-circle bc-yellow"></span>
+          <span class="browser-circle bc-green"></span>
+          <span
+            style="color: #999; font-size: 11px; font-family: 'Plus Jakarta Sans'; margin-left: 8px;">https://admin.resto.eg/overview</span>
+        </div>
+        <img src="assets/admin_overview.png" alt="Live Operations Analytics Dashboard">
+      </div>
+
+      <!-- Analytics Breakdown Grid -->
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;">
+        <div class="content-card" style="padding: 10px 14px; text-align: center;">
+          <div style="font-size: 11.5px; color: #777;">Today's Revenue</div>
+          <div style="font-size: 18px; font-weight: 900; color: var(--primary); margin: 2px 0;">640 EGP</div>
+          <div style="font-size: 10.5px; color: var(--forest); font-weight: 700;">+14% vs yesterday</div>
+        </div>
+
+        <div class="content-card" style="padding: 10px 14px; text-align: center;">
+          <div style="font-size: 11.5px; color: #777;">Total Orders Today</div>
+          <div style="font-size: 18px; font-weight: 900; color: var(--charcoal); margin: 2px 0;">3 Orders</div>
+          <div style="font-size: 10.5px; color: #777;">98% completion rate</div>
+        </div>
+
+        <div class="content-card" style="padding: 10px 14px; text-align: center;">
+          <div style="font-size: 11.5px; color: #777;">Kitchen Active Queue</div>
+          <div style="font-size: 18px; font-weight: 900; color: #B36B00; margin: 2px 0;">0 Pending</div>
+          <div style="font-size: 10.5px; color: #777;">Fastest prep: 16 mins</div>
+        </div>
+
+        <div class="content-card" style="padding: 10px 14px; text-align: center;">
+          <div style="font-size: 11.5px; color: #777;">Couriers En Route</div>
+          <div style="font-size: 18px; font-weight: 900; color: var(--forest); margin: 2px 0;">1 Active Driver</div>
+          <div style="font-size: 10.5px; color: #777;">Avg delivery: 32 mins</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>Resto Ecosystem — Comprehensive Product Catalog</span>
+      <span class="page-num">Page 6 of 10</span>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE 7: KITCHEN & ORDER MANAGEMENT ==================== -->
+  <section class="catalog-page">
+    <div class="page-header">
+      <div class="header-brand">
+        <img src="assets/logo.jpg" alt="Logo" class="header-logo">
+        <div class="header-title">
+          <h4>Resto Ecosystem</h4>
+          <span>Kitchen Orders Queue &amp; Fulfillment Management</span>
+        </div>
+      </div>
+      <div class="header-tag">Floor &amp; Kitchen Operations</div>
+    </div>
+
+    <div class="title-group">
+      <h2>Instant Order Processing &amp; Live Cooking Stage Updates</h2>
+      <p>An interactive operations table allowing floor managers to inspect order items and dispatch drivers:</p>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 16px; flex: 1;">
+      <!-- Orders Table Screen -->
+      <div class="web-mockup-frame" style="height: 380px;">
+        <div class="browser-top">
+          <span class="browser-circle bc-red"></span>
+          <span class="browser-circle bc-yellow"></span>
+          <span class="browser-circle bc-green"></span>
+          <span
+            style="color: #999; font-size: 11px; font-family: 'Plus Jakarta Sans'; margin-left: 8px;">https://admin.resto.eg/orders</span>
+        </div>
+        <img src="assets/admin_orders_management.png" alt="Orders Management Table">
+      </div>
+
+      <!-- Feature Capabilities -->
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+        <div class="content-card" style="padding: 12px 16px;">
+          <h4 style="font-size: 13.5px; font-weight: 800; color: var(--primary); margin-bottom: 2px;">Rapid Status Filtering</h4>
+          <p style="font-size: 11.5px; color: var(--gray-text); line-height: 1.4;">
+            Instantly switch between (All Orders), (Active Queue), and (Completed Orders) to keep cashiers and kitchen expeditor screens clutter-free.
+          </p>
+        </div>
+
+        <div class="content-card" style="padding: 12px 16px;">
+          <h4 style="font-size: 13.5px; font-weight: 800; color: var(--charcoal); margin-bottom: 2px;">Detailed Line Items &amp; Guest Info</h4>
+          <p style="font-size: 11.5px; color: var(--gray-text); line-height: 1.4;">
+            Displays exact dishes ordered (e.g., Royal Koshary, Mixed Grills, Clay Pot Om Ali) alongside customer phone number, special instructions, and total invoice due.
+          </p>
+        </div>
+
+        <div class="content-card" style="padding: 12px 16px;">
+          <h4 style="font-size: 13.5px; font-weight: 800; color: var(--forest); margin-bottom: 2px;">Quick Action Dispatch</h4>
+          <p style="font-size: 11.5px; color: var(--gray-text); line-height: 1.4;">
+            Assign drivers, advance preparation milestones, or confirm completed fulfillment directly from the row without navigating away.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>Resto Ecosystem — Comprehensive Product Catalog</span>
+      <span class="page-num">Page 7 of 10</span>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE 8: MENU AVAILABILITY & FLEET MANAGEMENT ==================== -->
+  <section class="catalog-page">
+    <div class="page-header">
+      <div class="header-brand">
+        <img src="assets/logo.jpg" alt="Logo" class="header-logo">
+        <div class="header-title">
+          <h4>Resto Ecosystem</h4>
+          <span>Menu Stock Availability &amp; Fleet Roster Management</span>
+        </div>
+      </div>
+      <div class="header-tag">Inventory &amp; Fleet</div>
+    </div>
+
+    <div class="title-group">
+      <h2>Absolute Agility: Instant Out-of-Stock Toggle &amp; Driver Crew Supervision</h2>
+      <p>Administrative controls safeguarding restaurant reputation by preventing orders of sold-out dishes:</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; flex: 1; align-items: stretch;">
+      <!-- Menu Stock Toggle -->
+      <div class="content-card"
+        style="display: flex; flex-direction: column; justify-content: space-between; padding: 16px;">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <h3 style="font-size: 15px; font-weight: 800; color: var(--primary);">Menu &amp; Stock Availability Control</h3>
+            <span
+              style="font-size: 11px; background: var(--primary-light); color: var(--primary-dark); padding: 2px 8px; border-radius: 4px; font-weight: 800;">Real-Time</span>
+          </div>
+          <p style="font-size: 11.5px; color: var(--gray-text); margin-bottom: 10px;">
+            Single-click availability toggle (In Stock / Out of Stock) for each menu dish; disabling an item hides it immediately from the customer app to eliminate guest disappointment.
+          </p>
+        </div>
+
+        <div class="web-mockup-frame" style="height: 310px;">
+          <div class="browser-top">
+            <span class="browser-circle bc-red"></span>
+            <span class="browser-circle bc-yellow"></span>
+            <span class="browser-circle bc-green"></span>
+            <span
+              style="color: #999; font-size: 10px; font-family: 'Plus Jakarta Sans'; margin-left: 6px;">admin.resto.eg/menu</span>
+          </div>
+          <img src="assets/admin_menu_stock.png" alt="Menu Stock Management">
+        </div>
+      </div>
+
+      <!-- Fleet Staff Roster -->
+      <div class="content-card"
+        style="display: flex; flex-direction: column; justify-content: space-between; padding: 16px;">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <h3 style="font-size: 15px; font-weight: 800; color: var(--forest);">Delivery Fleet &amp; Couriers (Fleet Roster)</h3>
+            <span
+              style="font-size: 11px; background: var(--forest-light); color: var(--forest); padding: 2px 8px; border-radius: 4px; font-weight: 800;">Fleet Tracking</span>
+          </div>
+          <p style="font-size: 11.5px; color: var(--gray-text); margin-bottom: 10px;">
+            Monitor the status of each courier (Out on Delivery, Available for Next Dispatch, On Break), track customer ratings, and evaluate daily completed delivery counts.
+          </p>
+        </div>
+
+        <div class="web-mockup-frame" style="height: 310px;">
+          <div class="browser-top">
+            <span class="browser-circle bc-red"></span>
+            <span class="browser-circle bc-yellow"></span>
+            <span class="browser-circle bc-green"></span>
+            <span
+              style="color: #999; font-size: 10px; font-family: 'Plus Jakarta Sans'; margin-left: 6px;">admin.resto.eg/delivery-staff</span>
+          </div>
+          <img src="assets/admin_delivery_fleet.png" alt="Fleet Roster Management">
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>Resto Ecosystem — Comprehensive Product Catalog</span>
+      <span class="page-num">Page 8 of 10</span>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE 9: COMPLETE OPERATIONAL LIFECYCLE ==================== -->
+  <section class="catalog-page">
+    <div class="page-header">
+      <div class="header-brand">
+        <img src="assets/logo.jpg" alt="Logo" class="header-logo">
+        <div class="header-title">
+          <h4>Resto Ecosystem</h4>
+          <span>End-to-End Operational Lifecycle &amp; Workflow</span>
+        </div>
+      </div>
+      <div class="header-tag">Operational Lifecycle</div>
+    </div>
+
+    <div class="title-group">
+      <h2>An Integrated Lifecycle Guaranteeing an Exceptional Experience from Screen to Table</h2>
+      <p>Seamless data continuity across customer, kitchen, and courier teams without communication gaps:</p>
+    </div>
+
+    <!-- 4-Stage Operational Grid -->
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; flex: 1; align-items: stretch;">
+      <!-- Step 1 -->
+      <div class="content-card"
+        style="display: flex; flex-direction: column; justify-content: space-between; border-top: 4px solid var(--forest);">
+        <div>
+          <div style="font-size: 12px; font-weight: 800; color: var(--forest); margin-bottom: 6px;">Stage 1</div>
+          <h4 style="font-size: 15px; font-weight: 800; margin-bottom: 6px;">Customer Orders &amp; Customizes</h4>
+          <p style="font-size: 12px; color: var(--gray-text); line-height: 1.5;">
+            Browse dishes, add chef instructions, apply promo discount (RESTO20), and choose home delivery or branch takeaway pickup.
+          </p>
+        </div>
+        <div style="background: #F9F7F5; padding: 10px; border-radius: 10px; text-align: center; margin-top: 10px;">
+          <span style="font-size: 11px; font-weight: 700; color: #555;">📱 Smart Mobile App</span>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="content-card"
+        style="display: flex; flex-direction: column; justify-content: space-between; border-top: 4px solid var(--primary);">
+        <div>
+          <div style="font-size: 12px; font-weight: 800; color: var(--primary); margin-bottom: 6px;">Stage 2</div>
+          <h4 style="font-size: 15px; font-weight: 800; margin-bottom: 6px;">Kitchen Receives &amp; Prepares</h4>
+          <p style="font-size: 12px; color: var(--gray-text); line-height: 1.5;">
+            Order lands instantly in the kitchen queue, chefs begin food preparation, and an available courier is assigned in 1 click.
+          </p>
+        </div>
+        <div style="background: #F9F7F5; padding: 10px; border-radius: 10px; text-align: center; margin-top: 10px;">
+          <span style="font-size: 11px; font-weight: 700; color: #555;">💻 Operations Dashboard</span>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="content-card"
+        style="display: flex; flex-direction: column; justify-content: space-between; border-top: 4px solid #B36B00;">
+        <div>
+          <div style="font-size: 12px; font-weight: 800; color: #B36B00; margin-bottom: 6px;">Stage 3</div>
+          <h4 style="font-size: 15px; font-weight: 800; margin-bottom: 6px;">Driver En Route to Address</h4>
+          <p style="font-size: 12px; color: var(--gray-text); line-height: 1.5;">
+            Courier collects freshly packed food, checks address and contact, and switches status to "Out for Delivery" to notify the customer.
+          </p>
+        </div>
+        <div style="background: #F9F7F5; padding: 10px; border-radius: 10px; text-align: center; margin-top: 10px;">
+          <span style="font-size: 11px; font-weight: 700; color: #555;">🛵 Courier Delivery Portal</span>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="content-card"
+        style="display: flex; flex-direction: column; justify-content: space-between; border-top: 4px solid var(--charcoal);">
+        <div>
+          <div style="font-size: 12px; font-weight: 800; color: var(--charcoal); margin-bottom: 6px;">Stage 4</div>
+          <h4 style="font-size: 15px; font-weight: 800; margin-bottom: 6px;">Delivery, Feedback &amp; Reorder</h4>
+          <p style="font-size: 12px; color: var(--gray-text); line-height: 1.5;">
+            Safe delivery, cash collection, in-app star rating, and effortless 1-click reordering for future cravings.
+          </p>
+        </div>
+        <div style="background: #F9F7F5; padding: 10px; border-radius: 10px; text-align: center; margin-top: 10px;">
+          <span style="font-size: 11px; font-weight: 700; color: #555;">⭐ Customer Loyalty &amp; Retention</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Customer Engagement Bar -->
+    <div
+      style="background: var(--white); border-radius: 14px; padding: 14px 20px; border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; margin-top: 14px;">
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <span style="font-size: 20px;">🛡️</span>
+        <div>
+          <h4 style="font-size: 13.5px; font-weight: 800;">Integrated Complaints &amp; Suggestions Center</h4>
+          <p style="font-size: 11.5px; color: var(--gray-text);">A direct communication channel to handle customer inquiries promptly and protect brand reputation.</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <span
+          style="font-size: 11px; background: var(--cream-dark); padding: 4px 10px; border-radius: 6px; font-weight: 700;">Dish Ratings</span>
+        <span
+          style="font-size: 11px; background: var(--cream-dark); padding: 4px 10px; border-radius: 6px; font-weight: 700;">1-Click Reorder</span>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>Resto Ecosystem — Comprehensive Product Catalog</span>
+      <span class="page-num">Page 9 of 10</span>
+    </div>
+  </section>
+
+  <!-- ==================== PAGE 10: CALL TO ACTION & DEMO ==================== -->
+  <section class="catalog-page"
+    style="background: linear-gradient(135deg, #181818 0%, #262626 100%); color: var(--white); justify-content: space-between;">
+    <div class="page-header" style="border-bottom-color: rgba(255,255,255,0.15);">
+      <div class="header-brand">
+        <img src="assets/logo.jpg" alt="Logo" class="header-logo" style="border-color: rgba(255,255,255,0.2);">
+        <div class="header-title">
+          <h4 style="color: var(--white);">Resto Ecosystem</h4>
+          <span style="color: #F7936E;">Next Steps &amp; Live Interactive Demonstration</span>
+        </div>
+      </div>
+      <div class="header-tag" style="background: rgba(255,255,255,0.1); color: #F7936E;">Available for Live Testing</div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 36px; align-items: center; flex: 1;">
+      <div>
+        <h2 style="font-size: 32px; font-weight: 900; line-height: 1.35; margin-bottom: 14px;">
+          Ready to Witness the Resto Ecosystem Powering Your Restaurant?
+        </h2>
+        <p style="font-size: 14px; line-height: 1.7; color: #CCC; margin-bottom: 24px;">
+          Experience the platform live in your browser right now via our interactive demo sandbox. Test ordering as a guest, receiving the order in the kitchen, and delivering as a driver.
+        </p>
+
+        <!-- Credentials Card -->
+        <div
+          style="background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 18px 22px;">
+          <h4 style="font-size: 14px; color: #F7936E; font-weight: 800; margin-bottom: 10px;">Preconfigured Accounts for Direct Testing:</h4>
+
+          <div style="display: flex; flex-direction: column; gap: 8px; font-size: 12.5px;">
+            <div
+              style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px;">
+              <span style="color: #FFF; font-weight: 700;">Customer Account (Mobile App):</span>
+              <span style="color: #F7936E; font-family: 'Plus Jakarta Sans';">mohamed@resto.eg</span>
+            </div>
+            <div
+              style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px;">
+              <span style="color: #FFF; font-weight: 700;">Delivery Courier Account:</span>
+              <span style="color: #F7936E; font-family: 'Plus Jakarta Sans';">driver@resto.eg</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding-top: 2px;">
+              <span style="color: #FFF; font-weight: 700;">Operations Manager (Web Dashboard):</span>
+              <span style="color: #F7936E; font-family: 'Plus Jakarta Sans';">admin@resto.eg (with auto TOTP)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact / Demo Box -->
+      <div
+        style="background: rgba(255,255,255,0.04); border: 1.5px solid rgba(217, 93, 57, 0.3); border-radius: 20px; padding: 26px; text-align: center;">
+        <div
+          style="width: 56px; height: 56px; border-radius: 50%; background: var(--primary); color: #FFF; display: flex; align-items: center; justify-content: center; font-size: 26px; margin: 0 auto 16px auto; box-shadow: 0 8px 24px rgba(217, 93, 57, 0.4);">
+          🚀
+        </div>
+        <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 8px;">Start Your Interactive Demo Walkthrough</h3>
+        <p style="font-size: 12px; color: #AAA; line-height: 1.6; margin-bottom: 20px;">
+          Consult our attached Demo Guide for a curated 15-step scenario to experience all system features sequentially.
+        </p>
+
+        <div
+          style="background: rgba(0,0,0,0.3); border-radius: 12px; padding: 12px; margin-bottom: 18px; text-align: left; font-size: 11.5px;">
+          <div style="color: #888; margin-bottom: 2px;">Direct Demo Access:</div>
+          <div style="color: #F7936E; font-family: 'Plus Jakarta Sans'; font-weight: 700;">resto-landing-zeta.vercel.app</div>
+          <div style="color: #888; margin-top: 8px; margin-bottom: 2px;">Commercial Inquiries:</div>
+          <div style="color: #DDD;">Resto Hospitality Solutions Team</div>
+        </div>
+
+        <a href="https://resto-landing-zeta.vercel.app/" target="_blank"
+          style="background: var(--primary); color: var(--white); display: block; padding: 12px 24px; border-radius: 12px; font-weight: 800; font-size: 14px; text-decoration: none; box-shadow: 0 4px 16px rgba(217, 93, 57, 0.4);">
+          Launch Platform &amp; Experience Demo &rarr;
+        </a>
+      </div>
+    </div>
+
+    <div class="page-footer" style="border-top-color: rgba(255,255,255,0.15); color: #888;">
+      <span>Resto Ecosystem — Comprehensive Product Catalog • 2026 Edition</span>
+      <span class="page-num">Page 10 of 10</span>
+    </div>
+  </section>
+
+</body>
+
+</html>

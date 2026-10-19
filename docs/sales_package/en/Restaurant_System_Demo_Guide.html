@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>Resto Ecosystem Interactive Demo Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #D95D39;
+      --primary-dark: #B54522;
+      --primary-light: #FDF2EE;
+      --charcoal: #1E1E1E;
+      --charcoal-soft: #2B2B2B;
+      --forest: #2D4B3E;
+      --forest-light: #EBF2EE;
+      --cream: #FBF9F8;
+      --cream-dark: #F3ECE8;
+      --gray-text: #555555;
+      --border-color: #E2DBD4;
+      --white: #FFFFFF;
+      --shadow-sm: 0 4px 14px rgba(30, 30, 30, 0.05);
+      --shadow-md: 0 10px 24px rgba(30, 30, 30, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    @page {
+      size: 1200px 1720px;
+      margin: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--cream);
+      color: var(--charcoal);
+      width: 1200px;
+      height: 1720px;
+      margin: 0 auto;
+      padding: 34px 44px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      overflow: hidden;
+    }
+
+    /* HEADER */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand-logo-img {
+      width: 58px;
+      height: 58px;
+      border-radius: 16px;
+      object-fit: cover;
+      box-shadow: var(--shadow-sm);
+      border: 1.5px solid var(--border-color);
+    }
+
+    .brand-text h1 {
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--charcoal);
+      line-height: 1.15;
+    }
+
+    .brand-text p {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .badge-pill {
+      background-color: var(--primary-light);
+      color: var(--primary-dark);
+      border: 1.5px solid rgba(217, 93, 57, 0.25);
+      padding: 6px 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    /* INTRO BANNER */
+    .intro-banner {
+      background: linear-gradient(135deg, #242424 0%, #151515 100%);
+      color: var(--white);
+      border-radius: 20px;
+      padding: 22px 30px;
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 24px;
+      align-items: center;
+      box-shadow: var(--shadow-md);
+    }
+
+    .intro-banner h2 {
+      font-size: 23px;
+      font-weight: 900;
+      line-height: 1.35;
+      margin-bottom: 6px;
+    }
+
+    .intro-banner h2 span { color: #F7936E; }
+
+    .intro-banner p {
+      font-size: 13px;
+      line-height: 1.65;
+      color: #DDD;
+    }
+
+    .credentials-box {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      padding: 12px 16px;
+    }
+
+    .cred-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 0;
+      font-size: 11.5px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .cred-row:last-child { border-bottom: none; }
+    .cred-role { color: #BBB; }
+    .cred-val { color: #F7936E; font-weight: 700; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+    /* JOURNEY TIMELINE (15 STEPS) */
+    .section-title {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--charcoal);
+      margin: 18px 0 10px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 18px;
+      background-color: var(--primary);
+      border-radius: 3px;
+    }
+
+    .steps-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      flex: 1;
+    }
+
+    .journey-phase {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 16px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .phase-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1.5px solid var(--border-color);
+      margin-bottom: 10px;
+    }
+
+    .phase-badge {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .phase-1 { background: var(--forest-light); color: var(--forest); }
+    .phase-2 { background: var(--primary-light); color: var(--primary-dark); }
+    .phase-3 { background: #FEF3E2; color: #B36B00; }
+
+    .phase-header h3 {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--charcoal);
+    }
+
+    .step-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .step-card {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      background: var(--cream);
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+    }
+
+    .step-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      background: #242424;
+      color: #FFF;
+      font-size: 11px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-content h4 {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--charcoal);
+      line-height: 1.25;
+      margin-bottom: 2px;
+    }
+
+    .step-content p {
+      font-size: 10.5px;
+      line-height: 1.35;
+      color: var(--gray-text);
+    }
+
+    .phase-callout {
+      margin-top: 10px;
+      background: #FAF8F6;
+      border-radius: 8px;
+      padding: 6px 10px;
+      border-left: 3px solid var(--primary);
+      font-size: 10px;
+      color: #444;
+      font-weight: 600;
+    }
+
+    /* BOTTOM TIPS & FOOTER */
+    .tips-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .tip-card {
+      background: var(--white);
+      border-radius: 14px;
+      padding: 12px 16px;
+      border: 1px solid var(--border-color);
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .tip-icon { font-size: 20px; }
+
+    .tip-text h4 {
+      font-size: 12.5px;
+      font-weight: 800;
+      color: var(--charcoal);
+      margin-bottom: 2px;
+    }
+
+    .tip-text p {
+      font-size: 11px;
+      color: var(--gray-text);
+      line-height: 1.4;
+    }
+
+    footer {
+      margin-top: 16px;
+      background: linear-gradient(135deg, #1E1E1E 0%, #2A2A2A 100%);
+      color: var(--white);
+      border-radius: 16px;
+      padding: 14px 26px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-md);
+    }
+
+    .footer-left h3 {
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 2px;
+      color: var(--white);
+    }
+
+    .footer-left p {
+      font-size: 11px;
+      color: #B5B5B5;
+    }
+
+    .cta-btn {
+      background: var(--primary);
+      color: var(--white);
+      padding: 8px 20px;
+      border-radius: 10px;
+      font-size: 12.5px;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-block;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand-group">
+      <img src="assets/app_icon.jpg" alt="Resto Logo" class="brand-logo-img">
+      <div class="brand-text">
+        <h1>Resto Interactive Demo Guide</h1>
+        <p>Curated 15-Step Journey to Explore the Complete Resto Ecosystem</p>
+      </div>
+    </div>
+    <div class="badge-pill">100% Live Interactive System</div>
+  </header>
+
+  <!-- INTRO BANNER -->
+  <section class="intro-banner">
+    <div>
+      <h2>How to Experience the Platform <span>as a Restaurant Owner &amp; Investor</span></h2>
+      <p>
+        This guide takes you through a seamless 5-minute practical journey across the 15 fundamental milestones of the order lifecycle—from customer menu browsing to driver dispatch, real-time tracking, and automated financial tracking in the operations console.
+      </p>
+    </div>
+
+    <div class="credentials-box">
+      <div style="font-size: 11px; font-weight: 800; color: #FFF; margin-bottom: 6px;">Preconfigured Demo Credentials:</div>
+      <div class="cred-row">
+        <span class="cred-role">Customer (Mobile App):</span>
+        <span class="cred-val">mohamed@resto.eg</span>
+      </div>
+      <div class="cred-row">
+        <span class="cred-role">Delivery Driver (Mobile Portal):</span>
+        <span class="cred-val">driver@resto.eg</span>
+      </div>
+      <div class="cred-row">
+        <span class="cred-role">Operations Manager (Web):</span>
+        <span class="cred-val">admin@resto.eg (+ TOTP)</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15-STEP JOURNEY -->
+  <div class="section-title">Recommended 15-Step Journey</div>
+
+  <section class="steps-container">
+    <!-- PHASE 1: CUSTOMER ORDERING (Steps 1-6) -->
+    <div class="journey-phase">
+      <div>
+        <div class="phase-header">
+          <span class="phase-badge phase-1">Phase 1</span>
+          <h3>Customer Experience (Mobile App)</h3>
+        </div>
+
+        <div class="step-list">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <h4>Launch App &amp; Sign In</h4>
+              <p>Log in with <code>mohamed@resto.eg</code> and explore the personalized greeting &amp; weekly promo banner.</p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <h4>Browse Menu &amp; Categories</h4>
+              <p>Explore Grills, Clay Pots, and Specialties with calculated calories, prep times, and rich food photography.</p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <h4>Add Meal to Shopping Cart</h4>
+              <p>Tap (+ Add) on any dish, adjust quantity, and watch the floating cart counter update instantaneously.</p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <h4>Apply Promo Code (RESTO20)</h4>
+              <p>Enter promo code <code>RESTO20</code> at checkout to witness an instant 20% discount deducted from the subtotal.</p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">5</div>
+            <div class="step-content">
+              <h4>Confirm Delivery &amp; Cash Payment</h4>
+              <p>Select Home Delivery, verify address details, add a special chef note, and choose Cash on Delivery (COD).</p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">6</div>
+            <div class="step-content">
+              <h4>Real-Time Order Tracker</h4>
+              <p>View the active order code and Stage 1 highlight ("Order Received &amp; Confirmed") on the visual milestone tracker.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-callout">
+        💡 <strong>Notice:</strong> Rapid, intuitive checkout with zero distracting third-party ads or commission fees.
+      </div>
+    </div>
+
+    <!-- PHASE 2: ADMIN DISPATCH (Steps 7-9) -->
+    <div class="journey-phase">
+      <div>
+        <div class="phase-header">
+          <span class="phase-badge phase-2">Phase 2</span>
+          <h3>Operations &amp; Kitchen (Admin Web)</h3>
+        </div>
+
+        <div class="step-list">
+          <div class="step-card">
+            <div class="step-num">7</div>
+            <div class="step-content">
+              <h4>Access Web Dashboard</h4>
+              <p>Log into the web console using <code>admin@resto.eg</code> and the on-screen 6-digit TOTP verification code.</p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">8</div>
+            <div class="step-content">
+              <h4>Review Order in Kitchen Queue</h4>
+              <p>Watch the fresh order appear instantly in the live orders table with ordered items, phone number, and address.</p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">9</div>
+            <div class="step-content">
+              <h4>Dispatch to Delivery Driver</h4>
+              <p>Assign the order to an available driver (e.g. Captain Hany Saeed) and update status to initiate cooking and dispatch.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 14px; background: #F7F5F2; padding: 12px; border-radius: 12px; border: 1px solid var(--border-color);">
+          <h4 style="font-size: 11.5px; font-weight: 800; color: var(--primary); margin-bottom: 4px;">Explore in Admin Dashboard:</h4>
+          <ul style="font-size: 10.5px; color: #666; padding-left: 14px; line-height: 1.5;">
+            <li>Live revenue analytics and hourly peak order charts.</li>
+            <li>Instant out-of-stock toggle for any menu dish.</li>
+            <li>Driver fleet roster and real-time customer ratings.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase-callout">
+        💡 <strong>Notice:</strong> Reactive synchronization propels order updates between web and mobile in sub-seconds.
+      </div>
+    </div>
+
+    <!-- PHASE 3: DRIVER & FULFILLMENT (Steps 10-15) -->
+    <div class="journey-phase">
+      <div>
+        <div class="phase-header">
+          <span class="phase-badge phase-3">Phase 3</span>
+          <h3>Delivery &amp; Loyalty (Driver &amp; Reorder)</h3>
+        </div>
+
+        <div class="step-list">
+          <div class="step-card">
+            <div class="step-num">10</div>
+            <div class="step-content">
+              <h4>Open Driver Portal</h4>
+              <p>Sign in with <code>driver@resto.eg</code> to view assigned delivery tasks sorted by preparation and delivery urgency.</p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">11</div>
+            <div class="step-content">
+              <h4>Start Route "Out for Delivery"</h4>
+              <p>Tap start delivery, immediately advancing the customer's live tracker to Stage 3 in real time.</p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">12</div>
+            <div class="step-content">
+              <h4>Complete Delivery &amp; Collect Cash</h4>
+              <p>Verify the invoice cash amount due and tap the "Delivered to Customer" confirmation button.</p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">13</div>
+            <div class="step-content">
+              <h4>Check Customer App Status</h4>
+              <p>Observe the customer's tracker switch automatically to "Delivered Successfully" with a completion alert.</p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">14</div>
+            <div class="step-content">
+              <h4>Rate Meal &amp; Direct Feedback</h4>
+              <p>Submit a star rating or submit an inquiry via the built-in Complaints &amp; Suggestions Center.</p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">15</div>
+            <div class="step-content">
+              <h4>1-Click Quick Reorder</h4>
+              <p>Open Order History, view past orders, and tap "Reorder" to refill the shopping cart in one second.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-callout">
+        💡 <strong>Notice:</strong> Clear milestone tracking eliminates unnecessary phone inquiries and costly GPS overhead.
+      </div>
+    </div>
+  </section>
+
+  <!-- TIPS & ADVICE -->
+  <div class="tips-row">
+    <div class="tip-card">
+      <div class="tip-icon">✨</div>
+      <div class="tip-text">
+        <h4>Dual-Screen Experience</h4>
+        <p>Open the customer app on your phone alongside the operations web dashboard on your laptop to watch instant live sync across devices.</p>
+      </div>
+    </div>
+
+    <div class="tip-card">
+      <div class="tip-icon">🛑</div>
+      <div class="tip-text">
+        <h4>Test Out-of-Stock Toggle</h4>
+        <p>Disable any menu dish in the admin dashboard and watch it disappear immediately from the customer app, preventing kitchen bottlenecks.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-left">
+      <h3>Need Guidance During Your Walkthrough?</h3>
+      <p>The Resto team is available to assist or conduct a personalized live demonstration for your hospitality leadership.</p>
+    </div>
+    <a href="https://drive.google.com/drive/folders/1FY4WpzYWaPibN1hgsEeguVwnmO0GabH5?usp=sharing" target="_blank" class="cta-btn">Download Apps (APK / iOS) &rarr;</a>
+  </footer>
+
+</body>
+</html>

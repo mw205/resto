@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, initial-scale=1.0">
+  <title>Resto — Showcase Poster</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Fredoka:wght@600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-terracotta: #D95D39;
+      --terracotta-dark: #A53616;
+      --terracotta-light: #FF855F;
+      --terracotta-glow: #F7936E;
+      --charcoal-bg: #151413;
+      --charcoal-deep: #0D0C0B;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 1920px;
+      height: 1080px;
+      margin: 0;
+      overflow: hidden;
+      font-family: 'Plus Jakarta Sans', 'Cairo', sans-serif;
+      background: radial-gradient(130% 110% at 20% 25%, #23211F 0%, #151413 55%, #0B0A0A 100%);
+      color: #FFFFFF;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      user-select: none;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* AMBIENT RADIAL LIGHTING */
+    .ambient-glow {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .glow-left {
+      width: 950px;
+      height: 950px;
+      top: -250px;
+      left: -200px;
+      background: radial-gradient(circle, rgba(217, 93, 57, 0.20) 0%, rgba(217, 93, 57, 0) 70%);
+    }
+
+    .glow-center {
+      width: 1200px;
+      height: 800px;
+      bottom: -200px;
+      left: 25%;
+      background: radial-gradient(ellipse, rgba(217, 93, 57, 0.22) 0%, rgba(165, 54, 22, 0) 70%);
+    }
+
+    .glow-right {
+      width: 800px;
+      height: 800px;
+      top: 10%;
+      right: -150px;
+      background: radial-gradient(circle, rgba(247, 147, 110, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+    }
+
+    /* 3D FLUID TUBE / RIBBON (HIGH-FIDELITY VECTOR WITH SPECULAR HIGHLIGHTS) */
+    .background-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .ribbon-svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* MAIN POSTER CONTAINER (16:9 GRID) */
+    .poster-content {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      padding: 100px 140px 90px 140px;
+      align-items: center;
+    }
+
+    /* LEFT SECTION: BRANDING & TYPOGRAPHY (IDENTICAL COMPOSITION TO REFERENCE) */
+    .left-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      max-width: 800px;
+      z-index: 15;
+    }
+
+    .top-brand-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(20px);
+      padding: 8px 20px 8px 14px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--terracotta-glow);
+      width: fit-content;
+      margin-bottom: 28px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .brand-badge img {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    .title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 22px;
+      margin-bottom: 6px;
+    }
+
+    /* LARGE BOLD DISPLAY TITLE LIKE REFERENCE "Cognineu" */
+    .main-title {
+      font-family: 'Fredoka', 'Plus Jakarta Sans', sans-serif;
+      font-size: 148px;
+      font-weight: 700;
+      line-height: 0.95;
+      letter-spacing: -2px;
+      color: #FFFFFF;
+      text-shadow: 0 16px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .arabic-title {
+      font-family: 'Cairo', sans-serif;
+      font-size: 64px;
+      font-weight: 900;
+      color: var(--terracotta-glow);
+      transform: translateY(-8px);
+      text-shadow: 0 10px 30px rgba(217, 93, 57, 0.3);
+    }
+
+    /* SUBTITLE LIKE REFERENCE "Wellness App" */
+    .subtitle {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.92);
+      letter-spacing: -0.5px;
+      margin-top: 4px;
+      text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .app-tagline {
+      font-family: 'Cairo', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #E8A086;
+      margin-top: 14px;
+      letter-spacing: 0.2px;
+    }
+
+    /* INTERACTIVE SCREEN SELECTOR (FOR DEMO & PRESENTATION) */
+    .screen-switcher {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 36px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 6px;
+      border-radius: 16px;
+      width: fit-content;
+      backdrop-filter: blur(12px);
+    }
+
+    .screen-tab {
+      background: transparent;
+      border: none;
+      color: rgba(255, 255, 255, 0.7);
+      font-family: 'Cairo', 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .screen-tab:hover {
+      color: #FFFFFF;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .screen-tab.active {
+      background: var(--primary-terracotta);
+      color: #FFFFFF;
+      box-shadow: 0 4px 14px rgba(217, 93, 57, 0.4);
+    }
+
+
+
+    /* RIGHT SECTION: MODERN IPHONE 17 PRO MOCKUP */
+    .right-section {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      position: relative;
+      z-index: 25;
+      padding-right: 25px;
+    }
+
+    /* TITANIUM HARDWARE CHASSIS */
+    .iphone-device {
+      width: 440px;
+      height: 920px;
+      background: #000000;
+      border-radius: 64px;
+      position: relative;
+      /* Realistic titanium outer bezel & ambient drop shadow */
+      box-shadow: 
+        0 0 0 1px rgba(255, 255, 255, 0.25),
+        0 0 0 4px #262422,
+        0 0 0 7px #121110,
+        -30px 45px 100px rgba(0, 0, 0, 0.85),
+        -10px 15px 45px rgba(217, 93, 57, 0.35);
+      padding: 10px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* SCREEN INNER CONTAINER */
+    .screen-bezel {
+      width: 100%;
+      height: 100%;
+      border-radius: 54px;
+      overflow: hidden;
+      position: relative;
+      background: #000000;
+    }
+
+    .screen-bezel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      transition: opacity 0.3s ease;
+    }
+
+    /* SUBTLE SCREEN GLASS REFLECTION */
+    .screen-reflection {
+      position: absolute;
+      top: -30%;
+      right: -30%;
+      width: 160%;
+      height: 160%;
+      background: linear-gradient(
+        130deg,
+        rgba(255, 255, 255, 0.13) 0%,
+        rgba(255, 255, 255, 0.04) 30%,
+        rgba(255, 255, 255, 0) 55%
+      );
+      pointer-events: none;
+      z-index: 90;
+    }
+
+    /* HOME INDICATOR */
+    .home-bar {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 135px;
+      height: 4.5px;
+      background: #111111;
+      border-radius: 999px;
+      z-index: 100;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- AMBIENT GLOWS -->
+  <div class="ambient-glow glow-left"></div>
+  <div class="ambient-glow glow-center"></div>
+  <div class="ambient-glow glow-right"></div>
+
+  <!-- 3D ORGANIC FLUID RIBBON (SWEEPING ACROSS THE BACKGROUND) -->
+  <div class="background-canvas">
+    <svg class="ribbon-svg" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- Dynamic smooth 3D gradient matching Terracotta Culinary palette -->
+        <linearGradient id="mainTubeGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#691F0B" stop-opacity="0.95" />
+          <stop offset="25%" stop-color="#BA411D" stop-opacity="0.98" />
+          <stop offset="55%" stop-color="#E86E46" stop-opacity="1" />
+          <stop offset="85%" stop-color="#D95D39" stop-opacity="0.95" />
+          <stop offset="100%" stop-color="#7B250E" stop-opacity="0.9" />
+        </linearGradient>
+
+        <linearGradient id="tubeShadingGrad" x1="50%" y1="0%" x2="50%" y2="100%">
+          <stop offset="0%" stop-color="#FFAE92" stop-opacity="0.5" />
+          <stop offset="40%" stop-color="#FFFFFF" stop-opacity="0.12" />
+          <stop offset="80%" stop-color="#3A1005" stop-opacity="0.65" />
+          <stop offset="100%" stop-color="#210802" stop-opacity="0.9" />
+        </linearGradient>
+
+        <linearGradient id="backRibbonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#4F1506" />
+          <stop offset="60%" stop-color="#912F12" />
+          <stop offset="100%" stop-color="#3A0E03" />
+        </linearGradient>
+
+        <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="25" />
+          <feOffset dx="-5" dy="30" result="offsetblur" />
+          <feComponentTransfer>
+            <feFuncA type="linear" slope="0.65" />
+          </feComponentTransfer>
+          <feMerge> 
+            <feMergeNode />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+
+      <!-- Background ribbon segment (behind phone) -->
+      <path d="M 1300 350 C 1550 250, 1750 480, 2050 420 L 2050 560 C 1750 620, 1550 390, 1300 490 Z" 
+            fill="url(#backRibbonGrad)" opacity="0.85" />
+
+      <!-- Deep shadow under main tube -->
+      <path d="M -150 820 C 300 880, 580 480, 1000 620 C 1380 740, 1600 480, 2050 360 L 2050 500 C 1600 620, 1380 880, 1000 760 C 580 620, 300 1020, -150 960 Z" 
+            fill="#1E0702" opacity="0.8" filter="url(#softShadow)" />
+
+      <!-- Main sweeping 3D fluid tube (from bottom-left, curving across center, sweeping right behind the device) -->
+      <path d="M -150 720 C 280 780, 560 380, 980 520 C 1400 660, 1600 380, 2050 260 L 2050 390 C 1600 510, 1400 790, 980 650 C 560 510, 280 910, -150 850 Z" 
+            fill="url(#mainTubeGrad)" filter="url(#softShadow)" />
+
+      <!-- Specular 3D cylindrical volumetric highlight -->
+      <path d="M -150 720 C 280 780, 560 380, 980 520 C 1400 660, 1600 380, 2050 260 L 2050 300 C 1600 420, 1400 700, 980 560 C 560 420, 280 820, -150 760 Z" 
+            fill="url(#tubeShadingGrad)" />
+    </svg>
+  </div>
+
+  <!-- POSTER CONTENT (GRID: LEFT = TEXT, RIGHT = PHONE) -->
+  <div class="poster-content">
+
+    <!-- LEFT COLUMN: BRAND & TEXT -->
+    <div class="left-section">
+      <div class="top-brand-group">
+        
+        <!-- BADGE -->
+        <div class="brand-badge">
+          <img src="assets/app_icon.jpg" alt="Resto App Icon">
+          <span>Culinary Heritage Design • Melos Monorepo</span>
+        </div>
+
+        <!-- MAIN TITLE (EXACT STYLE OF "Cognineu") -->
+        <div class="title-row">
+          <h1 class="main-title">Resto</h1>
+          <span class="arabic-title">ريستو</span>
+        </div>
+
+        <!-- SUBTITLE (EXACT STYLE OF "Wellness App") -->
+        <h2 class="subtitle">Food Delivery App</h2>
+        <div class="app-tagline">تجربة المذاق المصري الأصيل</div>
+
+        <!-- INTERACTIVE SCREEN SWITCHER -->
+        <div class="screen-switcher">
+          <button class="screen-tab active" onclick="switchScreen('../../screenshots/app_home.png', this)">الرئيسية (Home)</button>
+          <button class="screen-tab" onclick="switchScreen('../../screenshots/app_menu.png', this)">المنيو (Menu)</button>
+          <button class="screen-tab" onclick="switchScreen('../../screenshots/app_product_details.png', this)">الصنف (Details)</button>
+          <button class="screen-tab" onclick="switchScreen('../../screenshots/app_cart.png', this)">السلة (Cart)</button>
+          <button class="screen-tab" onclick="switchScreen('../../screenshots/driver_orders.png', this)">الكابتن (Driver)</button>
+        </div>
+
+      </div>
+
+
+    </div>
+
+    <!-- RIGHT COLUMN: PHONE MOCKUP -->
+    <div class="right-section">
+      <div class="iphone-device">
+        
+        <!-- SCREEN GLARE -->
+        <div class="screen-reflection"></div>
+
+        <!-- APP SCREENSHOT -->
+        <div class="screen-bezel">
+          <img id="appScreenImg" src="../../screenshots/app_home.png" alt="Resto Mobile App Home">
+        </div>
+
+        <!-- HOME INDICATOR -->
+        <div class="home-bar"></div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function switchScreen(src, tab) {
+      const img = document.getElementById('appScreenImg');
+      img.style.opacity = '0';
+      setTimeout(() => {
+        img.src = src;
+        img.style.opacity = '1';
+      }, 150);
+
+      document.querySelectorAll('.screen-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
